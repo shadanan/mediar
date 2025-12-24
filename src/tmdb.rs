@@ -97,7 +97,7 @@ impl TmdbClient {
             id: series.id,
             name: series.name,
             overview: series.overview,
-            year: year,
+            year,
             first_air_date: series.first_air_date,
             number_of_episodes: series.number_of_episodes,
             number_of_seasons: series.number_of_seasons,
