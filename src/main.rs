@@ -63,7 +63,7 @@ fn commit_all(mode: &Mode, transactions: Vec<Transaction>) -> Result<()> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenvy::dotenv()?;
+    let _ = dotenvy::dotenv();
     let args = Args::parse();
 
     let source = Path::new(&args.source);
