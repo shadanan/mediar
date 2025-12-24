@@ -40,7 +40,7 @@ struct Args {
 fn commit(mode: &Mode, old: &Path, new: &Path) -> Result<()> {
     let parent = new.parent().context("Failed to get parent")?;
     fs::create_dir_all(parent)?;
-    Ok(match mode {
+    match mode {
         Mode::Copy => {
             fs::copy(old, new)?;
         }
@@ -50,7 +50,8 @@ fn commit(mode: &Mode, old: &Path, new: &Path) -> Result<()> {
         Mode::Link => {
             fs::hard_link(old, new)?;
         }
-    })
+    };
+    Ok(())
 }
 
 fn commit_all(mode: &Mode, transactions: Vec<Transaction>) -> Result<()> {

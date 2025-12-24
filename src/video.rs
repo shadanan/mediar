@@ -11,15 +11,7 @@ pub fn parse_ext(path: &Path) -> Option<String> {
         return None;
     }
 
-    let Some(ext) = path.extension() else {
-        return None;
-    };
-
-    let Some(ext) = ext.to_str() else {
-        return None;
-    };
-
-    let ext = ext.to_lowercase();
+    let ext = path.extension()?.to_str()?.to_lowercase();
 
     let video_extensions = ["mp4", "mkv", "avi", "mov", "flv", "wmv", "webm"]
         .into_iter()
