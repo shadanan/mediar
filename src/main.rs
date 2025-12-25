@@ -1,5 +1,6 @@
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
+use colored::Colorize;
 use mediar::{
     tmdb::{Show, TmdbClient},
     video::{parse_ext, parse_season_episode},
@@ -10,8 +11,6 @@ use std::{
     path::{Path, PathBuf},
 };
 use walkdir::WalkDir;
-
-type Transaction = (PathBuf, PathBuf);
 
 #[derive(Debug, Clone)]
 enum Mode {
@@ -58,30 +57,6 @@ struct Args {
     command: Commands,
 }
 
-fn commit(mode: &Mode, old: &Path, new: &Path) -> Result<()> {
-    let parent = new.parent().context("Failed to get parent")?;
-    fs::create_dir_all(parent)?;
-    match mode {
-        Mode::Copy => {
-            fs::copy(old, new)?;
-        }
-        Mode::Move => {
-            fs::rename(old, new)?;
-        }
-        Mode::Link => {
-            fs::hard_link(old, new)?;
-        }
-    };
-    Ok(())
-}
-
-fn commit_all(mode: &Mode, transactions: Vec<Transaction>) -> Result<()> {
-    for transaction in transactions {
-        commit(mode, &transaction.0, &transaction.1)?;
-    }
-    Ok(())
-}
-
 fn organize(
     mode: Mode,
     source: &Path,
@@ -109,7 +84,7 @@ fn organize(
         let episode_id = match parse_season_episode(&old) {
             Ok(episode_id) => episode_id,
             Err(_) => {
-                println!("Skip {:?}", old);
+                println!("Skip: {}", old.to_string_lossy().yellow());
                 continue;
             }
         };
@@ -128,13 +103,38 @@ fn organize(
             )));
 
         if old != new && !new.exists() {
-            println!("{:#?} -> {:#?}", old, new);
             transactions.push((old, new));
         }
     }
 
-    if !dry_run {
-        commit_all(&mode, transactions)?;
+    for (old, new) in transactions {
+        let parent = new.parent().context("Failed to get parent")?;
+        match mode {
+            Mode::Copy => {
+                println!("Copy: {}", old.to_string_lossy().blue());
+                println!("↪ To: {}", new.to_string_lossy().blue());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::copy(old, new)?;
+                }
+            }
+            Mode::Move => {
+                println!("Move: {}", old.to_string_lossy().red());
+                println!("↪ To: {}", new.to_string_lossy().red());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::rename(old, new)?;
+                }
+            }
+            Mode::Link => {
+                println!("Link: {}", old.to_string_lossy().green());
+                println!("↪ To: {}", new.to_string_lossy().green());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::hard_link(old, new)?;
+                }
+            }
+        };
     }
 
     Ok(())
@@ -255,7 +255,7 @@ mod tests {
         }
     }
 
-    fn test_video_files() -> Vec<PathBuf> {
+    fn test_episode_files() -> Vec<PathBuf> {
         vec![
             Path::new("s01").join("Show.S01E01.mkv").to_path_buf(),
             Path::new("s01").join("Show.S01E02.mp4").to_path_buf(),
@@ -263,16 +263,17 @@ mod tests {
         ]
     }
 
-    fn test_regular_files() -> Vec<PathBuf> {
+    fn test_other_files() -> Vec<PathBuf> {
         vec![
             Path::new("readme.txt").to_path_buf(),
+            Path::new("trailer.mp4").to_path_buf(),
             Path::new("s01").join("Show.S01E01.srt").to_path_buf(),
             Path::new("s02").join("Show.S02E01.thumb.jpg").to_path_buf(),
         ]
     }
 
     fn test_files() -> Vec<PathBuf> {
-        [test_video_files(), test_regular_files()].concat()
+        [test_episode_files(), test_other_files()].concat()
     }
 
     fn create_test_files(base_dir: &Path, files: &[PathBuf]) {
@@ -380,7 +381,7 @@ mod tests {
             result.err()
         );
 
-        for file_name in &test_video_files() {
+        for file_name in &test_episode_files() {
             let original_path = source.join(file_name);
             assert!(
                 !original_path.exists(),
@@ -389,7 +390,7 @@ mod tests {
             );
         }
 
-        for file_name in &test_regular_files() {
+        for file_name in &test_other_files() {
             let original_path = source.join(file_name);
             assert!(
                 original_path.exists(),
