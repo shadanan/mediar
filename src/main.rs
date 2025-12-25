@@ -1,8 +1,8 @@
-use anyhow::{Context, Result};
+use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
 use mediar::{
-    tmdb::{MovieSearchResult, Show, TmdbClient, TvSearchResult},
+    tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
     video::{parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
@@ -38,7 +38,9 @@ enum Commands {
         source: String,
         target: Option<String>,
         #[arg(long)]
-        series_id: i32,
+        tv_id: Option<i32>,
+        #[arg(long)]
+        movie_id: Option<i32>,
         #[arg(long)]
         dry_run: bool,
     },
@@ -47,7 +49,9 @@ enum Commands {
         source: String,
         target: Option<String>,
         #[arg(long)]
-        series_id: i32,
+        tv_id: Option<i32>,
+        #[arg(long)]
+        movie_id: Option<i32>,
         #[arg(long)]
         dry_run: bool,
     },
@@ -56,7 +60,9 @@ enum Commands {
         source: String,
         target: Option<String>,
         #[arg(long)]
-        series_id: i32,
+        tv_id: Option<i32>,
+        #[arg(long)]
+        movie_id: Option<i32>,
         #[arg(long)]
         dry_run: bool,
     },
@@ -69,7 +75,7 @@ struct Args {
     command: Commands,
 }
 
-fn organize(
+fn organize_tv(
     mode: Mode,
     source: &Path,
     target: Option<&Path>,
@@ -117,6 +123,90 @@ fn organize(
         if old != new && !new.exists() {
             transactions.push((old, new));
         }
+    }
+
+    for (old, new) in transactions {
+        let parent = new.parent().context("Failed to get parent")?;
+        match mode {
+            Mode::Copy => {
+                println!("Copy: {}", old.to_string_lossy().blue());
+                println!("↪ To: {}", new.to_string_lossy().blue());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::copy(old, new)?;
+                }
+            }
+            Mode::Move => {
+                println!("Move: {}", old.to_string_lossy().red());
+                println!("↪ To: {}", new.to_string_lossy().red());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::rename(old, new)?;
+                }
+            }
+            Mode::Link => {
+                println!("Link: {}", old.to_string_lossy().green());
+                println!("↪ To: {}", new.to_string_lossy().green());
+                if !dry_run {
+                    fs::create_dir_all(parent)?;
+                    fs::hard_link(old, new)?;
+                }
+            }
+        };
+    }
+
+    Ok(())
+}
+
+fn organize_movie(
+    mode: Mode,
+    source: &Path,
+    target: Option<&Path>,
+    movie: &Movie,
+    dry_run: bool,
+) -> Result<()> {
+    let target = target
+        .or_else(|| Path::parent(source))
+        .context("Failed to determine target")?;
+
+    let year = movie
+        .release_date
+        .split('-')
+        .next()
+        .and_then(|y| y.parse::<i32>().ok())
+        .unwrap_or(0);
+
+    let title = sanitize(format!("{} ({})", movie.title, year));
+
+    let mut transactions: Vec<(PathBuf, PathBuf)> = Vec::new();
+
+    for entry in WalkDir::new(source).sort_by_file_name() {
+        let entry = entry?;
+        let old = entry.path().to_path_buf();
+
+        let Some(ext) = parse_ext(&old) else {
+            continue;
+        };
+
+        let new = target
+            .to_path_buf()
+            .join(&title)
+            .join(sanitize(format!("{} ({}).{}", movie.title, year, ext)));
+
+        if old != new && !new.exists() {
+            transactions.push((old, new));
+        }
+    }
+
+    if transactions.len() > 1 {
+        return Err(anyhow!(
+            "Found {} video files in source directory. Expected exactly one movie file.",
+            transactions.len()
+        ));
+    }
+
+    if transactions.is_empty() {
+        return Err(anyhow!("No video files found in source directory"));
     }
 
     for (old, new) in transactions {
@@ -336,35 +426,71 @@ async fn main() -> Result<()> {
         Commands::Move {
             source,
             target,
-            series_id,
+            tv_id,
+            movie_id,
             dry_run,
         } => {
-            let show = client.show(series_id).await?;
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
-            organize(Mode::Move, source, target, &show, dry_run)
+
+            match (tv_id, movie_id) {
+                (Some(id), None) => {
+                    let show = client.show(id).await?;
+                    organize_tv(Mode::Move, source, target, &show, dry_run)
+                }
+                (None, Some(id)) => {
+                    let movie = client.movie(id).await?;
+                    organize_movie(Mode::Move, source, target, &movie, dry_run)
+                }
+                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
+                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+            }
         }
         Commands::Copy {
             source,
             target,
-            series_id,
+            tv_id,
+            movie_id,
             dry_run,
         } => {
-            let show = client.show(series_id).await?;
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
-            organize(Mode::Copy, source, target, &show, dry_run)
+
+            match (tv_id, movie_id) {
+                (Some(id), None) => {
+                    let show = client.show(id).await?;
+                    organize_tv(Mode::Copy, source, target, &show, dry_run)
+                }
+                (None, Some(id)) => {
+                    let movie = client.movie(id).await?;
+                    organize_movie(Mode::Copy, source, target, &movie, dry_run)
+                }
+                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
+                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+            }
         }
         Commands::Link {
             source,
             target,
-            series_id,
+            tv_id,
+            movie_id,
             dry_run,
         } => {
-            let show = client.show(series_id).await?;
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
-            organize(Mode::Link, source, target, &show, dry_run)
+
+            match (tv_id, movie_id) {
+                (Some(id), None) => {
+                    let show = client.show(id).await?;
+                    organize_tv(Mode::Link, source, target, &show, dry_run)
+                }
+                (None, Some(id)) => {
+                    let movie = client.movie(id).await?;
+                    organize_movie(Mode::Link, source, target, &movie, dry_run)
+                }
+                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
+                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+            }
         }
     }
 }
@@ -372,7 +498,7 @@ async fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mediar::tmdb::{Show, TvSeason, TvSeasonEpisode};
+    use mediar::tmdb::{Movie, Show, TvSeason, TvSeasonEpisode};
     use std::fs;
     use tempfile::TempDir;
 
@@ -480,7 +606,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize(Mode::Move, &source, Some(&target), &show, true);
+        let result = organize_tv(Mode::Move, &source, Some(&target), &show, true);
 
         assert!(
             result.is_ok(),
@@ -510,7 +636,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize(Mode::Copy, &source, Some(&target), &show, false);
+        let result = organize_tv(Mode::Copy, &source, Some(&target), &show, false);
 
         assert!(
             result.is_ok(),
@@ -558,7 +684,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize(Mode::Move, &source, None, &show, false);
+        let result = organize_tv(Mode::Move, &source, None, &show, false);
 
         assert!(
             result.is_ok(),
@@ -604,5 +730,120 @@ mod tests {
                 expected_file
             );
         }
+    }
+
+    fn create_test_movie() -> Movie {
+        Movie {
+            id: 550,
+            title: "Fight Club".to_string(),
+            overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.".to_string(),
+            release_date: "1999-10-15".to_string(),
+            original_language: "en".to_string(),
+            popularity: 63.869,
+        }
+    }
+
+    #[test]
+    fn test_organize_movie_copy() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let movie_files = vec![Path::new("Fight.Club.1080p.mkv").to_path_buf()];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, false);
+
+        assert!(
+            result.is_ok(),
+            "organize_movie should succeed: {:?}",
+            result.err()
+        );
+
+        for file_name in &movie_files {
+            let original_path = source.join(file_name);
+            assert!(
+                original_path.exists(),
+                "Original file should still exist after copy: {:?}",
+                file_name
+            );
+        }
+
+        let movie_dir = target.join("Fight Club (1999)");
+        assert!(movie_dir.exists(), "Movie directory should exist");
+
+        let expected_file = movie_dir.join("Fight Club (1999).mkv");
+        assert!(
+            expected_file.exists(),
+            "Movie file should exist in target: {:?}",
+            expected_file
+        );
+    }
+
+    #[test]
+    fn test_organize_movie_multiple_files_fails() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let movie_files = vec![
+            Path::new("Fight.Club.1999.1080p.mkv").to_path_buf(),
+            Path::new("Fight.Club.1999.720p.mp4").to_path_buf(),
+        ];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, false);
+
+        assert!(
+            result.is_err(),
+            "organize_movie should fail with multiple video files"
+        );
+
+        let error_msg = result.unwrap_err().to_string();
+        assert!(
+            error_msg.contains("Found 2 video files"),
+            "Error message should mention multiple files: {}",
+            error_msg
+        );
+    }
+
+    #[test]
+    fn test_organize_movie_dry_run() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        fs::create_dir_all(&source).unwrap();
+
+        let movie_files = vec![Path::new("Fight.Club.1999.mkv").to_path_buf()];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Move, &source, Some(&target), &movie, true);
+
+        assert!(
+            result.is_ok(),
+            "organize_movie should succeed: {:?}",
+            result.err()
+        );
+
+        for file_name in &movie_files {
+            let original_path = source.join(file_name);
+            assert!(
+                original_path.exists(),
+                "File should still exist in dry run mode: {:?}",
+                file_name
+            );
+        }
+
+        assert!(!target.exists(), "Target should not exist in dry run mode");
     }
 }
