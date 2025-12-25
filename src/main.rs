@@ -2,7 +2,7 @@ use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
 use mediar::{
-    tmdb::{SearchResult, Show, TmdbClient},
+    tmdb::{MovieSearchResult, Show, TmdbClient, TvSearchResult},
     video::{parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
@@ -22,7 +22,7 @@ enum Mode {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    /// Search for TV shows
+    /// Search for TV shows and movies
     Search {
         /// The search query
         query: String,
@@ -156,6 +156,8 @@ fn organize(
 struct SearchResultDisplay {
     #[tabled(rename = "ID")]
     id: i32,
+    #[tabled(rename = "")]
+    r#type: String,
     #[tabled(rename = "Name")]
     name: String,
     #[tabled(rename = "🌐")]
@@ -168,10 +170,11 @@ struct SearchResultDisplay {
     link: String,
 }
 
-impl From<SearchResult> for SearchResultDisplay {
-    fn from(result: SearchResult) -> Self {
+impl From<TvSearchResult> for SearchResultDisplay {
+    fn from(result: TvSearchResult) -> Self {
         Self {
             id: result.id,
+            r#type: "📺".to_string(),
             name: result.name,
             language: result
                 .original_language
@@ -190,6 +193,87 @@ impl From<SearchResult> for SearchResultDisplay {
     }
 }
 
+impl From<MovieSearchResult> for SearchResultDisplay {
+    fn from(result: MovieSearchResult) -> Self {
+        Self {
+            id: result.id,
+            r#type: "🎬".to_string(),
+            name: result.title,
+            language: result
+                .original_language
+                .unwrap_or_else(|| "N/A".to_string()),
+            popularity: result
+                .popularity
+                .map(|p| format!("{:.1}", p))
+                .unwrap_or_else(|| "N/A".to_string()),
+            year: result
+                .release_date
+                .as_ref()
+                .and_then(|date| date.split('-').next().map(|s| s.to_string()))
+                .unwrap_or_default(),
+            link: format!("https://www.themoviedb.org/movie/{}", result.id),
+        }
+    }
+}
+
+fn filter_and_sort_search_results(
+    results: Vec<SearchResultDisplay>,
+    language: &Option<String>,
+    min_popularity: f64,
+    query: &str,
+) -> Vec<SearchResultDisplay> {
+    let query_lower = query.to_lowercase();
+
+    let mut filtered: Vec<_> = results
+        .into_iter()
+        .filter(|result| {
+            // Filter by language if specified
+            let lang_match = language
+                .as_ref()
+                .map(|lang| &result.language == lang || result.language == "N/A")
+                .unwrap_or(true);
+
+            // Check if it's an exact match
+            let is_exact_match = result.name.to_lowercase() == query_lower;
+
+            // Filter by minimum popularity (skip this check for exact matches)
+            let pop_match = if is_exact_match {
+                true
+            } else {
+                result
+                    .popularity
+                    .parse::<f64>()
+                    .map(|p| p >= min_popularity)
+                    .unwrap_or(false)
+            };
+
+            lang_match && pop_match
+        })
+        .collect();
+
+    // Sort by match type (exact, prefix, other) then by popularity within each group
+    filtered.sort_by_key(|result| {
+        let name_lower = result.name.to_lowercase();
+
+        // Determine match type (0 = exact, 1 = prefix, 2 = other)
+        let match_type = if name_lower == query_lower {
+            0
+        } else if name_lower.starts_with(&query_lower) {
+            1
+        } else {
+            2
+        };
+
+        // Convert popularity to negative integer for descending sort
+        let popularity = result.popularity.parse::<f64>().unwrap_or(0.0);
+        let neg_popularity = -(popularity * 100.0) as i64;
+
+        (match_type, neg_popularity)
+    });
+
+    filtered
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let _ = dotenvy::dotenv();
@@ -203,58 +287,49 @@ async fn main() -> Result<()> {
             language,
             min_popularity,
         } => {
-            let response = client.search_tv(&query).await?;
+            // Search both TV and movies in parallel
+            let (tv_response, movie_response) =
+                tokio::join!(client.search_tv(&query), client.search_movie(&query));
 
-            if response.results.is_empty() {
-                println!("No results found for: {}", query.yellow());
-                return Ok(());
-            }
+            let tv_response = tv_response?;
+            let movie_response = movie_response?;
 
-            let mut filtered_results: Vec<_> = response
+            // Convert all results to SearchResultDisplay
+            let tv_results: Vec<SearchResultDisplay> = tv_response
                 .results
-                .into_iter()
-                .filter(|result| {
-                    // Filter by language if specified
-                    let lang_match = language
-                        .as_ref()
-                        .is_none_or(|lang| result.original_language.as_ref() == Some(lang));
-
-                    // Filter by minimum popularity
-                    let pop_match = result.popularity.is_some_and(|p| p >= min_popularity);
-
-                    lang_match && pop_match
-                })
-                .collect();
-
-            if filtered_results.is_empty() {
-                println!(
-                    "No results found matching the filters for: {}",
-                    query.yellow()
-                );
-                return Ok(());
-            }
-
-            // Sort by popularity descending
-            filtered_results.sort_by(|a, b| {
-                let pop_a = a.popularity.unwrap_or(0.0);
-                let pop_b = b.popularity.unwrap_or(0.0);
-                pop_b
-                    .partial_cmp(&pop_a)
-                    .unwrap_or(std::cmp::Ordering::Equal)
-            });
-
-            let display_results: Vec<SearchResultDisplay> = filtered_results
                 .into_iter()
                 .map(SearchResultDisplay::from)
                 .collect();
 
-            let table = Table::new(display_results)
+            let movie_results: Vec<SearchResultDisplay> = movie_response
+                .results
+                .into_iter()
+                .map(SearchResultDisplay::from)
+                .collect();
+
+            // Combine all results
+            let mut all_results = Vec::new();
+            all_results.extend(tv_results);
+            all_results.extend(movie_results);
+
+            // Filter and sort combined results
+            let filtered_results =
+                filter_and_sort_search_results(all_results, &language, min_popularity, &query);
+
+            if filtered_results.is_empty() {
+                println!("No results found for: {}", query.yellow());
+                return Ok(());
+            }
+
+            let total_results = tv_response.total_results + movie_response.total_results;
+
+            let table = Table::new(&filtered_results)
                 .with(Style::rounded())
                 .to_string();
             println!("\n{}", table);
             println!(
-                "\nFound {} results (Page {} of {})",
-                response.total_results, response.page, response.total_pages
+                "\nFound {} results ({} TV, {} movies)",
+                total_results, tv_response.total_results, movie_response.total_results
             );
             Ok(())
         }
@@ -297,7 +372,7 @@ async fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mediar::tmdb::{Episode, Season, Show};
+    use mediar::tmdb::{Show, TvSeason, TvSeasonEpisode};
     use std::fs;
     use tempfile::TempDir;
 
@@ -311,14 +386,14 @@ mod tests {
             number_of_episodes: 4,
             number_of_seasons: 2,
             seasons: vec![
-                Season {
+                TvSeason {
                     id: 1,
                     season_number: 1,
                     name: "Season 1".to_string(),
                     overview: "First season".to_string(),
                     air_date: "2008-01-20".to_string(),
                     episodes: vec![
-                        Episode {
+                        TvSeasonEpisode {
                             id: 101,
                             season_number: 1,
                             episode_number: 1,
@@ -326,7 +401,7 @@ mod tests {
                             overview: "Pilot".to_string(),
                             air_date: "2008-01-20".to_string(),
                         },
-                        Episode {
+                        TvSeasonEpisode {
                             id: 102,
                             season_number: 1,
                             episode_number: 2,
@@ -336,14 +411,14 @@ mod tests {
                         },
                     ],
                 },
-                Season {
+                TvSeason {
                     id: 2,
                     season_number: 2,
                     name: "Season 2".to_string(),
                     overview: "Second season".to_string(),
                     air_date: "2009-03-08".to_string(),
                     episodes: vec![
-                        Episode {
+                        TvSeasonEpisode {
                             id: 201,
                             season_number: 2,
                             episode_number: 1,
@@ -351,7 +426,7 @@ mod tests {
                             overview: "Season 2 premiere".to_string(),
                             air_date: "2009-03-08".to_string(),
                         },
-                        Episode {
+                        TvSeasonEpisode {
                             id: 202,
                             season_number: 2,
                             episode_number: 2,
