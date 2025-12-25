@@ -41,8 +41,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
-        #[arg(long)]
-        dry_run: bool,
+        /// Skip confirmation prompt
+        #[arg(short, long)]
+        yes: bool,
     },
     /// Copy files to the target directory
     Copy {
@@ -52,8 +53,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
-        #[arg(long)]
-        dry_run: bool,
+        /// Skip confirmation prompt
+        #[arg(short, long)]
+        yes: bool,
     },
     /// Create hard links in the target directory
     Link {
@@ -63,8 +65,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
-        #[arg(long)]
-        dry_run: bool,
+        /// Skip confirmation prompt
+        #[arg(short, long)]
+        yes: bool,
     },
 }
 
@@ -80,7 +83,7 @@ fn organize_tv(
     source: &Path,
     target: Option<&Path>,
     show: &Show,
-    dry_run: bool,
+    auto_confirm: bool,
 ) -> Result<()> {
     let target = target
         .or_else(|| Path::parent(source))
@@ -125,36 +128,63 @@ fn organize_tv(
         }
     }
 
-    for (old, new) in transactions {
-        let parent = new.parent().context("Failed to get parent")?;
+    // Print what will be done
+    for (old, new) in &transactions {
         match mode {
             Mode::Copy => {
                 println!("Copy: {}", old.to_string_lossy().blue());
                 println!("↪ To: {}", new.to_string_lossy().blue());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::copy(old, new)?;
-                }
             }
             Mode::Move => {
                 println!("Move: {}", old.to_string_lossy().red());
                 println!("↪ To: {}", new.to_string_lossy().red());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::rename(old, new)?;
-                }
             }
             Mode::Link => {
                 println!("Link: {}", old.to_string_lossy().green());
                 println!("↪ To: {}", new.to_string_lossy().green());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::hard_link(old, new)?;
-                }
             }
         };
     }
 
+    if transactions.is_empty() {
+        println!("No files to process.");
+        return Ok(());
+    }
+
+    // Prompt for confirmation unless auto-confirmed
+    if !auto_confirm {
+        use std::io::{self, Write};
+        print!("\nProceed with {} operations? [y/N] ", transactions.len());
+        io::stdout().flush()?;
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input)?;
+
+        if !input.trim().eq_ignore_ascii_case("y") && !input.trim().eq_ignore_ascii_case("yes") {
+            println!("Cancelled.");
+            return Ok(());
+        }
+    }
+
+    // Execute the operations
+    for (old, new) in transactions {
+        let parent = new.parent().context("Failed to get parent")?;
+        fs::create_dir_all(parent)?;
+
+        match mode {
+            Mode::Copy => {
+                fs::copy(old, new)?;
+            }
+            Mode::Move => {
+                fs::rename(old, new)?;
+            }
+            Mode::Link => {
+                fs::hard_link(old, new)?;
+            }
+        };
+    }
+
+    println!("✓ Done.");
     Ok(())
 }
 
@@ -163,7 +193,7 @@ fn organize_movie(
     source: &Path,
     target: Option<&Path>,
     movie: &Movie,
-    dry_run: bool,
+    auto_confirm: bool,
 ) -> Result<()> {
     let target = target
         .or_else(|| Path::parent(source))
@@ -209,36 +239,58 @@ fn organize_movie(
         return Err(anyhow!("No video files found in source directory"));
     }
 
-    for (old, new) in transactions {
-        let parent = new.parent().context("Failed to get parent")?;
+    // Print what will be done
+    for (old, new) in &transactions {
         match mode {
             Mode::Copy => {
                 println!("Copy: {}", old.to_string_lossy().blue());
                 println!("↪ To: {}", new.to_string_lossy().blue());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::copy(old, new)?;
-                }
             }
             Mode::Move => {
                 println!("Move: {}", old.to_string_lossy().red());
                 println!("↪ To: {}", new.to_string_lossy().red());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::rename(old, new)?;
-                }
             }
             Mode::Link => {
                 println!("Link: {}", old.to_string_lossy().green());
                 println!("↪ To: {}", new.to_string_lossy().green());
-                if !dry_run {
-                    fs::create_dir_all(parent)?;
-                    fs::hard_link(old, new)?;
-                }
             }
         };
     }
 
+    // Prompt for confirmation unless auto-confirmed
+    if !auto_confirm {
+        use std::io::{self, Write};
+        print!("\nProceed with this operation? [y/N] ");
+        io::stdout().flush()?;
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input)?;
+
+        if !input.trim().eq_ignore_ascii_case("y") && !input.trim().eq_ignore_ascii_case("yes") {
+            println!("Cancelled.");
+            return Ok(());
+        }
+    }
+
+    // Execute the operations
+    for (old, new) in transactions {
+        let parent = new.parent().context("Failed to get parent")?;
+        fs::create_dir_all(parent)?;
+
+        match mode {
+            Mode::Copy => {
+                fs::copy(old, new)?;
+            }
+            Mode::Move => {
+                fs::rename(old, new)?;
+            }
+            Mode::Link => {
+                fs::hard_link(old, new)?;
+            }
+        };
+    }
+
+    println!("✓ Done.");
     Ok(())
 }
 
@@ -428,7 +480,7 @@ async fn main() -> Result<()> {
             target,
             tv_id,
             movie_id,
-            dry_run,
+            yes,
         } => {
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
@@ -436,11 +488,11 @@ async fn main() -> Result<()> {
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Move, source, target, &show, dry_run)
+                    organize_tv(Mode::Move, source, target, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Move, source, target, &movie, dry_run)
+                    organize_movie(Mode::Move, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
                 (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
@@ -451,7 +503,7 @@ async fn main() -> Result<()> {
             target,
             tv_id,
             movie_id,
-            dry_run,
+            yes,
         } => {
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
@@ -459,11 +511,11 @@ async fn main() -> Result<()> {
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Copy, source, target, &show, dry_run)
+                    organize_tv(Mode::Copy, source, target, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Copy, source, target, &movie, dry_run)
+                    organize_movie(Mode::Copy, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
                 (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
@@ -474,7 +526,7 @@ async fn main() -> Result<()> {
             target,
             tv_id,
             movie_id,
-            dry_run,
+            yes,
         } => {
             let source = Path::new(&source);
             let target = target.as_ref().map(Path::new);
@@ -482,11 +534,11 @@ async fn main() -> Result<()> {
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Link, source, target, &show, dry_run)
+                    organize_tv(Mode::Link, source, target, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Link, source, target, &movie, dry_run)
+                    organize_movie(Mode::Link, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
                 (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
@@ -596,7 +648,7 @@ mod tests {
     }
 
     #[test]
-    fn test_organize_dry_run() {
+    fn test_organize_with_autoconfirm() {
         let temp_dir = TempDir::new().unwrap();
         let source = temp_dir.path().join("source");
         let target = temp_dir.path().join("target");
@@ -614,16 +666,18 @@ mod tests {
             result.err()
         );
 
-        for file_name in &test_files() {
+        // With auto-confirm, files should be moved
+        for file_name in &test_episode_files() {
             let original_path = source.join(file_name);
             assert!(
-                original_path.exists(),
-                "File should still exist in dry run mode: {:?}",
+                !original_path.exists(),
+                "Original video file should be moved: {:?}",
                 file_name
             );
         }
 
-        assert!(!target.exists(), "Target should not exist in dry run mode");
+        let show_dir = target.join("Show Name (2008)");
+        assert!(show_dir.exists(), "Show directory should exist");
     }
 
     #[test]
@@ -636,7 +690,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize_tv(Mode::Copy, &source, Some(&target), &show, false);
+        let result = organize_tv(Mode::Copy, &source, Some(&target), &show, true);
 
         assert!(
             result.is_ok(),
@@ -684,7 +738,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize_tv(Mode::Move, &source, None, &show, false);
+        let result = organize_tv(Mode::Move, &source, None, &show, true);
 
         assert!(
             result.is_ok(),
@@ -755,7 +809,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, false);
+        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
 
         assert!(
             result.is_ok(),
@@ -798,7 +852,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, false);
+        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
 
         assert!(
             result.is_err(),
@@ -814,7 +868,7 @@ mod tests {
     }
 
     #[test]
-    fn test_organize_movie_dry_run() {
+    fn test_organize_movie_with_autoconfirm() {
         let temp_dir = TempDir::new().unwrap();
         let source = temp_dir.path().join("source");
         let target = temp_dir.path().join("target");
@@ -835,15 +889,17 @@ mod tests {
             result.err()
         );
 
+        // With auto-confirm, file should be moved
         for file_name in &movie_files {
             let original_path = source.join(file_name);
             assert!(
-                original_path.exists(),
-                "File should still exist in dry run mode: {:?}",
+                !original_path.exists(),
+                "File should be moved with auto-confirm: {:?}",
                 file_name
             );
         }
 
-        assert!(!target.exists(), "Target should not exist in dry run mode");
+        let movie_dir = target.join("Fight Club (1999)");
+        assert!(movie_dir.exists(), "Movie directory should exist");
     }
 }
