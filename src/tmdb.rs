@@ -38,6 +38,24 @@ pub struct Episode {
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct SearchResult {
+    pub id: i32,
+    pub name: String,
+    pub overview: String,
+    pub first_air_date: Option<String>,
+    pub original_language: Option<String>,
+    pub popularity: Option<f64>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct SearchResponse {
+    pub page: i32,
+    pub results: Vec<SearchResult>,
+    pub total_pages: i32,
+    pub total_results: i32,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct Show {
     pub id: i32,
     pub name: String,
@@ -121,6 +139,18 @@ impl TmdbClient {
             .client
             .get(format!("{}/tv/{}/season/{}", BASE_URL, id, season))
             .bearer_auth(&self.token)
+            .send()
+            .await?
+            .json()
+            .await?)
+    }
+
+    pub async fn search_tv(&self, query: &str) -> Result<SearchResponse> {
+        Ok(self
+            .client
+            .get(format!("{}/search/tv", BASE_URL))
+            .bearer_auth(&self.token)
+            .query(&[("query", query)])
             .send()
             .await?
             .json()
