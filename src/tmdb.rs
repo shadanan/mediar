@@ -8,7 +8,7 @@ use crate::video::episode_id;
 const BASE_URL: &str = "https://api.themoviedb.org/3";
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
-pub struct Series {
+pub struct Tv {
     pub id: i32,
     pub name: String,
     pub overview: String,
@@ -18,17 +18,7 @@ pub struct Series {
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
-pub struct Season {
-    pub id: i32,
-    pub season_number: i32,
-    pub name: String,
-    pub overview: String,
-    pub air_date: String,
-    pub episodes: Vec<Episode>,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-pub struct Episode {
+pub struct TvSeasonEpisode {
     pub id: i32,
     pub season_number: i32,
     pub episode_number: i32,
@@ -38,21 +28,13 @@ pub struct Episode {
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
-pub struct SearchResult {
+pub struct TvSeason {
     pub id: i32,
+    pub season_number: i32,
     pub name: String,
     pub overview: String,
-    pub first_air_date: Option<String>,
-    pub original_language: Option<String>,
-    pub popularity: Option<f64>,
-}
-
-#[derive(Debug, PartialEq, Deserialize, Serialize)]
-pub struct SearchResponse {
-    pub page: i32,
-    pub results: Vec<SearchResult>,
-    pub total_pages: i32,
-    pub total_results: i32,
+    pub air_date: String,
+    pub episodes: Vec<TvSeasonEpisode>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -64,11 +46,57 @@ pub struct Show {
     pub first_air_date: String,
     pub number_of_episodes: i32,
     pub number_of_seasons: i32,
-    pub seasons: Vec<Season>,
+    pub seasons: Vec<TvSeason>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct TvSearchResult {
+    pub id: i32,
+    pub name: String,
+    pub overview: String,
+    pub first_air_date: Option<String>,
+    pub original_language: Option<String>,
+    pub popularity: Option<f64>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct TvSearchResponse {
+    pub page: i32,
+    pub results: Vec<TvSearchResult>,
+    pub total_pages: i32,
+    pub total_results: i32,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct Movie {
+    pub id: i32,
+    pub title: String,
+    pub overview: String,
+    pub release_date: String,
+    pub original_language: String,
+    pub popularity: f64,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct MovieSearchResult {
+    pub id: i32,
+    pub title: String,
+    pub overview: String,
+    pub release_date: Option<String>,
+    pub original_language: Option<String>,
+    pub popularity: Option<f64>,
+}
+
+#[derive(Debug, PartialEq, Deserialize, Serialize)]
+pub struct MovieSearchResponse {
+    pub page: i32,
+    pub results: Vec<MovieSearchResult>,
+    pub total_pages: i32,
+    pub total_results: i32,
 }
 
 impl Show {
-    pub fn episodes(&self) -> HashMap<String, &Episode> {
+    pub fn episodes(&self) -> HashMap<String, &TvSeasonEpisode> {
         self.seasons
             .iter()
             .flat_map(|season| {
@@ -123,7 +151,7 @@ impl TmdbClient {
         })
     }
 
-    pub async fn series(&self, id: i32) -> Result<Series> {
+    pub async fn series(&self, id: i32) -> Result<Tv> {
         Ok(self
             .client
             .get(format!("{}/tv/{}", BASE_URL, id))
@@ -134,7 +162,7 @@ impl TmdbClient {
             .await?)
     }
 
-    pub async fn season(&self, id: i32, season: i32) -> Result<Season> {
+    pub async fn season(&self, id: i32, season: i32) -> Result<TvSeason> {
         Ok(self
             .client
             .get(format!("{}/tv/{}/season/{}", BASE_URL, id, season))
@@ -145,12 +173,35 @@ impl TmdbClient {
             .await?)
     }
 
-    pub async fn search_tv(&self, query: &str) -> Result<SearchResponse> {
+    pub async fn search_tv(&self, query: &str) -> Result<TvSearchResponse> {
         Ok(self
             .client
             .get(format!("{}/search/tv", BASE_URL))
             .bearer_auth(&self.token)
             .query(&[("query", query)])
+            .send()
+            .await?
+            .json()
+            .await?)
+    }
+
+    pub async fn search_movie(&self, query: &str) -> Result<MovieSearchResponse> {
+        Ok(self
+            .client
+            .get(format!("{}/search/movie", BASE_URL))
+            .bearer_auth(&self.token)
+            .query(&[("query", query)])
+            .send()
+            .await?
+            .json()
+            .await?)
+    }
+
+    pub async fn movie(&self, id: i32) -> Result<Movie> {
+        Ok(self
+            .client
+            .get(format!("{}/movie/{}", BASE_URL, id))
+            .bearer_auth(&self.token)
             .send()
             .await?
             .json()
@@ -190,14 +241,14 @@ mod tests {
             first_air_date: "2020-01-01".to_string(),
             number_of_episodes: 2,
             number_of_seasons: 1,
-            seasons: vec![Season {
+            seasons: vec![TvSeason {
                 id: 1,
                 season_number: 1,
                 name: "Season 1".to_string(),
                 overview: "First season".to_string(),
                 air_date: "2020-01-01".to_string(),
                 episodes: vec![
-                    Episode {
+                    TvSeasonEpisode {
                         id: 1,
                         season_number: 1,
                         episode_number: 1,
@@ -205,7 +256,7 @@ mod tests {
                         overview: "First episode".to_string(),
                         air_date: "2020-01-01".to_string(),
                     },
-                    Episode {
+                    TvSeasonEpisode {
                         id: 2,
                         season_number: 1,
                         episode_number: 2,
@@ -236,13 +287,13 @@ mod tests {
             number_of_episodes: 3,
             number_of_seasons: 2,
             seasons: vec![
-                Season {
+                TvSeason {
                     id: 1,
                     season_number: 1,
                     name: "Season 1".to_string(),
                     overview: "First season".to_string(),
                     air_date: "2020-01-01".to_string(),
-                    episodes: vec![Episode {
+                    episodes: vec![TvSeasonEpisode {
                         id: 1,
                         season_number: 1,
                         episode_number: 1,
@@ -251,14 +302,14 @@ mod tests {
                         air_date: "2020-01-01".to_string(),
                     }],
                 },
-                Season {
+                TvSeason {
                     id: 2,
                     season_number: 2,
                     name: "Season 2".to_string(),
                     overview: "Second season".to_string(),
                     air_date: "2021-01-01".to_string(),
                     episodes: vec![
-                        Episode {
+                        TvSeasonEpisode {
                             id: 2,
                             season_number: 2,
                             episode_number: 1,
@@ -266,7 +317,7 @@ mod tests {
                             overview: "First episode of season 2".to_string(),
                             air_date: "2021-01-01".to_string(),
                         },
-                        Episode {
+                        TvSeasonEpisode {
                             id: 3,
                             season_number: 2,
                             episode_number: 2,
