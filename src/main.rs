@@ -2,7 +2,7 @@ use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
 use mediar::{
-    tmdb::{Show, TmdbClient},
+    tmdb::{SearchResult, Show, TmdbClient},
     video::{parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
@@ -10,6 +10,7 @@ use std::{
     fs,
     path::{Path, PathBuf},
 };
+use tabled::{Table, Tabled, settings::Style};
 use walkdir::WalkDir;
 
 #[derive(Debug, Clone)]
@@ -21,6 +22,17 @@ enum Mode {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
+    /// Search for TV shows
+    Search {
+        /// The search query
+        query: String,
+        /// Filter by language (e.g., en, es, fr)
+        #[arg(long)]
+        language: Option<String>,
+        /// Filter by minimum popularity (default: 1.0)
+        #[arg(long, default_value = "1.0")]
+        min_popularity: f64,
+    },
     /// Move files to the target directory
     Move {
         source: String,
@@ -140,6 +152,44 @@ fn organize(
     Ok(())
 }
 
+#[derive(Tabled)]
+struct SearchResultDisplay {
+    #[tabled(rename = "ID")]
+    id: i32,
+    #[tabled(rename = "Name")]
+    name: String,
+    #[tabled(rename = "🌐")]
+    language: String,
+    #[tabled(rename = "⭐")]
+    popularity: String,
+    #[tabled(rename = "Year")]
+    year: String,
+    #[tabled(rename = "TMDB Link")]
+    link: String,
+}
+
+impl From<SearchResult> for SearchResultDisplay {
+    fn from(result: SearchResult) -> Self {
+        Self {
+            id: result.id,
+            name: result.name,
+            language: result
+                .original_language
+                .unwrap_or_else(|| "N/A".to_string()),
+            popularity: result
+                .popularity
+                .map(|p| format!("{:.1}", p))
+                .unwrap_or_else(|| "N/A".to_string()),
+            year: result
+                .first_air_date
+                .as_ref()
+                .and_then(|date| date.split('-').next().map(|s| s.to_string()))
+                .unwrap_or_default(),
+            link: format!("https://www.themoviedb.org/tv/{}", result.id),
+        }
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let _ = dotenvy::dotenv();
@@ -148,6 +198,66 @@ async fn main() -> Result<()> {
     let client = TmdbClient::new()?;
 
     match args.command {
+        Commands::Search {
+            query,
+            language,
+            min_popularity,
+        } => {
+            let response = client.search_tv(&query).await?;
+
+            if response.results.is_empty() {
+                println!("No results found for: {}", query.yellow());
+                return Ok(());
+            }
+
+            let mut filtered_results: Vec<_> = response
+                .results
+                .into_iter()
+                .filter(|result| {
+                    // Filter by language if specified
+                    let lang_match = language
+                        .as_ref()
+                        .is_none_or(|lang| result.original_language.as_ref() == Some(lang));
+
+                    // Filter by minimum popularity
+                    let pop_match = result.popularity.is_some_and(|p| p >= min_popularity);
+
+                    lang_match && pop_match
+                })
+                .collect();
+
+            if filtered_results.is_empty() {
+                println!(
+                    "No results found matching the filters for: {}",
+                    query.yellow()
+                );
+                return Ok(());
+            }
+
+            // Sort by popularity descending
+            filtered_results.sort_by(|a, b| {
+                let pop_a = a.popularity.unwrap_or(0.0);
+                let pop_b = b.popularity.unwrap_or(0.0);
+                pop_b
+                    .partial_cmp(&pop_a)
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            });
+
+            let display_results: Vec<SearchResultDisplay> = filtered_results
+                .into_iter()
+                .map(SearchResultDisplay::from)
+                .collect();
+
+            let table = Table::new(display_results)
+                .with(Style::rounded())
+                .to_string();
+            println!("\n{}", table);
+            println!(
+                "\nFound {} results (Page {} of {})",
+                response.total_results, response.page, response.total_pages
+            );
+            Ok(())
+        }
         Commands::Move {
             source,
             target,
