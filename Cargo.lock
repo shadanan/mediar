@@ -716,6 +716,8 @@ dependencies = [
  "reqwest",
  "sanitize-filename",
  "serde",
+ "serde_json",
+ "tempfile",
  "tokio",
  "walkdir",
 ]

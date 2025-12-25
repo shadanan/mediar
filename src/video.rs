@@ -130,4 +130,44 @@ mod tests {
         let result = parse_season_episode(Path::new("The Show s03e07 The Episode Name.mp4"));
         assert_eq!(result.unwrap(), "S03E07");
     }
+
+    #[test]
+    fn test_episode_id() {
+        assert_eq!(episode_id(1, 1), "S01E01");
+        assert_eq!(episode_id(5, 12), "S05E12");
+        assert_eq!(episode_id(10, 99), "S10E99");
+    }
+
+    #[test]
+    fn test_parse_season_episode_complex_filename() {
+        let result = parse_season_episode(Path::new(
+            "[Group] Show Name - s02e15 - Episode Title [1080p].mkv",
+        ));
+        assert_eq!(result.unwrap(), "S02E15");
+    }
+
+    #[test]
+    fn test_parse_season_episode_with_year() {
+        let result = parse_season_episode(Path::new("Show.2024.s01e03.720p.mp4"));
+        assert_eq!(result.unwrap(), "S01E03");
+    }
+
+    #[test]
+    fn test_parse_ext_case_insensitive() {
+        assert_eq!(parse_ext(Path::new("video.MP4")), Some("mp4".to_string()));
+        assert_eq!(parse_ext(Path::new("video.MKV")), Some("mkv".to_string()));
+        assert_eq!(parse_ext(Path::new("video.AVI")), Some("avi".to_string()));
+    }
+
+    #[test]
+    fn test_parse_ext_with_path() {
+        assert_eq!(
+            parse_ext(Path::new("/path/to/video.mp4")),
+            Some("mp4".to_string())
+        );
+        assert_eq!(
+            parse_ext(Path::new("relative/path/video.mkv")),
+            Some("mkv".to_string())
+        );
+    }
 }
