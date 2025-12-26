@@ -6,6 +6,51 @@ pub fn episode_id(season: i32, episode: i32) -> String {
     format!("S{:02}E{:02}", season, episode)
 }
 
+/// Extract the title from a filename by removing metadata patterns
+/// Returns the cleaned title as a string
+pub fn extract_title(path: &Path) -> Option<String> {
+    let file_name = path.file_stem().and_then(|name| name.to_str())?;
+
+    // Patterns that indicate the start of metadata (case insensitive)
+    let metadata_patterns = [
+        r"[Ss]\d+",
+        r"[Ee]\d+",
+        r"\d{4}",
+        r"\d{3,4}p",
+        r"(?i)(bluray|brrip|webrip|web-dl|hdtv|dvdrip|xvid|x264|x265|h264|h265)",
+        r"(?i)(proper|repack|internal|limited|unrated|extended|directors.cut)",
+        r"\[.*?\]",
+    ];
+
+    let combined_pattern = metadata_patterns.join("|");
+    let re = Regex::new(&combined_pattern).ok()?;
+
+    // Find the first match of any metadata pattern
+    let title_end = re
+        .find(file_name)
+        .map(|m| m.start())
+        .unwrap_or(file_name.len());
+
+    // Extract the title portion
+    let title = &file_name[..title_end];
+
+    // Clean up the title: replace dots, underscores, and multiple spaces with single space
+    let cleaned = title.replace(['.', '_', '-'], " ");
+
+    // Trim and collapse multiple spaces
+    let cleaned = cleaned.split_whitespace().collect::<Vec<_>>().join(" ");
+
+    if cleaned.is_empty() {
+        None
+    } else {
+        Some(cleaned)
+    }
+}
+
+pub fn is_tv_show(path: &Path) -> bool {
+    parse_season_episode(path).is_ok()
+}
+
 pub fn parse_ext(path: &Path) -> Option<String> {
     if path.is_dir() {
         return None;
@@ -169,5 +214,53 @@ mod tests {
             parse_ext(Path::new("relative/path/video.mkv")),
             Some("mkv".to_string())
         );
+    }
+
+    #[test]
+    fn test_extract_title_simple() {
+        assert_eq!(
+            extract_title(Path::new("Movie Name.mkv")),
+            Some("Movie Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_with_season_episode() {
+        assert_eq!(
+            extract_title(Path::new("Show.Title.S01E01.720p.mkv")),
+            Some("Show Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_with_year() {
+        assert_eq!(
+            extract_title(Path::new("Movie.Title.1999.1080p.BluRay.mkv")),
+            Some("Movie Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_with_quality() {
+        assert_eq!(
+            extract_title(Path::new("Movie_Title_BluRay_1080p.mkv")),
+            Some("Movie Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_with_brackets() {
+        assert_eq!(
+            extract_title(Path::new("Show Name [1080p].mkv")),
+            Some("Show Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_is_tv_show() {
+        assert!(is_tv_show(Path::new("Show.S01E01.mkv")));
+        assert!(is_tv_show(Path::new("series_s02e10.mp4")));
+        assert!(!is_tv_show(Path::new("Movie.2020.mkv")));
+        assert!(!is_tv_show(Path::new("Film.Name.1080p.mp4")));
     }
 }
