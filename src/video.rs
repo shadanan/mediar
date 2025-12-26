@@ -16,10 +16,6 @@ impl ContentType {
             ContentType::Movie => "Movie",
         }
     }
-
-    pub fn all() -> [ContentType; 2] {
-        [ContentType::Show, ContentType::Movie]
-    }
 }
 
 impl fmt::Display for ContentType {
@@ -30,39 +26,6 @@ impl fmt::Display for ContentType {
 
 pub fn episode_id(season: i32, episode: i32) -> String {
     format!("S{:02}E{:02}", season, episode)
-}
-
-/// Extract title from a directory name, removing season info and metadata
-pub fn extract_title_from_directory(dir_name: &str) -> Option<String> {
-    // First, replace dots, underscores, dashes with spaces for easier pattern matching
-    let normalized = dir_name.replace(['.', '_', '-'], " ");
-
-    // Patterns to remove from directory names
-    let metadata_patterns = [
-        r"[Ss]eason\s*\d+",
-        r"[Ss]\d+",
-        r"\d{4}",
-        r"\d{3,4}p",
-        r"(?i)(bluray|brrip|webrip|web-dl|hdtv|dvdrip|xvid|x264|x265|h264|h265)",
-        r"(?i)(proper|repack|internal|limited|unrated|extended|directors.cut)",
-        r"\(.*?\)", // Remove parenthetical content
-        r"\[.*?\]",
-    ];
-
-    let combined_pattern = metadata_patterns.join("|");
-    let re = Regex::new(&combined_pattern).ok()?;
-
-    // Remove all metadata patterns
-    let cleaned = re.replace_all(&normalized, " ");
-
-    // Collapse multiple spaces and trim
-    let cleaned = cleaned.split_whitespace().collect::<Vec<_>>().join(" ");
-
-    if cleaned.is_empty() {
-        None
-    } else {
-        Some(cleaned)
-    }
 }
 
 /// Extract the title from a filename by removing metadata patterns
@@ -139,7 +102,7 @@ pub fn parse_season_episode(path: &Path) -> Result<String> {
         .context("Invalid filename")?;
 
     // Try the standard S##E## pattern first
-    let se_re = Regex::new(r"[Ss](\d+)[Ee](\d+)")?;
+    let se_re = Regex::new(r"[Ss](\d+)[\s.-_]*[Ee](\d+)")?;
 
     if let Some(caps) = se_re.captures(file_name) {
         let season = caps
@@ -230,60 +193,10 @@ mod tests {
     }
 
     #[test]
-    fn test_parse_season_episode_valid_pattern() {
-        let result = parse_season_episode(Path::new("show_s01e05.mkv"));
-        assert_eq!(result.unwrap(), "S01E05");
-    }
-
-    #[test]
-    fn test_parse_season_episode_uppercase_pattern() {
-        let result = parse_season_episode(Path::new("Series_S10E23.mp4"));
-        assert_eq!(result.unwrap(), "S10E23");
-    }
-
-    #[test]
-    fn test_parse_season_episode_mixed_case() {
-        let result = parse_season_episode(Path::new("show_s02E15.avi"));
-        assert_eq!(result.unwrap(), "S02E15");
-    }
-
-    #[test]
-    fn test_parse_season_episode_no_pattern() {
-        let result = parse_season_episode(Path::new("video.mp4"));
-        assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_parse_season_episode_invalid_numbers() {
-        let result = parse_season_episode(Path::new("show_saXebX.mkv"));
-        assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_parse_season_episode_with_text() {
-        let result = parse_season_episode(Path::new("The Show s03e07 The Episode Name.mp4"));
-        assert_eq!(result.unwrap(), "S03E07");
-    }
-
-    #[test]
     fn test_episode_id() {
         assert_eq!(episode_id(1, 1), "S01E01");
         assert_eq!(episode_id(5, 12), "S05E12");
         assert_eq!(episode_id(10, 99), "S10E99");
-    }
-
-    #[test]
-    fn test_parse_season_episode_complex_filename() {
-        let result = parse_season_episode(Path::new(
-            "[Group] Show Name - s02e15 - Episode Title [1080p].mkv",
-        ));
-        assert_eq!(result.unwrap(), "S02E15");
-    }
-
-    #[test]
-    fn test_parse_season_episode_with_year() {
-        let result = parse_season_episode(Path::new("Show.2024.s01e03.720p.mp4"));
-        assert_eq!(result.unwrap(), "S01E03");
     }
 
     #[test]
@@ -354,44 +267,65 @@ mod tests {
     }
 
     #[test]
-    fn test_extract_title_from_directory_simple() {
-        assert_eq!(
-            extract_title_from_directory("Show Name Season 01"),
-            Some("Show Name".to_string())
-        );
+    fn test_parse_season_episode_valid_pattern() {
+        let result = parse_season_episode(Path::new("show_s01e05.mkv"));
+        assert_eq!(result.unwrap(), "S01E05");
     }
 
     #[test]
-    fn test_extract_title_from_directory_with_metadata() {
-        assert_eq!(
-            extract_title_from_directory("Selfie Season 01 HDTV (S01 with subtitles)"),
-            Some("Selfie".to_string())
-        );
+    fn test_parse_season_episode_uppercase_pattern() {
+        let result = parse_season_episode(Path::new("Series_S10E23.mp4"));
+        assert_eq!(result.unwrap(), "S10E23");
     }
 
     #[test]
-    fn test_extract_title_from_directory_with_year() {
-        assert_eq!(
-            extract_title_from_directory("Breaking Bad (2008) Season 01"),
-            Some("Breaking Bad".to_string())
-        );
+    fn test_parse_season_episode_mixed_case() {
+        let result = parse_season_episode(Path::new("show_s02E15.avi"));
+        assert_eq!(result.unwrap(), "S02E15");
     }
 
     #[test]
-    fn test_extract_title_from_directory_compact_season() {
-        assert_eq!(
-            extract_title_from_directory("The Wire S01 720p"),
-            Some("The Wire".to_string())
-        );
+    fn test_parse_season_episode_space_separated() {
+        let result = parse_season_episode(Path::new("Show S02 E15.avi"));
+        assert_eq!(result.unwrap(), "S02E15");
     }
 
     #[test]
-    fn test_extract_title_from_directory_dots_and_underscores() {
-        // Note: Dots and underscores are replaced with spaces before pattern removal
-        assert_eq!(
-            extract_title_from_directory("Show.Name.Season.01.HDTV"),
-            Some("Show Name".to_string())
-        );
+    fn test_parse_season_episode_period_separated() {
+        let result = parse_season_episode(Path::new("show.S02.E15.avi"));
+        assert_eq!(result.unwrap(), "S02E15");
+    }
+
+    #[test]
+    fn test_parse_season_episode_no_pattern() {
+        let result = parse_season_episode(Path::new("video.mp4"));
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_parse_season_episode_invalid_numbers() {
+        let result = parse_season_episode(Path::new("show_saXebX.mkv"));
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_parse_season_episode_with_text() {
+        let result = parse_season_episode(Path::new("The Show s03e07 The Episode Name.mp4"));
+        assert_eq!(result.unwrap(), "S03E07");
+    }
+
+    #[test]
+    fn test_parse_season_episode_complex_filename() {
+        let result = parse_season_episode(Path::new(
+            "[Group] Show Name - s02e15 - Episode Title [1080p].mkv",
+        ));
+        assert_eq!(result.unwrap(), "S02E15");
+    }
+
+    #[test]
+    fn test_parse_season_episode_with_year() {
+        let result = parse_season_episode(Path::new("Show.2024.s01e03.720p.mp4"));
+        assert_eq!(result.unwrap(), "S01E03");
     }
 
     #[test]
