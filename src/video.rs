@@ -126,7 +126,74 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_get_video_format_with_valid_extensions() {
+    fn test_episode_id() {
+        assert_eq!(episode_id(1, 1), "S01E01");
+        assert_eq!(episode_id(5, 12), "S05E12");
+        assert_eq!(episode_id(10, 99), "S10E99");
+    }
+
+    #[test]
+    fn test_parse_title_simple() {
+        assert_eq!(
+            parse_title(Path::new("Movie Name.mkv")),
+            Some("Movie Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_season_episode() {
+        assert_eq!(
+            parse_title(Path::new("Show.Title.S01E01.720p.mkv")),
+            Some("Show Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_year() {
+        assert_eq!(
+            parse_title(Path::new("Movie.Title.1999.1080p.BluRay.mkv")),
+            Some("Movie Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_quality() {
+        assert_eq!(
+            parse_title(Path::new("Movie_Title_BluRay_1080p.mkv")),
+            Some("Movie Title".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_brackets() {
+        assert_eq!(
+            parse_title(Path::new("Show Name [1080p].mkv")),
+            Some("Show Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_content_type() {
+        assert_eq!(
+            parse_content_type(Path::new("Show.S01E01.mkv")),
+            ContentType::Show
+        );
+        assert_eq!(
+            parse_content_type(Path::new("show_s02e10.mp4")),
+            ContentType::Show
+        );
+        assert_eq!(
+            parse_content_type(Path::new("Movie.2020.mkv")),
+            ContentType::Movie
+        );
+        assert_eq!(
+            parse_content_type(Path::new("Film.1080p.mp4")),
+            ContentType::Movie
+        );
+    }
+
+    #[test]
+    fn test_parse_extension_with_valid_extensions() {
         assert_eq!(
             parse_extension(Path::new("video.mp4")).as_deref(),
             Some("mp4")
@@ -158,7 +225,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_video_format_with_invalid_extensions() {
+    fn test_parse_extension_with_invalid_extensions() {
         assert_eq!(parse_extension(Path::new("image.jpg")), None);
         assert_eq!(parse_extension(Path::new("document.txt")), None);
         assert_eq!(parse_extension(Path::new("audio.mp3")), None);
@@ -166,17 +233,17 @@ mod tests {
     }
 
     #[test]
-    fn test_get_video_format_with_directory() {
+    fn test_parse_extension_with_directory() {
         assert_eq!(parse_extension(Path::new("some_directory/")), None);
     }
 
     #[test]
-    fn test_get_video_format_with_no_extension() {
+    fn test_parse_extension_with_no_extension() {
         assert_eq!(parse_extension(Path::new("noextension")), None);
     }
 
     #[test]
-    fn test_get_video_format_with_uppercase_extension() {
+    fn test_parse_extension_with_uppercase_extension() {
         assert_eq!(
             parse_extension(Path::new("video.MP4")),
             Some("mp4".to_string())
@@ -184,7 +251,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_video_format_with_multiple_dots() {
+    fn test_parse_extension_with_multiple_dots() {
         assert_eq!(
             parse_extension(Path::new("my.video.file.mp4")),
             Some("mp4".to_string())
@@ -192,14 +259,7 @@ mod tests {
     }
 
     #[test]
-    fn test_episode_id() {
-        assert_eq!(episode_id(1, 1), "S01E01");
-        assert_eq!(episode_id(5, 12), "S05E12");
-        assert_eq!(episode_id(10, 99), "S10E99");
-    }
-
-    #[test]
-    fn test_parse_ext_case_insensitive() {
+    fn test_parse_extension_case_insensitive() {
         assert_eq!(
             parse_extension(Path::new("video.MP4")),
             Some("mp4".to_string())
@@ -215,7 +275,7 @@ mod tests {
     }
 
     #[test]
-    fn test_parse_ext_with_path() {
+    fn test_parse_extension_with_path() {
         assert_eq!(
             parse_extension(Path::new("/path/to/video.mp4")),
             Some("mp4".to_string())
@@ -223,66 +283,6 @@ mod tests {
         assert_eq!(
             parse_extension(Path::new("relative/path/video.mkv")),
             Some("mkv".to_string())
-        );
-    }
-
-    #[test]
-    fn test_extract_title_simple() {
-        assert_eq!(
-            parse_title(Path::new("Movie Name.mkv")),
-            Some("Movie Name".to_string())
-        );
-    }
-
-    #[test]
-    fn test_extract_title_with_season_episode() {
-        assert_eq!(
-            parse_title(Path::new("Show.Title.S01E01.720p.mkv")),
-            Some("Show Title".to_string())
-        );
-    }
-
-    #[test]
-    fn test_extract_title_with_year() {
-        assert_eq!(
-            parse_title(Path::new("Movie.Title.1999.1080p.BluRay.mkv")),
-            Some("Movie Title".to_string())
-        );
-    }
-
-    #[test]
-    fn test_extract_title_with_quality() {
-        assert_eq!(
-            parse_title(Path::new("Movie_Title_BluRay_1080p.mkv")),
-            Some("Movie Title".to_string())
-        );
-    }
-
-    #[test]
-    fn test_extract_title_with_brackets() {
-        assert_eq!(
-            parse_title(Path::new("Show Name [1080p].mkv")),
-            Some("Show Name".to_string())
-        );
-    }
-
-    #[test]
-    fn test_detect_type() {
-        assert_eq!(
-            parse_content_type(Path::new("Show.S01E01.mkv")),
-            ContentType::Show
-        );
-        assert_eq!(
-            parse_content_type(Path::new("show_s02e10.mp4")),
-            ContentType::Show
-        );
-        assert_eq!(
-            parse_content_type(Path::new("Movie.2020.mkv")),
-            ContentType::Movie
-        );
-        assert_eq!(
-            parse_content_type(Path::new("Film.1080p.mp4")),
-            ContentType::Movie
         );
     }
 

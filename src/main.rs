@@ -968,8 +968,8 @@ mod tests {
     fn create_test_movie() -> Movie {
         Movie {
             id: 550,
-            title: "Fight Club".to_string(),
-            overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy.".to_string(),
+            title: "Movie Name".to_string(),
+            overview: "Movie description".to_string(),
             release_date: "1999-10-15".to_string(),
             original_language: "en".to_string(),
             popularity: 63.869,
@@ -982,7 +982,7 @@ mod tests {
         let source = temp_dir.path().join("source");
         let target = temp_dir.path().join("target");
 
-        let movie_files = vec![Path::new("Fight.Club.1080p.mkv").to_path_buf()];
+        let movie_files = vec![Path::new("Movie.Name.1080p.mkv").to_path_buf()];
 
         create_test_files(&source, &movie_files);
 
@@ -1005,10 +1005,10 @@ mod tests {
             );
         }
 
-        let movie_dir = target.join("Fight Club (1999)");
+        let movie_dir = target.join("Movie Name (1999)");
         assert!(movie_dir.exists(), "Movie directory should exist");
 
-        let expected_file = movie_dir.join("Fight Club (1999).mkv");
+        let expected_file = movie_dir.join("Movie Name (1999).mkv");
         assert!(
             expected_file.exists(),
             "Movie file should exist in target: {:?}",
@@ -1023,8 +1023,8 @@ mod tests {
         let target = temp_dir.path().join("target");
 
         let movie_files = vec![
-            Path::new("Fight.Club.1999.mkv").to_path_buf(),
-            Path::new("Fight.Club.1999.srt").to_path_buf(),
+            Path::new("Movie.Name.1999.mkv").to_path_buf(),
+            Path::new("Movie.Name.1999.srt").to_path_buf(),
         ];
 
         create_test_files(&source, &movie_files);
@@ -1038,17 +1038,17 @@ mod tests {
             "organize_movie should succeed with multiple files of different extensions"
         );
 
-        let movie_dir = target.join("Fight Club (1999)");
+        let movie_dir = target.join("Movie Name (1999)");
         assert!(movie_dir.exists(), "Movie directory should exist");
 
-        let expected_mkv = movie_dir.join("Fight Club (1999).mkv");
+        let expected_mkv = movie_dir.join("Movie Name (1999).mkv");
         assert!(
             expected_mkv.exists(),
             "Movie mkv file should exist in target: {:?}",
             expected_mkv
         );
 
-        let expected_srt = movie_dir.join("Fight Club (1999).srt");
+        let expected_srt = movie_dir.join("Movie Name (1999).srt");
         assert!(
             expected_srt.exists(),
             "Movie srt file should exist in target: {:?}",
@@ -1063,8 +1063,8 @@ mod tests {
         let target = temp_dir.path().join("target");
 
         let movie_files = vec![
-            Path::new("Fight.Club.1999.1080p.mkv").to_path_buf(),
-            Path::new("Fight.Club.1999.720p.mkv").to_path_buf(),
+            Path::new("Movie.Name.1999.1080p.mkv").to_path_buf(),
+            Path::new("Movie.Name.1999.720p.mkv").to_path_buf(),
         ];
 
         create_test_files(&source, &movie_files);
@@ -1094,7 +1094,7 @@ mod tests {
 
         fs::create_dir_all(&source).unwrap();
 
-        let movie_files = vec![Path::new("Fight.Club.1999.mkv").to_path_buf()];
+        let movie_files = vec![Path::new("Movie.Name.1999.mkv").to_path_buf()];
 
         create_test_files(&source, &movie_files);
 
@@ -1118,7 +1118,7 @@ mod tests {
             );
         }
 
-        let movie_dir = target.join("Fight Club (1999)");
+        let movie_dir = target.join("Movie Name (1999)");
         assert!(movie_dir.exists(), "Movie directory should exist");
     }
 }
