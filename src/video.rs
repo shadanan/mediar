@@ -1,9 +1,68 @@
 use anyhow::{Context, Result};
+use core::fmt;
 use regex::Regex;
 use std::{collections::HashSet, path::Path};
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ContentType {
+    Show,
+    Movie,
+}
+
+impl ContentType {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            ContentType::Show => "TV Show",
+            ContentType::Movie => "Movie",
+        }
+    }
+
+    pub fn all() -> [ContentType; 2] {
+        [ContentType::Show, ContentType::Movie]
+    }
+}
+
+impl fmt::Display for ContentType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.as_str())
+    }
+}
+
 pub fn episode_id(season: i32, episode: i32) -> String {
     format!("S{:02}E{:02}", season, episode)
+}
+
+/// Extract title from a directory name, removing season info and metadata
+pub fn extract_title_from_directory(dir_name: &str) -> Option<String> {
+    // First, replace dots, underscores, dashes with spaces for easier pattern matching
+    let normalized = dir_name.replace(['.', '_', '-'], " ");
+
+    // Patterns to remove from directory names
+    let metadata_patterns = [
+        r"[Ss]eason\s*\d+",
+        r"[Ss]\d+",
+        r"\d{4}",
+        r"\d{3,4}p",
+        r"(?i)(bluray|brrip|webrip|web-dl|hdtv|dvdrip|xvid|x264|x265|h264|h265)",
+        r"(?i)(proper|repack|internal|limited|unrated|extended|directors.cut)",
+        r"\(.*?\)", // Remove parenthetical content
+        r"\[.*?\]",
+    ];
+
+    let combined_pattern = metadata_patterns.join("|");
+    let re = Regex::new(&combined_pattern).ok()?;
+
+    // Remove all metadata patterns
+    let cleaned = re.replace_all(&normalized, " ");
+
+    // Collapse multiple spaces and trim
+    let cleaned = cleaned.split_whitespace().collect::<Vec<_>>().join(" ");
+
+    if cleaned.is_empty() {
+        None
+    } else {
+        Some(cleaned)
+    }
 }
 
 /// Extract the title from a filename by removing metadata patterns
@@ -47,8 +106,12 @@ pub fn extract_title(path: &Path) -> Option<String> {
     }
 }
 
-pub fn is_tv_show(path: &Path) -> bool {
-    parse_season_episode(path).is_ok()
+pub fn detect_type(path: &Path) -> ContentType {
+    if parse_season_episode(path).is_ok() {
+        ContentType::Show
+    } else {
+        ContentType::Movie
+    }
 }
 
 pub fn parse_ext(path: &Path) -> Option<String> {
@@ -283,11 +346,52 @@ mod tests {
     }
 
     #[test]
-    fn test_is_tv_show() {
-        assert!(is_tv_show(Path::new("Show.S01E01.mkv")));
-        assert!(is_tv_show(Path::new("series_s02e10.mp4")));
-        assert!(!is_tv_show(Path::new("Movie.2020.mkv")));
-        assert!(!is_tv_show(Path::new("Film.Name.1080p.mp4")));
+    fn test_detect_type() {
+        assert_eq!(detect_type(Path::new("Show.S01E01.mkv")), ContentType::Show);
+        assert_eq!(detect_type(Path::new("show_s02e10.mp4")), ContentType::Show);
+        assert_eq!(detect_type(Path::new("Movie.2020.mkv")), ContentType::Movie);
+        assert_eq!(detect_type(Path::new("Film.1080p.mp4")), ContentType::Movie);
+    }
+
+    #[test]
+    fn test_extract_title_from_directory_simple() {
+        assert_eq!(
+            extract_title_from_directory("Show Name Season 01"),
+            Some("Show Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_from_directory_with_metadata() {
+        assert_eq!(
+            extract_title_from_directory("Selfie Season 01 HDTV (S01 with subtitles)"),
+            Some("Selfie".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_from_directory_with_year() {
+        assert_eq!(
+            extract_title_from_directory("Breaking Bad (2008) Season 01"),
+            Some("Breaking Bad".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_from_directory_compact_season() {
+        assert_eq!(
+            extract_title_from_directory("The Wire S01 720p"),
+            Some("The Wire".to_string())
+        );
+    }
+
+    #[test]
+    fn test_extract_title_from_directory_dots_and_underscores() {
+        // Note: Dots and underscores are replaced with spaces before pattern removal
+        assert_eq!(
+            extract_title_from_directory("Show.Name.Season.01.HDTV"),
+            Some("Show Name".to_string())
+        );
     }
 
     #[test]

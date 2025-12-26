@@ -4,7 +4,7 @@ use colored::Colorize;
 use inquire::Select;
 use mediar::{
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
-    video::{extract_title, is_tv_show, parse_ext, parse_season_episode},
+    video::{ContentType, detect_type, extract_title, parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
 use std::{
@@ -471,7 +471,6 @@ fn select_from_results<T>(
 
 /// Interactive selection for TV shows
 async fn select_tv_show(client: &TmdbClient, query: &str) -> Result<Show> {
-    println!("Searching for TV show: {}", query.yellow());
     let response = client.search_tv(query).await?;
 
     let id = select_from_results(
@@ -501,7 +500,6 @@ async fn select_tv_show(client: &TmdbClient, query: &str) -> Result<Show> {
 
 /// Interactive selection for movies
 async fn select_movie(client: &TmdbClient, query: &str) -> Result<Movie> {
-    println!("Searching for movie: {}", query.yellow());
     let response = client.search_movie(query).await?;
 
     let id = select_from_results(
@@ -543,20 +541,31 @@ async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Co
 
     let sample_video = sample_video.context("No video files found in source directory")?;
 
-    // Extract title from the filename
-    let title = extract_title(&sample_video).context("Failed to extract title from filename")?;
+    let detected_title = extract_title(&sample_video).unwrap_or_default();
 
-    println!("Detected title: {}", title.cyan());
+    let detected_type = detect_type(&sample_video);
 
-    // Determine if it's a TV show or movie
-    if is_tv_show(&sample_video) {
-        println!("Content type: {}", "TV Show".blue());
-        let show = select_tv_show(client, &title).await?;
-        Ok(Content::Show(show))
-    } else {
-        println!("Content type: {}", "Movie".blue());
-        let movie = select_movie(client, &title).await?;
-        Ok(Content::Movie(movie))
+    let selected_type = Select::new("Search for:", vec![ContentType::Show, ContentType::Movie])
+        .with_starting_cursor(if detected_type == ContentType::Show {
+            0
+        } else {
+            1
+        })
+        .prompt()?;
+
+    let title = inquire::Text::new(&format!("{} Title:", selected_type))
+        .with_initial_value(&detected_title)
+        .prompt()?;
+
+    match selected_type {
+        ContentType::Show => {
+            let show = select_tv_show(client, &title).await?;
+            Ok(Content::Show(show))
+        }
+        ContentType::Movie => {
+            let movie = select_movie(client, &title).await?;
+            Ok(Content::Movie(movie))
+        }
     }
 }
 
