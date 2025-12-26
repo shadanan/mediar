@@ -1,11 +1,14 @@
+mod tmdb;
+mod video;
+
+use crate::{
+    tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
+    video::{ContentType, detect_type, extract_title, parse_ext, parse_season_episode},
+};
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
 use inquire::{Confirm, Select};
-use mediar::{
-    tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
-    video::{ContentType, detect_type, extract_title, parse_ext, parse_season_episode},
-};
 use sanitize_filename::sanitize;
 use std::{
     collections::HashSet,
@@ -724,7 +727,7 @@ async fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mediar::tmdb::{Movie, Show, TvSeason, TvSeasonEpisode};
+    use crate::tmdb::{Movie, Show, TvSeason, TvSeasonEpisode};
     use std::fs;
     use tempfile::TempDir;
 
