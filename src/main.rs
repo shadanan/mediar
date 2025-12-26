@@ -1,13 +1,14 @@
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
-use inquire::Select;
+use inquire::{Confirm, Select};
 use mediar::{
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
     video::{ContentType, detect_type, extract_title, parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
 use std::{
+    collections::HashSet,
     fs,
     path::{Path, PathBuf},
 };
@@ -103,35 +104,34 @@ fn print_operation(mode: &Mode, old: &Path, new: &Path) {
 }
 
 /// Print all operations with pagination for large lists
-fn print_operations(mode: &Mode, transactions: &[(PathBuf, PathBuf)]) -> Result<()> {
+fn print_operations(mode: &Mode, operations: &[(PathBuf, PathBuf)]) -> Result<()> {
     const MAX_DISPLAY: usize = 10;
 
-    if transactions.len() <= MAX_DISPLAY {
+    if operations.len() <= MAX_DISPLAY {
         // Print all if within limit
-        for (old, new) in transactions {
+        for (old, new) in operations {
             print_operation(mode, old, new);
         }
     } else {
         // Print first few
-        for (old, new) in transactions.iter().take(MAX_DISPLAY) {
+        for (old, new) in operations.iter().take(MAX_DISPLAY) {
             print_operation(mode, old, new);
         }
 
-        let remaining = transactions.len() - MAX_DISPLAY;
+        let remaining = operations.len() - MAX_DISPLAY;
         println!(
             "{}",
             format!("... and {} more operations", remaining).yellow()
         );
 
         // Ask if user wants to see all
-        let show_all = inquire::Confirm::new("Show all operations?")
+        let show_all = Confirm::new("Show all operations?")
             .with_default(false)
-            .prompt()
-            .map_err(|e| anyhow!(e))?;
+            .prompt()?;
 
         if show_all {
             println!();
-            for (old, new) in transactions.iter().skip(MAX_DISPLAY) {
+            for (old, new) in operations.iter().skip(MAX_DISPLAY) {
                 print_operation(mode, old, new);
             }
         }
@@ -165,10 +165,74 @@ fn confirm_operations(auto_confirm: bool) -> Result<bool> {
         return Ok(true);
     }
 
-    inquire::Confirm::new("Proceed with operations?")
+    Ok(Confirm::new("Proceed with operations?")
         .with_default(true)
-        .prompt()
-        .map_err(|e| anyhow!(e))
+        .prompt()?)
+}
+
+/// Common function to collect operations from source directory
+fn collect_operations<F>(source: &Path, mut path_builder: F) -> Result<Vec<(PathBuf, PathBuf)>>
+where
+    F: FnMut(&Path, &str) -> Result<Option<PathBuf>>,
+{
+    let mut operations: Vec<(PathBuf, PathBuf)> = Vec::new();
+    let mut seen_outputs: HashSet<PathBuf> = HashSet::new();
+
+    for entry in WalkDir::new(source).sort_by_file_name() {
+        let entry = entry?;
+        let old = entry.path().to_path_buf();
+
+        let Some(ext) = parse_ext(&old) else {
+            continue;
+        };
+
+        let Some(new) = path_builder(&old, &ext)? else {
+            continue;
+        };
+
+        if old != new && !new.exists() {
+            // Check if this output path has already been seen
+            if seen_outputs.contains(&new) {
+                return Err(anyhow!(
+                    "Multiple input files map to the same output: {}",
+                    new.display()
+                ));
+            }
+            seen_outputs.insert(new.clone());
+            operations.push((old, new));
+        }
+    }
+
+    Ok(operations)
+}
+
+/// Execute all operations with confirmation
+fn execute_operations(
+    mode: &Mode,
+    operations: Vec<(PathBuf, PathBuf)>,
+    auto_confirm: bool,
+) -> Result<()> {
+    if operations.is_empty() {
+        println!("No files to process.");
+        return Ok(());
+    }
+
+    // Print what will be done
+    print_operations(mode, &operations)?;
+
+    // Prompt for confirmation
+    if !confirm_operations(auto_confirm)? {
+        println!("Cancelled.");
+        return Ok(());
+    }
+
+    // Execute the operations
+    for (old, new) in operations {
+        execute_operation(mode, old, new)?;
+    }
+
+    println!("✓ Done.");
+    Ok(())
 }
 
 fn organize_tv(
@@ -185,21 +249,12 @@ fn organize_tv(
     let episodes = show.episodes();
     let title = sanitize(format!("{} ({})", show.name, show.year));
 
-    let mut transactions: Vec<(PathBuf, PathBuf)> = Vec::new();
-
-    for entry in WalkDir::new(source).sort_by_file_name() {
-        let entry = entry?;
-        let old = entry.path().to_path_buf();
-
-        let Some(ext) = parse_ext(&old) else {
-            continue;
-        };
-
-        let episode_id = match parse_season_episode(&old) {
+    let operations = collect_operations(source, |old, ext| {
+        let episode_id = match parse_season_episode(old) {
             Ok(episode_id) => episode_id,
             Err(_) => {
                 println!("Skip: {}", old.to_string_lossy().yellow());
-                continue;
+                return Ok(None);
             }
         };
 
@@ -216,32 +271,10 @@ fn organize_tv(
                 show.name, episode_id, episode.name, ext
             )));
 
-        if old != new && !new.exists() {
-            transactions.push((old, new));
-        }
-    }
+        Ok(Some(new))
+    })?;
 
-    if transactions.is_empty() {
-        println!("No files to process.");
-        return Ok(());
-    }
-
-    // Print what will be done
-    print_operations(&mode, &transactions)?;
-
-    // Prompt for confirmation
-    if !confirm_operations(auto_confirm)? {
-        println!("Cancelled.");
-        return Ok(());
-    }
-
-    // Execute the operations
-    for (old, new) in transactions {
-        execute_operation(&mode, old, new)?;
-    }
-
-    println!("✓ Done.");
-    Ok(())
+    execute_operations(&mode, operations, auto_confirm)
 }
 
 fn organize_movie(
@@ -264,53 +297,16 @@ fn organize_movie(
 
     let title = sanitize(format!("{} ({})", movie.title, year));
 
-    let mut transactions: Vec<(PathBuf, PathBuf)> = Vec::new();
-
-    for entry in WalkDir::new(source).sort_by_file_name() {
-        let entry = entry?;
-        let old = entry.path().to_path_buf();
-
-        let Some(ext) = parse_ext(&old) else {
-            continue;
-        };
-
+    let operations = collect_operations(source, |_old, ext| {
         let new = target
             .to_path_buf()
             .join(&title)
             .join(sanitize(format!("{} ({}).{}", movie.title, year, ext)));
 
-        if old != new && !new.exists() {
-            transactions.push((old, new));
-        }
-    }
+        Ok(Some(new))
+    })?;
 
-    if transactions.len() > 1 {
-        return Err(anyhow!(
-            "Found {} video files in source directory. Expected exactly one movie file.",
-            transactions.len()
-        ));
-    }
-
-    if transactions.is_empty() {
-        return Err(anyhow!("No video files found in source directory"));
-    }
-
-    // Print what will be done
-    print_operations(&mode, &transactions)?;
-
-    // Prompt for confirmation
-    if !confirm_operations(auto_confirm)? {
-        println!("Cancelled.");
-        return Ok(());
-    }
-
-    // Execute the operations
-    for (old, new) in transactions {
-        execute_operation(&mode, old, new)?;
-    }
-
-    println!("✓ Done.");
-    Ok(())
+    execute_operations(&mode, operations, auto_confirm)
 }
 
 #[derive(Tabled)]
@@ -412,17 +408,18 @@ fn filter_and_sort_search_results(
         })
         .collect();
 
-    // Sort by match type (exact, prefix, other) then by popularity within each group
+    const EXACT: i32 = 0;
+    const PREFIX: i32 = 1;
+    const OTHER: i32 = 2;
     filtered.sort_by_key(|result| {
         let name_lower = result.name.to_lowercase();
 
-        // Determine match type (0 = exact, 1 = prefix, 2 = other)
         let match_type = if name_lower == query_lower {
-            0
+            EXACT
         } else if name_lower.starts_with(&query_lower) {
-            1
+            PREFIX
         } else {
-            2
+            OTHER
         };
 
         // Convert popularity to negative integer for descending sort
@@ -798,6 +795,7 @@ mod tests {
     fn test_episode_files() -> Vec<PathBuf> {
         vec![
             Path::new("s01").join("Show.S01E01.mkv").to_path_buf(),
+            Path::new("s01").join("Show.S01E01.srt").to_path_buf(),
             Path::new("s01").join("02.Show.mp4").to_path_buf(),
             Path::new("s02").join("Show.S02E01.avi").to_path_buf(),
         ]
@@ -807,7 +805,6 @@ mod tests {
         vec![
             Path::new("readme.txt").to_path_buf(),
             Path::new("trailer.mp4").to_path_buf(),
-            Path::new("s01").join("Show.S01E01.srt").to_path_buf(),
             Path::new("s02").join("Show.S02E01.thumb.jpg").to_path_buf(),
         ]
     }
@@ -895,6 +892,7 @@ mod tests {
 
         for expected_file in [
             season1_dir.join("Show Name - S01E01 - One.mkv"),
+            season1_dir.join("Show Name - S01E01 - One.srt"),
             season1_dir.join("Show Name - S01E02 - Two.mp4"),
             season2_dir.join("Show Name - S02E01 - Three.avi"),
         ] {
@@ -952,6 +950,7 @@ mod tests {
 
         for expected_file in [
             season1_dir.join("Show Name - S01E01 - One.mkv"),
+            season1_dir.join("Show Name - S01E01 - One.srt"),
             season1_dir.join("Show Name - S01E02 - Two.mp4"),
             season2_dir.join("Show Name - S02E01 - Three.avi"),
         ] {
@@ -1015,14 +1014,54 @@ mod tests {
     }
 
     #[test]
-    fn test_organize_movie_multiple_files_fails() {
+    fn test_organize_movie_multiple_files_different_extensions() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let movie_files = vec![
+            Path::new("Fight.Club.1999.mkv").to_path_buf(),
+            Path::new("Fight.Club.1999.srt").to_path_buf(),
+        ];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
+
+        assert!(
+            result.is_ok(),
+            "organize_movie should succeed with multiple files of different extensions"
+        );
+
+        let movie_dir = target.join("Fight Club (1999)");
+        assert!(movie_dir.exists(), "Movie directory should exist");
+
+        let expected_mkv = movie_dir.join("Fight Club (1999).mkv");
+        assert!(
+            expected_mkv.exists(),
+            "Movie mkv file should exist in target: {:?}",
+            expected_mkv
+        );
+
+        let expected_srt = movie_dir.join("Fight Club (1999).srt");
+        assert!(
+            expected_srt.exists(),
+            "Movie srt file should exist in target: {:?}",
+            expected_srt
+        );
+    }
+
+    #[test]
+    fn test_organize_movie_duplicate_extension_fails() {
         let temp_dir = TempDir::new().unwrap();
         let source = temp_dir.path().join("source");
         let target = temp_dir.path().join("target");
 
         let movie_files = vec![
             Path::new("Fight.Club.1999.1080p.mkv").to_path_buf(),
-            Path::new("Fight.Club.1999.720p.mp4").to_path_buf(),
+            Path::new("Fight.Club.1999.720p.mkv").to_path_buf(),
         ];
 
         create_test_files(&source, &movie_files);
@@ -1033,13 +1072,13 @@ mod tests {
 
         assert!(
             result.is_err(),
-            "organize_movie should fail with multiple video files"
+            "organize_movie should fail when multiple files map to same output"
         );
 
         let error_msg = result.unwrap_err().to_string();
         assert!(
-            error_msg.contains("Found 2 video files"),
-            "Error message should mention multiple files: {}",
+            error_msg.contains("Multiple input files map to the same output"),
+            "Error message should mention duplicate output: {}",
             error_msg
         );
     }

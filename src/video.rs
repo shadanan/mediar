@@ -121,11 +121,11 @@ pub fn parse_ext(path: &Path) -> Option<String> {
 
     let ext = path.extension()?.to_str()?.to_lowercase();
 
-    let video_extensions = ["mp4", "mkv", "avi", "mov", "flv", "wmv", "webm"]
+    let allowed_formats = ["mp4", "mkv", "avi", "mov", "flv", "wmv", "webm", "srt"]
         .into_iter()
         .map(|ext| ext.to_string())
         .collect::<HashSet<_>>();
-    if !video_extensions.contains(&ext) {
+    if !allowed_formats.contains(&ext) {
         return None;
     }
 
