@@ -75,23 +75,49 @@ pub fn parse_season_episode(path: &Path) -> Result<String> {
         .and_then(|name| name.to_str())
         .context("Invalid filename")?;
 
-    let re = Regex::new(r"[Ss](\d+)[Ee](\d+)")?;
+    // Try the standard S##E## pattern first
+    let se_re = Regex::new(r"[Ss](\d+)[Ee](\d+)")?;
 
-    let caps = re
+    if let Some(caps) = se_re.captures(file_name) {
+        let season = caps
+            .get(1)
+            .and_then(|m| m.as_str().parse::<i32>().ok())
+            .context("Invalid season number")?;
+
+        let episode = caps
+            .get(2)
+            .and_then(|m| m.as_str().parse::<i32>().ok())
+            .context("Invalid episode number")?;
+
+        return Ok(format!("S{:02}E{:02}", season, episode));
+    }
+
+    // Try to extract season from parent directory (e.g., "Season 01" or "S01")
+    let season_re = Regex::new(r"[Ss]eason\s*(\d+)|[Ss](\d+)")?;
+    let mut season: Option<i32> = None;
+
+    if let Some(parent) = path.parent()
+        && let Some(parent_name) = parent.file_name().and_then(|n| n.to_str())
+        && let Some(caps) = season_re.captures(parent_name)
+    {
+        // Check first capture group (from "Season 01")
+        season = caps
+            .get(1)
+            .or_else(|| caps.get(2))
+            .and_then(|m| m.as_str().parse::<i32>().ok());
+    }
+
+    // Try to extract standalone episode number from filename (e.g., "01 Pilot.mp4")
+    let ep_re = Regex::new(r"^(\d+)(?:\s|\.|-|_)")?;
+    let episode: Option<i32> = ep_re
         .captures(file_name)
-        .context("No season/episode pattern found")?;
+        .and_then(|caps| caps.get(1))
+        .and_then(|m| m.as_str().parse::<i32>().ok());
 
-    let season = caps
-        .get(1)
-        .and_then(|m| m.as_str().parse::<i32>().ok())
-        .context("Invalid season number")?;
-
-    let episode = caps
-        .get(2)
-        .and_then(|m| m.as_str().parse::<i32>().ok())
-        .context("Invalid episode number")?;
-
-    Ok(format!("S{:02}E{:02}", season, episode))
+    match (season, episode) {
+        (Some(s), Some(e)) => Ok(format!("S{:02}E{:02}", s, e)),
+        _ => Err(anyhow::anyhow!("No season/episode pattern found")),
+    }
 }
 
 #[cfg(test)]
@@ -262,5 +288,44 @@ mod tests {
         assert!(is_tv_show(Path::new("series_s02e10.mp4")));
         assert!(!is_tv_show(Path::new("Movie.2020.mkv")));
         assert!(!is_tv_show(Path::new("Film.Name.1080p.mp4")));
+    }
+
+    #[test]
+    fn test_parse_season_episode_from_directory() {
+        let result = parse_season_episode(Path::new("Season 01/01 Pilot.mp4"));
+        assert_eq!(result.unwrap(), "S01E01");
+    }
+
+    #[test]
+    fn test_parse_season_episode_from_directory_with_metadata() {
+        let result = parse_season_episode(Path::new(
+            "Show Title Season 01 HDTV (S01 with subtitles)/01 Pilot.mp4",
+        ));
+        assert_eq!(result.unwrap(), "S01E01");
+    }
+
+    #[test]
+    fn test_parse_season_episode_from_directory_s_notation() {
+        let result = parse_season_episode(Path::new("S02/05 Episode Name.mkv"));
+        assert_eq!(result.unwrap(), "S02E05");
+    }
+
+    #[test]
+    fn test_parse_season_episode_standalone_episode_with_dash() {
+        let result = parse_season_episode(Path::new("Season 03/12-Episode Title.mp4"));
+        assert_eq!(result.unwrap(), "S03E12");
+    }
+
+    #[test]
+    fn test_parse_season_episode_standalone_episode_with_dot() {
+        let result = parse_season_episode(Path::new("Season 10/08.Episode.Title.mkv"));
+        assert_eq!(result.unwrap(), "S10E08");
+    }
+
+    #[test]
+    fn test_parse_season_episode_prefers_filename_pattern() {
+        // Should prefer S02E03 from filename over Season 01 from directory
+        let result = parse_season_episode(Path::new("Season 01/Show.S02E03.mkv"));
+        assert_eq!(result.unwrap(), "S02E03");
     }
 }
