@@ -1,9 +1,10 @@
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
 use colored::Colorize;
+use inquire::Select;
 use mediar::{
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
-    video::{parse_ext, parse_season_episode},
+    video::{extract_title, is_tv_show, parse_ext, parse_season_episode},
 };
 use sanitize_filename::sanitize;
 use std::{
@@ -18,6 +19,11 @@ enum Mode {
     Move,
     Copy,
     Link,
+}
+
+enum Content {
+    Show(Show),
+    Movie(Movie),
 }
 
 #[derive(Subcommand, Debug)]
@@ -78,6 +84,93 @@ struct Args {
     command: Commands,
 }
 
+/// Print operation details based on mode
+fn print_operation(mode: &Mode, old: &Path, new: &Path) {
+    match mode {
+        Mode::Copy => {
+            println!("Copy: {}", old.to_string_lossy().blue());
+            println!("↪ To: {}", new.to_string_lossy().blue());
+        }
+        Mode::Move => {
+            println!("Move: {}", old.to_string_lossy().red());
+            println!("↪ To: {}", new.to_string_lossy().red());
+        }
+        Mode::Link => {
+            println!("Link: {}", old.to_string_lossy().green());
+            println!("↪ To: {}", new.to_string_lossy().green());
+        }
+    }
+}
+
+/// Print all operations with pagination for large lists
+fn print_operations(mode: &Mode, transactions: &[(PathBuf, PathBuf)]) -> Result<()> {
+    const MAX_DISPLAY: usize = 10;
+
+    if transactions.len() <= MAX_DISPLAY {
+        // Print all if within limit
+        for (old, new) in transactions {
+            print_operation(mode, old, new);
+        }
+    } else {
+        // Print first few
+        for (old, new) in transactions.iter().take(MAX_DISPLAY) {
+            print_operation(mode, old, new);
+        }
+
+        let remaining = transactions.len() - MAX_DISPLAY;
+        println!(
+            "{}",
+            format!("... and {} more operations", remaining).yellow()
+        );
+
+        // Ask if user wants to see all
+        let show_all = inquire::Confirm::new("Show all operations?")
+            .with_default(false)
+            .prompt()
+            .map_err(|e| anyhow!(e))?;
+
+        if show_all {
+            println!();
+            for (old, new) in transactions.iter().skip(MAX_DISPLAY) {
+                print_operation(mode, old, new);
+            }
+        }
+    }
+
+    Ok(())
+}
+
+/// Execute a file operation based on mode
+fn execute_operation(mode: &Mode, old: PathBuf, new: PathBuf) -> Result<()> {
+    let parent = new.parent().context("Failed to get parent")?;
+    fs::create_dir_all(parent)?;
+
+    match mode {
+        Mode::Copy => {
+            fs::copy(old, new)?;
+        }
+        Mode::Move => {
+            fs::rename(old, new)?;
+        }
+        Mode::Link => {
+            fs::hard_link(old, new)?;
+        }
+    }
+    Ok(())
+}
+
+/// Prompt user for confirmation unless auto-confirmed
+fn confirm_operations(auto_confirm: bool) -> Result<bool> {
+    if auto_confirm {
+        return Ok(true);
+    }
+
+    inquire::Confirm::new("Proceed with operations?")
+        .with_default(true)
+        .prompt()
+        .map_err(|e| anyhow!(e))
+}
+
 fn organize_tv(
     mode: Mode,
     source: &Path,
@@ -128,60 +221,23 @@ fn organize_tv(
         }
     }
 
-    // Print what will be done
-    for (old, new) in &transactions {
-        match mode {
-            Mode::Copy => {
-                println!("Copy: {}", old.to_string_lossy().blue());
-                println!("↪ To: {}", new.to_string_lossy().blue());
-            }
-            Mode::Move => {
-                println!("Move: {}", old.to_string_lossy().red());
-                println!("↪ To: {}", new.to_string_lossy().red());
-            }
-            Mode::Link => {
-                println!("Link: {}", old.to_string_lossy().green());
-                println!("↪ To: {}", new.to_string_lossy().green());
-            }
-        };
-    }
-
     if transactions.is_empty() {
         println!("No files to process.");
         return Ok(());
     }
 
-    // Prompt for confirmation unless auto-confirmed
-    if !auto_confirm {
-        use std::io::{self, Write};
-        print!("\nProceed with {} operations? [y/N] ", transactions.len());
-        io::stdout().flush()?;
+    // Print what will be done
+    print_operations(&mode, &transactions)?;
 
-        let mut input = String::new();
-        io::stdin().read_line(&mut input)?;
-
-        if !input.trim().eq_ignore_ascii_case("y") && !input.trim().eq_ignore_ascii_case("yes") {
-            println!("Cancelled.");
-            return Ok(());
-        }
+    // Prompt for confirmation
+    if !confirm_operations(auto_confirm)? {
+        println!("Cancelled.");
+        return Ok(());
     }
 
     // Execute the operations
     for (old, new) in transactions {
-        let parent = new.parent().context("Failed to get parent")?;
-        fs::create_dir_all(parent)?;
-
-        match mode {
-            Mode::Copy => {
-                fs::copy(old, new)?;
-            }
-            Mode::Move => {
-                fs::rename(old, new)?;
-            }
-            Mode::Link => {
-                fs::hard_link(old, new)?;
-            }
-        };
+        execute_operation(&mode, old, new)?;
     }
 
     println!("✓ Done.");
@@ -240,54 +296,17 @@ fn organize_movie(
     }
 
     // Print what will be done
-    for (old, new) in &transactions {
-        match mode {
-            Mode::Copy => {
-                println!("Copy: {}", old.to_string_lossy().blue());
-                println!("↪ To: {}", new.to_string_lossy().blue());
-            }
-            Mode::Move => {
-                println!("Move: {}", old.to_string_lossy().red());
-                println!("↪ To: {}", new.to_string_lossy().red());
-            }
-            Mode::Link => {
-                println!("Link: {}", old.to_string_lossy().green());
-                println!("↪ To: {}", new.to_string_lossy().green());
-            }
-        };
-    }
+    print_operations(&mode, &transactions)?;
 
-    // Prompt for confirmation unless auto-confirmed
-    if !auto_confirm {
-        use std::io::{self, Write};
-        print!("\nProceed with this operation? [y/N] ");
-        io::stdout().flush()?;
-
-        let mut input = String::new();
-        io::stdin().read_line(&mut input)?;
-
-        if !input.trim().eq_ignore_ascii_case("y") && !input.trim().eq_ignore_ascii_case("yes") {
-            println!("Cancelled.");
-            return Ok(());
-        }
+    // Prompt for confirmation
+    if !confirm_operations(auto_confirm)? {
+        println!("Cancelled.");
+        return Ok(());
     }
 
     // Execute the operations
     for (old, new) in transactions {
-        let parent = new.parent().context("Failed to get parent")?;
-        fs::create_dir_all(parent)?;
-
-        match mode {
-            Mode::Copy => {
-                fs::copy(old, new)?;
-            }
-            Mode::Move => {
-                fs::rename(old, new)?;
-            }
-            Mode::Link => {
-                fs::hard_link(old, new)?;
-            }
-        };
+        execute_operation(&mode, old, new)?;
     }
 
     println!("✓ Done.");
@@ -416,6 +435,131 @@ fn filter_and_sort_search_results(
     filtered
 }
 
+/// Generic interactive selection helper for search results
+fn select_from_results<T>(
+    results: &[T],
+    prompt: &str,
+    no_results_msg: &str,
+    format_option: impl Fn(&T) -> String,
+    get_name: impl Fn(&T) -> &str,
+    get_id: impl Fn(&T) -> i32,
+) -> Result<i32> {
+    if results.is_empty() {
+        return Err(anyhow!("{}", no_results_msg));
+    }
+
+    // Format options for selection
+    let options: Vec<String> = results.iter().map(&format_option).collect();
+
+    let selection = Select::new(prompt, options).with_page_size(10).prompt()?;
+
+    // Extract the ID from the selection
+    let selected_index = results
+        .iter()
+        .position(|result| format_option(result) == selection)
+        .context("Failed to find selected item")?;
+
+    let selected_result = &results[selected_index];
+    println!(
+        "Selected: {} (ID: {})",
+        get_name(selected_result).green(),
+        get_id(selected_result)
+    );
+
+    Ok(get_id(selected_result))
+}
+
+/// Interactive selection for TV shows
+async fn select_tv_show(client: &TmdbClient, query: &str) -> Result<Show> {
+    println!("Searching for TV show: {}", query.yellow());
+    let response = client.search_tv(query).await?;
+
+    let id = select_from_results(
+        &response.results,
+        "Select a TV show:",
+        &format!("No TV shows found for query: {}", query),
+        |result| {
+            let year = result
+                .first_air_date
+                .as_ref()
+                .and_then(|date| date.split('-').next())
+                .unwrap_or("N/A");
+            format!(
+                "{} ({}) - ID: {} - Popularity: {:.1}",
+                result.name,
+                year,
+                result.id,
+                result.popularity.unwrap_or(0.0)
+            )
+        },
+        |result| &result.name,
+        |result| result.id,
+    )?;
+
+    client.show(id).await
+}
+
+/// Interactive selection for movies
+async fn select_movie(client: &TmdbClient, query: &str) -> Result<Movie> {
+    println!("Searching for movie: {}", query.yellow());
+    let response = client.search_movie(query).await?;
+
+    let id = select_from_results(
+        &response.results,
+        "Select a movie:",
+        &format!("No movies found for query: {}", query),
+        |result| {
+            let year = result
+                .release_date
+                .as_ref()
+                .and_then(|date| date.split('-').next())
+                .unwrap_or("N/A");
+            format!(
+                "{} ({}) - ID: {} - Popularity: {:.1}",
+                result.title,
+                year,
+                result.id,
+                result.popularity.unwrap_or(0.0)
+            )
+        },
+        |result| &result.title,
+        |result| result.id,
+    )?;
+
+    client.movie(id).await
+}
+
+/// Auto-detect and select content (TV show or movie)
+async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Content> {
+    // Find a video file to analyze
+    let mut sample_video: Option<PathBuf> = None;
+    for entry in WalkDir::new(source).max_depth(3) {
+        let entry = entry?;
+        if parse_ext(entry.path()).is_some() {
+            sample_video = Some(entry.path().to_path_buf());
+            break;
+        }
+    }
+
+    let sample_video = sample_video.context("No video files found in source directory")?;
+
+    // Extract title from the filename
+    let title = extract_title(&sample_video).context("Failed to extract title from filename")?;
+
+    println!("Detected title: {}", title.cyan());
+
+    // Determine if it's a TV show or movie
+    if is_tv_show(&sample_video) {
+        println!("Content type: {}", "TV Show".blue());
+        let show = select_tv_show(client, &title).await?;
+        Ok(Content::Show(show))
+    } else {
+        println!("Content type: {}", "Movie".blue());
+        let movie = select_movie(client, &title).await?;
+        Ok(Content::Movie(movie))
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let _ = dotenvy::dotenv();
@@ -495,7 +639,15 @@ async fn main() -> Result<()> {
                     organize_movie(Mode::Move, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+                (None, None) => {
+                    // Auto-detect and select
+                    match auto_detect_and_select(&client, source).await? {
+                        Content::Show(show) => organize_tv(Mode::Move, source, target, &show, yes),
+                        Content::Movie(movie) => {
+                            organize_movie(Mode::Move, source, target, &movie, yes)
+                        }
+                    }
+                }
             }
         }
         Commands::Copy {
@@ -518,7 +670,15 @@ async fn main() -> Result<()> {
                     organize_movie(Mode::Copy, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+                (None, None) => {
+                    // Auto-detect and select
+                    match auto_detect_and_select(&client, source).await? {
+                        Content::Show(show) => organize_tv(Mode::Copy, source, target, &show, yes),
+                        Content::Movie(movie) => {
+                            organize_movie(Mode::Copy, source, target, &movie, yes)
+                        }
+                    }
+                }
             }
         }
         Commands::Link {
@@ -541,7 +701,15 @@ async fn main() -> Result<()> {
                     organize_movie(Mode::Link, source, target, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => Err(anyhow!("Must specify either --tv-id or --movie-id")),
+                (None, None) => {
+                    // Auto-detect and select
+                    match auto_detect_and_select(&client, source).await? {
+                        Content::Show(show) => organize_tv(Mode::Link, source, target, &show, yes),
+                        Content::Movie(movie) => {
+                            organize_movie(Mode::Link, source, target, &movie, yes)
+                        }
+                    }
+                }
             }
         }
     }
