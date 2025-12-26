@@ -789,7 +789,7 @@ mod tests {
     fn test_episode_files() -> Vec<PathBuf> {
         vec![
             Path::new("s01").join("Show.S01E01.mkv").to_path_buf(),
-            Path::new("s01").join("Show.S01E02.mp4").to_path_buf(),
+            Path::new("s01").join("02.Show.mp4").to_path_buf(),
             Path::new("s02").join("Show.S02E01.avi").to_path_buf(),
         ]
     }
