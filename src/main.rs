@@ -3,7 +3,7 @@ mod video;
 
 use crate::{
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
-    video::{ContentType, detect_type, extract_title, parse_ext, parse_season_episode},
+    video::{ContentType, parse_content_type, parse_episode_id, parse_extension, parse_title},
 };
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
@@ -185,7 +185,7 @@ where
         let entry = entry?;
         let old = entry.path().to_path_buf();
 
-        let Some(ext) = parse_ext(&old) else {
+        let Some(ext) = parse_extension(&old) else {
             continue;
         };
 
@@ -253,7 +253,7 @@ fn organize_tv(
     let title = sanitize(format!("{} ({})", show.name, show.year));
 
     let operations = collect_operations(source, |old, ext| {
-        let episode_id = match parse_season_episode(old) {
+        let episode_id = match parse_episode_id(old) {
             Ok(episode_id) => episode_id,
             Err(_) => {
                 println!("Skip: {}", old.to_string_lossy().yellow());
@@ -533,7 +533,7 @@ async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Co
     let mut sample_video: Option<PathBuf> = None;
     for entry in WalkDir::new(source).max_depth(3) {
         let entry = entry?;
-        if parse_ext(entry.path()).is_some() {
+        if parse_extension(entry.path()).is_some() {
             sample_video = Some(entry.path().to_path_buf());
             break;
         }
@@ -541,9 +541,9 @@ async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Co
 
     let sample_video = sample_video.context("No video files found in source directory")?;
 
-    let detected_title = extract_title(&sample_video).unwrap_or_default();
+    let detected_title = parse_title(&sample_video).unwrap_or_default();
 
-    let detected_type = detect_type(&sample_video);
+    let detected_type = parse_content_type(&sample_video);
 
     let selected_type = Select::new("Search for:", vec![ContentType::Show, ContentType::Movie])
         .with_starting_cursor(if detected_type == ContentType::Show {
