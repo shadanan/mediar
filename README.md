@@ -17,7 +17,7 @@ A command-line tool for organizing your media library using The Movie Database (
 ## Installation
 
 ```bash
-cargo install --git https://github.com/shadanan/mediar.git
+cargo install mediar
 ```
 
 ## Configuration
