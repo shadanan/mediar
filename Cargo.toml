@@ -1,7 +1,12 @@
 [package]
 name = "mediar"
+description = "Rename and move media files using metadata from TMDB"
+readme = "README.md"
 version = "0.1.0"
 edition = "2024"
+authors = ["Shad Sharma <shadanan@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/shadanan/mediar"
 
 [dependencies]
 anyhow = "1.0.100"
