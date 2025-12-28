@@ -107,7 +107,7 @@ pub fn parse_episode_id(path: &Path) -> Result<String> {
         .get(1)
         .context("Could not extract season")?;
 
-    let episode_regex = Regex::new(r"(?:[Ee](?:pisode)?\s*|\b)(\d+)")?;
+    let episode_regex = Regex::new(r"(?:[Ee](?:pisode)?\s*|\b)(\d{1,2})(?:[._\-]|\b)")?;
     let episode_match = episode_regex
         .captures_at(&path_str, season_match.end())
         .context("Could not extract episode")?
@@ -363,7 +363,7 @@ mod tests {
     #[test]
     fn test_parse_episode_id_from_directory_with_metadata() {
         let result = parse_episode_id(Path::new(
-            "Show Title Season 01 (S01 with subtitles)/01 Pilot.mp4",
+            "Show.Season.01.720p.x264.AC3/Show.01.720p.x264.AC3.mkv",
         ));
         assert_eq!(result.unwrap(), "S01E01");
     }
