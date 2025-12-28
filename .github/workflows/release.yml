@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'shadanan' }}
+    permissions:
+      contents: write
+      id-token: write
+    environment:
+      name: mediar-release
+    steps:
+      - &checkout
+        uses: actions/checkout@v6.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - &install-rust
+        uses: moonrepo/setup-rust@v1
+        with:
+          components: clippy,rustfmt
+      - uses: release-plz/action@v0.5.120
+        with:
+          command: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_PLZ_TOKEN }}
+
+  pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'shadanan' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    environment:
+      name: mediar-release
+    concurrency:
+      group: release-plz-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - *checkout
+      - *install-rust
+      - uses: release-plz/action@v0.5.120
+        with:
+          command: release-pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_PLZ_TOKEN }}
