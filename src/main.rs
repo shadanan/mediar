@@ -7,7 +7,7 @@ use crate::{
 };
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
-use colored::Colorize;
+use colored::{ColoredString, Colorize};
 use inquire::{Confirm, Select};
 use sanitize_filename::sanitize;
 use std::{
@@ -16,6 +16,7 @@ use std::{
     path::{Path, PathBuf},
 };
 use tabled::{Table, Tabled, settings::Style};
+use textwrap::{Options, termwidth, wrap};
 use walkdir::WalkDir;
 
 #[derive(Debug, Clone)]
@@ -81,6 +82,21 @@ enum Commands {
     },
 }
 
+fn print_wrapped(start: ColoredString, text: ColoredString) {
+    let indent = " ".repeat(start.chars().count());
+    let start = start.to_string();
+    let text = text.to_string();
+    let lines = wrap(
+        &text,
+        Options::new(termwidth())
+            .initial_indent(&start)
+            .subsequent_indent(&indent),
+    );
+    for line in lines {
+        println!("{}", line);
+    }
+}
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -88,54 +104,31 @@ struct Args {
     command: Commands,
 }
 
-/// Print operation details based on mode
-fn print_operation(mode: &Mode, old: &Path, new: &Path) {
-    match mode {
-        Mode::Copy => {
-            println!("Copy: {}", old.to_string_lossy().blue());
-            println!("↪ To: {}", new.to_string_lossy().blue());
-        }
-        Mode::Move => {
-            println!("Move: {}", old.to_string_lossy().red());
-            println!("↪ To: {}", new.to_string_lossy().red());
-        }
-        Mode::Link => {
-            println!("Link: {}", old.to_string_lossy().green());
-            println!("↪ To: {}", new.to_string_lossy().green());
-        }
-    }
-}
-
 /// Print all operations with pagination for large lists
 fn print_operations(mode: &Mode, operations: &[(PathBuf, PathBuf)]) -> Result<()> {
     const MAX_DISPLAY: usize = 10;
 
-    if operations.len() <= MAX_DISPLAY {
-        // Print all if within limit
-        for (old, new) in operations {
-            print_operation(mode, old, new);
-        }
-    } else {
-        // Print first few
-        for (old, new) in operations.iter().take(MAX_DISPLAY) {
-            print_operation(mode, old, new);
+    for (index, (old, new)) in operations.iter().enumerate() {
+        if index == MAX_DISPLAY
+            && !Confirm::new("Show all operations?")
+                .with_default(false)
+                .prompt()?
+        {
+            break;
         }
 
-        let remaining = operations.len() - MAX_DISPLAY;
-        println!(
-            "{}",
-            format!("... and {} more operations", remaining).yellow()
-        );
-
-        // Ask if user wants to see all
-        let show_all = Confirm::new("Show all operations?")
-            .with_default(false)
-            .prompt()?;
-
-        if show_all {
-            println!();
-            for (old, new) in operations.iter().skip(MAX_DISPLAY) {
-                print_operation(mode, old, new);
+        match mode {
+            Mode::Copy => {
+                print_wrapped("Copy ".clear(), old.to_string_lossy().dimmed().green());
+                print_wrapped("  ↪  ".bold(), new.to_string_lossy().bold().green());
+            }
+            Mode::Move => {
+                print_wrapped("Move ".clear(), old.to_string_lossy().dimmed().red());
+                print_wrapped("  ↪  ".bold(), new.to_string_lossy().bold().red());
+            }
+            Mode::Link => {
+                print_wrapped("Link ".clear(), old.to_string_lossy().dimmed().blue());
+                print_wrapped("  ↪  ".bold(), new.to_string_lossy().bold().blue());
             }
         }
     }
@@ -193,16 +186,26 @@ where
             continue;
         };
 
-        if old != new && !new.exists() {
-            // Check if this output path has already been seen
-            if seen_outputs.contains(&new) {
-                return Err(anyhow!(
-                    "Multiple input files map to the same output: {}",
-                    new.display()
-                ));
+        if old != new {
+            if !new.exists() {
+                // Check if this output path has already been seen
+                if seen_outputs.contains(&new) {
+                    return Err(anyhow!(
+                        "Multiple input files map to the same output: {}",
+                        new.display()
+                    ));
+                }
+                seen_outputs.insert(new.clone());
+                operations.push((old, new));
+            } else {
+                print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
+                print_wrapped(
+                    "  ↪  ".bold(),
+                    format!("{} already exists", new.to_string_lossy())
+                        .bold()
+                        .yellow(),
+                );
             }
-            seen_outputs.insert(new.clone());
-            operations.push((old, new));
         }
     }
 
@@ -216,25 +219,22 @@ fn execute_operations(
     auto_confirm: bool,
 ) -> Result<()> {
     if operations.is_empty() {
-        println!("No files to process.");
+        println!("{} No files to process.", "✗".bold().yellow());
         return Ok(());
     }
 
-    // Print what will be done
     print_operations(mode, &operations)?;
 
-    // Prompt for confirmation
     if !confirm_operations(auto_confirm)? {
-        println!("Cancelled.");
+        println!("{} Cancelled.", "✗".bold().yellow());
         return Ok(());
     }
 
-    // Execute the operations
     for (old, new) in operations {
         execute_operation(mode, old, new)?;
     }
 
-    println!("✓ Done.");
+    println!("{} Done.", "✓".bold().green());
     Ok(())
 }
 
@@ -255,8 +255,9 @@ fn organize_tv(
     let operations = collect_operations(source, |old, ext| {
         let episode_id = match parse_episode_id(old) {
             Ok(episode_id) => episode_id,
-            Err(_) => {
-                println!("Skip: {}", old.to_string_lossy().yellow());
+            Err(err) => {
+                print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
+                print_wrapped("  ↪  ".bold(), err.to_string().bold().yellow());
                 return Ok(None);
             }
         };

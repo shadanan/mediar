@@ -103,16 +103,16 @@ pub fn parse_episode_id(path: &Path) -> Result<String> {
     let season_match = season_regex
         .captures_iter(&path_str)
         .last()
-        .context("Could not extract season")?
+        .context("Failed to extract season number")?
         .get(1)
-        .context("Could not extract season")?;
+        .context("Failed to extract season number")?;
 
     let episode_regex = Regex::new(r"(?:[Ee](?:pisode)?\s*|\b)(\d{1,2})(?:[._\-]|\b)")?;
     let episode_match = episode_regex
         .captures_at(&path_str, season_match.end())
-        .context("Could not extract episode")?
+        .context("Failed to extract episode number")?
         .get(1)
-        .context("Could not extract episode")?;
+        .context("Failed to extract episode number")?;
 
     Ok(format!(
         "S{:02}E{:02}",
