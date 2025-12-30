@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3](https://github.com/shadanan/mediar/compare/v0.1.2...v0.1.3) - 2025-12-29
+
+### Other
+
+- Add wrapping and info about why some operations were skipped ([#27](https://github.com/shadanan/mediar/pull/27))
+
 ## [0.1.2](https://github.com/shadanan/mediar/compare/v0.1.1...v0.1.2) - 2025-12-28
 
 ### Other
