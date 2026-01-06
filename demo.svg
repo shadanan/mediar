@@ -8,10 +8,10 @@
 <circle cx="43" cy="20" r="7" style="fill:#ffbd2e" />
 <circle cx="66" cy="20" r="7" style="fill:#18c132" />
 <g transform="translate(20,60)" >
-<g style="animation-duration:37.56s;animation-iteration-count:infinite;animation-name:k;animation-timing-function:steps(1,end);font-family:Monago,Monaco,Consolas,Menlo,'Bitstream Vera Sans Mono','Powerline Symbols',monospace;font-size:20px">
+<g style="animation-duration:37.20s;animation-iteration-count:infinite;animation-name:k;animation-timing-function:steps(1,end);font-family:Monago,Monaco,Consolas,Menlo,'Bitstream Vera Sans Mono','Powerline Symbols',monospace;font-size:20px">
 <style type="text/css">
 <![CDATA[
-@keyframes k {0.050%{transform:translateX(-0px)}0.050%{transform:translateX(-1204px)}0.050%{transform:translateX(-2408px)}2.696%{transform:translateX(-3612px)}2.851%{transform:translateX(-4816px)}2.982%{transform:translateX(-6020px)}3.131%{transform:translateX(-7224px)}5.953%{transform:translateX(-8428px)}5.975%{transform:translateX(-9632px)}5.975%{transform:translateX(-10836px)}5.975%{transform:translateX(-12040px)}5.975%{transform:translateX(-13244px)}5.975%{transform:translateX(-14448px)}5.975%{transform:translateX(-15652px)}5.975%{transform:translateX(-16856px)}5.975%{transform:translateX(-18060px)}5.975%{transform:translateX(-19264px)}5.975%{transform:translateX(-20468px)}5.976%{transform:translateX(-21672px)}5.976%{transform:translateX(-22876px)}22.086%{transform:translateX(-24080px)}22.226%{transform:translateX(-25284px)}22.365%{transform:translateX(-26488px)}22.509%{transform:translateX(-27692px)}22.664%{transform:translateX(-28896px)}22.807%{transform:translateX(-30100px)}22.951%{transform:translateX(-31304px)}23.098%{transform:translateX(-32508px)}23.239%{transform:translateX(-33712px)}23.387%{transform:translateX(-34916px)}23.529%{transform:translateX(-36120px)}23.666%{transform:translateX(-37324px)}23.814%{transform:translateX(-38528px)}23.961%{transform:translateX(-39732px)}24.107%{transform:translateX(-40936px)}24.240%{transform:translateX(-42140px)}24.391%{transform:translateX(-43344px)}24.527%{transform:translateX(-44548px)}24.680%{transform:translateX(-45752px)}24.816%{transform:translateX(-46956px)}24.971%{transform:translateX(-48160px)}25.104%{transform:translateX(-49364px)}25.245%{transform:translateX(-50568px)}25.390%{transform:translateX(-51772px)}25.530%{transform:translateX(-52976px)}25.680%{transform:translateX(-54180px)}25.823%{transform:translateX(-55384px)}25.961%{transform:translateX(-56588px)}26.100%{transform:translateX(-57792px)}26.236%{transform:translateX(-58996px)}26.391%{transform:translateX(-60200px)}29.201%{transform:translateX(-61404px)}29.236%{transform:translateX(-62608px)}29.236%{transform:translateX(-63812px)}34.693%{transform:translateX(-65016px)}40.178%{transform:translateX(-66220px)}40.178%{transform:translateX(-67424px)}40.178%{transform:translateX(-68628px)}40.178%{transform:translateX(-69832px)}40.178%{transform:translateX(-71036px)}40.178%{transform:translateX(-72240px)}40.178%{transform:translateX(-73444px)}40.178%{transform:translateX(-74648px)}40.451%{transform:translateX(-75852px)}40.451%{transform:translateX(-77056px)}40.451%{transform:translateX(-78260px)}40.451%{transform:translateX(-79464px)}40.451%{transform:translateX(-80668px)}40.451%{transform:translateX(-81872px)}40.451%{transform:translateX(-83076px)}40.451%{transform:translateX(-84280px)}40.451%{transform:translateX(-85484px)}40.451%{transform:translateX(-86688px)}40.451%{transform:translateX(-87892px)}40.451%{transform:translateX(-89096px)}45.675%{transform:translateX(-90300px)}45.675%{transform:translateX(-91504px)}46.040%{transform:translateX(-92708px)}46.042%{transform:translateX(-93912px)}46.043%{transform:translateX(-95116px)}46.043%{transform:translateX(-96320px)}46.043%{transform:translateX(-97524px)}46.043%{transform:translateX(-98728px)}46.043%{transform:translateX(-99932px)}46.043%{transform:translateX(-101136px)}46.043%{transform:translateX(-102340px)}46.043%{transform:translateX(-103544px)}46.043%{transform:translateX(-104748px)}51.157%{transform:translateX(-105952px)}51.170%{transform:translateX(-107156px)}51.173%{transform:translateX(-108360px)}51.173%{transform:translateX(-109564px)}51.173%{transform:translateX(-110768px)}67.297%{transform:translateX(-111972px)}67.446%{transform:translateX(-113176px)}67.580%{transform:translateX(-114380px)}67.727%{transform:translateX(-115584px)}70.542%{transform:translateX(-116788px)}70.554%{transform:translateX(-117992px)}70.554%{transform:translateX(-119196px)}70.554%{transform:translateX(-120400px)}70.554%{transform:translateX(-121604px)}70.554%{transform:translateX(-122808px)}70.554%{transform:translateX(-124012px)}70.554%{transform:translateX(-125216px)}70.555%{transform:translateX(-126420px)}70.555%{transform:translateX(-127624px)}70.555%{transform:translateX(-128828px)}70.555%{transform:translateX(-130032px)}70.555%{transform:translateX(-131236px)}70.556%{transform:translateX(-132440px)}70.556%{transform:translateX(-133644px)}70.557%{transform:translateX(-134848px)}70.557%{transform:translateX(-136052px)}99.995%{transform:translateX(-137256px)}99.996%{transform:translateX(-138460px)}100.000%{transform:translateX(-139664px)}}.bold{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}.dim{opacity:0.5}.g{fill:#0000ee}.h{fill:#5c5cff}.a{fill:#e5e5e5}.b{fill:#00ff00}.c{fill:#00ffff}.d{fill:#00cd00}.e{fill:#cdcd00}.f{fill:#ffff00}
+@keyframes k {0.039%{transform:translateX(-0px)}0.040%{transform:translateX(-1204px)}0.458%{transform:translateX(-2408px)}0.596%{transform:translateX(-3612px)}0.736%{transform:translateX(-4816px)}0.890%{transform:translateX(-6020px)}6.425%{transform:translateX(-7224px)}6.446%{transform:translateX(-8428px)}6.446%{transform:translateX(-9632px)}6.447%{transform:translateX(-10836px)}6.447%{transform:translateX(-12040px)}6.447%{transform:translateX(-13244px)}6.447%{transform:translateX(-14448px)}6.447%{transform:translateX(-15652px)}6.447%{transform:translateX(-16856px)}6.447%{transform:translateX(-18060px)}6.449%{transform:translateX(-19264px)}6.449%{transform:translateX(-20468px)}6.449%{transform:translateX(-21672px)}20.032%{transform:translateX(-22876px)}20.183%{transform:translateX(-24080px)}20.334%{transform:translateX(-25284px)}20.480%{transform:translateX(-26488px)}20.631%{transform:translateX(-27692px)}20.767%{transform:translateX(-28896px)}20.918%{transform:translateX(-30100px)}21.460%{transform:translateX(-31304px)}21.611%{transform:translateX(-32508px)}21.759%{transform:translateX(-33712px)}21.906%{transform:translateX(-34916px)}22.054%{transform:translateX(-36120px)}22.606%{transform:translateX(-37324px)}22.751%{transform:translateX(-38528px)}22.902%{transform:translateX(-39732px)}23.051%{transform:translateX(-40936px)}23.198%{transform:translateX(-42140px)}23.340%{transform:translateX(-43344px)}23.484%{transform:translateX(-44548px)}23.631%{transform:translateX(-45752px)}23.778%{transform:translateX(-46956px)}23.929%{transform:translateX(-48160px)}24.081%{transform:translateX(-49364px)}24.237%{transform:translateX(-50568px)}24.779%{transform:translateX(-51772px)}24.912%{transform:translateX(-52976px)}25.063%{transform:translateX(-54180px)}25.217%{transform:translateX(-55384px)}25.356%{transform:translateX(-56588px)}25.494%{transform:translateX(-57792px)}25.645%{transform:translateX(-58996px)}31.189%{transform:translateX(-60200px)}31.257%{transform:translateX(-61404px)}31.257%{transform:translateX(-62608px)}36.719%{transform:translateX(-63812px)}36.719%{transform:translateX(-65016px)}36.720%{transform:translateX(-66220px)}36.720%{transform:translateX(-67424px)}36.720%{transform:translateX(-68628px)}36.720%{transform:translateX(-69832px)}36.720%{transform:translateX(-71036px)}42.263%{transform:translateX(-72240px)}42.263%{transform:translateX(-73444px)}42.503%{transform:translateX(-74648px)}42.503%{transform:translateX(-75852px)}47.802%{transform:translateX(-77056px)}47.802%{transform:translateX(-78260px)}47.803%{transform:translateX(-79464px)}48.104%{transform:translateX(-80668px)}48.104%{transform:translateX(-81872px)}48.107%{transform:translateX(-83076px)}48.107%{transform:translateX(-84280px)}48.107%{transform:translateX(-85484px)}48.107%{transform:translateX(-86688px)}48.107%{transform:translateX(-87892px)}48.108%{transform:translateX(-89096px)}48.108%{transform:translateX(-90300px)}48.108%{transform:translateX(-91504px)}53.347%{transform:translateX(-92708px)}53.347%{transform:translateX(-93912px)}53.361%{transform:translateX(-95116px)}53.368%{transform:translateX(-96320px)}53.369%{transform:translateX(-97524px)}66.942%{transform:translateX(-98728px)}67.088%{transform:translateX(-99932px)}67.234%{transform:translateX(-101136px)}67.378%{transform:translateX(-102340px)}72.911%{transform:translateX(-103544px)}72.933%{transform:translateX(-104748px)}72.933%{transform:translateX(-105952px)}72.933%{transform:translateX(-107156px)}72.933%{transform:translateX(-108360px)}72.933%{transform:translateX(-109564px)}72.933%{transform:translateX(-110768px)}72.934%{transform:translateX(-111972px)}72.934%{transform:translateX(-113176px)}72.934%{transform:translateX(-114380px)}72.934%{transform:translateX(-115584px)}72.934%{transform:translateX(-116788px)}72.934%{transform:translateX(-117992px)}72.935%{transform:translateX(-119196px)}72.935%{transform:translateX(-120400px)}72.937%{transform:translateX(-121604px)}72.937%{transform:translateX(-122808px)}99.997%{transform:translateX(-124012px)}99.997%{transform:translateX(-125216px)}99.998%{transform:translateX(-126420px)}100.000%{transform:translateX(-127624px)}}.bold{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}.dim{opacity:0.5}.f{fill:#db8c44}.g{fill:#3d6d97}.h{fill:#17afff}.a{fill:#e5e5e5}.b{fill:#91e364}.c{fill:#01d0df}.d{fill:#91e364}.e{fill:#db8c44}
 ]]>
 </style>
 <g transform="translate(0)">
@@ -21,18 +21,19 @@
 </g>
 <g transform="translate(2408)">
 <text x="0" y="0" class="a"  >$</text>
+<text x="24" y="0" class="a"  >t</text>
 </g>
 <g transform="translate(3612)">
 <text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >t</text>
+<text x="24" y="0" class="a"  >tr</text>
 </g>
 <g transform="translate(4816)">
 <text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tr</text>
+<text x="24" y="0" class="a"  >tre</text>
 </g>
 <g transform="translate(6020)">
 <text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tre</text>
+<text x="24" y="0" class="a"  >tree</text>
 </g>
 <g transform="translate(7224)">
 <text x="0" y="0" class="a"  >$</text>
@@ -41,11 +42,14 @@
 <g transform="translate(8428)">
 <text x="0" y="0" class="a"  >$</text>
 <text x="24" y="0" class="a"  >tree</text>
+<text x="0" y="25" class="a"  >.</text>
 </g>
 <g transform="translate(9632)">
 <text x="0" y="0" class="a"  >$</text>
 <text x="24" y="0" class="a"  >tree</text>
 <text x="0" y="25" class="a"  >.</text>
+<text x="0" y="50" class="a"  >├──</text>
+<text x="48" y="50" class="a"  >source</text>
 </g>
 <g transform="translate(10836)">
 <text x="0" y="0" class="a"  >$</text>
@@ -53,6 +57,13 @@
 <text x="0" y="25" class="a"  >.</text>
 <text x="0" y="50" class="a"  >├──</text>
 <text x="48" y="50" class="a"  >source</text>
+<text x="0" y="75" class="a"  >│  </text>
+<text x="48" y="75" class="a"  >├──</text>
+<text x="96" y="75" class="a"  >movie</text>
+<text x="0" y="100" class="a"  >│  </text>
+<text x="48" y="100" class="a"  >│  </text>
+<text x="96" y="100" class="a"  >└──</text>
+<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
 </g>
 <g transform="translate(12040)">
 <text x="0" y="0" class="a"  >$</text>
@@ -67,6 +78,9 @@
 <text x="48" y="100" class="a"  >│  </text>
 <text x="96" y="100" class="a"  >└──</text>
 <text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="0" y="125" class="a"  >│  </text>
+<text x="48" y="125" class="a"  >└──</text>
+<text x="96" y="125" class="a"  >show</text>
 </g>
 <g transform="translate(13244)">
 <text x="0" y="0" class="a"  >$</text>
@@ -84,6 +98,9 @@
 <text x="0" y="125" class="a"  >│  </text>
 <text x="48" y="125" class="a"  >└──</text>
 <text x="96" y="125" class="a"  >show</text>
+<text x="0" y="150" class="a"  >│  </text>
+<text x="96" y="150" class="a"  >├──</text>
+<text x="144" y="150" class="a"  >Sample.mkv</text>
 </g>
 <g transform="translate(14448)">
 <text x="0" y="0" class="a"  >$</text>
@@ -104,6 +121,12 @@
 <text x="0" y="150" class="a"  >│  </text>
 <text x="96" y="150" class="a"  >├──</text>
 <text x="144" y="150" class="a"  >Sample.mkv</text>
+<text x="0" y="175" class="a"  >│  </text>
+<text x="96" y="175" class="a"  >├──</text>
+<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="0" y="200" class="a"  >│  </text>
+<text x="96" y="200" class="a"  >├──</text>
+<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
 </g>
 <g transform="translate(15652)">
 <text x="0" y="0" class="a"  >$</text>
@@ -130,6 +153,9 @@
 <text x="0" y="200" class="a"  >│  </text>
 <text x="96" y="200" class="a"  >├──</text>
 <text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="0" y="225" class="a"  >│  </text>
+<text x="96" y="225" class="a"  >├──</text>
+<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
 </g>
 <g transform="translate(16856)">
 <text x="0" y="0" class="a"  >$</text>
@@ -159,6 +185,9 @@
 <text x="0" y="225" class="a"  >│  </text>
 <text x="96" y="225" class="a"  >├──</text>
 <text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="0" y="250" class="a"  >│  </text>
+<text x="96" y="250" class="a"  >└──</text>
+<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
 </g>
 <g transform="translate(18060)">
 <text x="0" y="0" class="a"  >$</text>
@@ -191,6 +220,12 @@
 <text x="0" y="250" class="a"  >│  </text>
 <text x="96" y="250" class="a"  >└──</text>
 <text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="0" y="275" class="a"  >└──</text>
+<text x="48" y="275" class="a"  >target</text>
+<text x="0" y="325" class="a"  >5</text>
+<text x="24" y="325" class="a"  >directories,</text>
+<text x="180" y="325" class="a"  >6</text>
+<text x="204" y="325" class="a"  >files</text>
 </g>
 <g transform="translate(19264)">
 <text x="0" y="0" class="a"  >$</text>
@@ -225,6 +260,10 @@
 <text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
 <text x="0" y="275" class="a"  >└──</text>
 <text x="48" y="275" class="a"  >target</text>
+<text x="0" y="325" class="a"  >5</text>
+<text x="24" y="325" class="a"  >directories,</text>
+<text x="180" y="325" class="a"  >6</text>
+<text x="204" y="325" class="a"  >files</text>
 </g>
 <g transform="translate(20468)">
 <text x="0" y="0" class="a"  >$</text>
@@ -263,6 +302,7 @@
 <text x="24" y="325" class="a"  >directories,</text>
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
+<text x="0" y="350" class="a"  >$</text>
 </g>
 <g transform="translate(21672)">
 <text x="0" y="0" class="a"  >$</text>
@@ -301,6 +341,7 @@
 <text x="24" y="325" class="a"  >directories,</text>
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
+<text x="0" y="350" class="a"  >$</text>
 </g>
 <g transform="translate(22876)">
 <text x="0" y="0" class="a"  >$</text>
@@ -340,6 +381,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
+<text x="24" y="350" class="a"  >m</text>
 </g>
 <g transform="translate(24080)">
 <text x="0" y="0" class="a"  >$</text>
@@ -379,7 +421,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >m</text>
+<text x="24" y="350" class="a"  >me</text>
 </g>
 <g transform="translate(25284)">
 <text x="0" y="0" class="a"  >$</text>
@@ -419,7 +461,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >me</text>
+<text x="24" y="350" class="a"  >med</text>
 </g>
 <g transform="translate(26488)">
 <text x="0" y="0" class="a"  >$</text>
@@ -459,7 +501,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >med</text>
+<text x="24" y="350" class="a"  >medi</text>
 </g>
 <g transform="translate(27692)">
 <text x="0" y="0" class="a"  >$</text>
@@ -499,7 +541,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >medi</text>
+<text x="24" y="350" class="a"  >media</text>
 </g>
 <g transform="translate(28896)">
 <text x="0" y="0" class="a"  >$</text>
@@ -539,7 +581,7 @@
 <text x="180" y="325" class="a"  >6</text>
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >media</text>
+<text x="24" y="350" class="a"  >mediar</text>
 </g>
 <g transform="translate(30100)">
 <text x="0" y="0" class="a"  >$</text>
@@ -620,6 +662,7 @@
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
+<text x="108" y="350" class="a"  >l</text>
 </g>
 <g transform="translate(32508)">
 <text x="0" y="0" class="a"  >$</text>
@@ -660,7 +703,7 @@
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >l</text>
+<text x="108" y="350" class="a"  >li</text>
 </g>
 <g transform="translate(33712)">
 <text x="0" y="0" class="a"  >$</text>
@@ -701,7 +744,7 @@
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >li</text>
+<text x="108" y="350" class="a"  >lin</text>
 </g>
 <g transform="translate(34916)">
 <text x="0" y="0" class="a"  >$</text>
@@ -742,7 +785,7 @@
 <text x="204" y="325" class="a"  >files</text>
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >lin</text>
+<text x="108" y="350" class="a"  >link</text>
 </g>
 <g transform="translate(36120)">
 <text x="0" y="0" class="a"  >$</text>
@@ -825,6 +868,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
+<text x="168" y="350" class="a"  >s</text>
 </g>
 <g transform="translate(38528)">
 <text x="0" y="0" class="a"  >$</text>
@@ -866,7 +910,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >s</text>
+<text x="168" y="350" class="a"  >so</text>
 </g>
 <g transform="translate(39732)">
 <text x="0" y="0" class="a"  >$</text>
@@ -908,7 +952,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >so</text>
+<text x="168" y="350" class="a"  >sou</text>
 </g>
 <g transform="translate(40936)">
 <text x="0" y="0" class="a"  >$</text>
@@ -950,7 +994,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >sou</text>
+<text x="168" y="350" class="a"  >sour</text>
 </g>
 <g transform="translate(42140)">
 <text x="0" y="0" class="a"  >$</text>
@@ -992,7 +1036,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >sour</text>
+<text x="168" y="350" class="a"  >sourc</text>
 </g>
 <g transform="translate(43344)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1034,7 +1078,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >sourc</text>
+<text x="168" y="350" class="a"  >source</text>
 </g>
 <g transform="translate(44548)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1076,7 +1120,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source</text>
+<text x="168" y="350" class="a"  >source/</text>
 </g>
 <g transform="translate(45752)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1118,7 +1162,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/</text>
+<text x="168" y="350" class="a"  >source/s</text>
 </g>
 <g transform="translate(46956)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1160,7 +1204,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/s</text>
+<text x="168" y="350" class="a"  >source/sh</text>
 </g>
 <g transform="translate(48160)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1202,7 +1246,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/sh</text>
+<text x="168" y="350" class="a"  >source/sho</text>
 </g>
 <g transform="translate(49364)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1244,7 +1288,7 @@
 <text x="0" y="350" class="a"  >$</text>
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/sho</text>
+<text x="168" y="350" class="a"  >source/show</text>
 </g>
 <g transform="translate(50568)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1329,6 +1373,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
+<text x="312" y="350" class="a"  >t</text>
 </g>
 <g transform="translate(52976)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1371,7 +1416,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >t</text>
+<text x="312" y="350" class="a"  >ta</text>
 </g>
 <g transform="translate(54180)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1414,7 +1459,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >ta</text>
+<text x="312" y="350" class="a"  >tar</text>
 </g>
 <g transform="translate(55384)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1457,7 +1502,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >tar</text>
+<text x="312" y="350" class="a"  >targ</text>
 </g>
 <g transform="translate(56588)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1500,7 +1545,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >targ</text>
+<text x="312" y="350" class="a"  >targe</text>
 </g>
 <g transform="translate(57792)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1543,7 +1588,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >targe</text>
+<text x="312" y="350" class="a"  >target</text>
 </g>
 <g transform="translate(58996)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1586,7 +1631,7 @@
 <text x="24" y="350" class="a"  >mediar</text>
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target</text>
+<text x="312" y="350" class="a"  >target/</text>
 </g>
 <g transform="translate(60200)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1673,6 +1718,9 @@
 <text x="108" y="350" class="a"  >link</text>
 <text x="168" y="350" class="a"  >source/show</text>
 <text x="312" y="350" class="a"  >target/</text>
+<text x="0" y="375" class="b"  >?</text>
+<text x="24" y="375" class="a"  >Search</text>
+<text x="108" y="375" class="a"  >for:</text>
 </g>
 <g transform="translate(62608)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1723,7 +1771,15 @@
 <text x="24" y="400" class="c"  >TV</text>
 <text x="60" y="400" class="c"  >Show</text>
 <text x="24" y="425" class="a"  >Movie</text>
-<text x="0" y="450" class="c"  >[</text>
+<text x="0" y="450" class="c"  >[↑↓</text>
+<text x="48" y="450" class="c"  >to</text>
+<text x="84" y="450" class="c"  >move,</text>
+<text x="156" y="450" class="c"  >enter</text>
+<text x="228" y="450" class="c"  >to</text>
+<text x="264" y="450" class="c"  >select,</text>
+<text x="360" y="450" class="c"  >type</text>
+<text x="420" y="450" class="c"  >to</text>
+<text x="456" y="450" class="c"  >filter]</text>
 </g>
 <g transform="translate(63812)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1831,15 +1887,16 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >?</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="a"  >Star</text>
-<text x="264" y="400" class="a"  >Trek</text>
-<text x="324" y="400" class="a"  >The</text>
-<text x="372" y="400" class="a"  >Next</text>
-<text x="432" y="400" class="a"  >Generation</text>
+<text x="24" y="425" class="a"  >Movie</text>
+<text x="0" y="450" class="c"  >[↑↓</text>
+<text x="48" y="450" class="c"  >to</text>
+<text x="84" y="450" class="c"  >move,</text>
+<text x="156" y="450" class="c"  >enter</text>
+<text x="228" y="450" class="c"  >to</text>
+<text x="264" y="450" class="c"  >select,</text>
+<text x="360" y="450" class="c"  >type</text>
+<text x="420" y="450" class="c"  >to</text>
+<text x="456" y="450" class="c"  >filter]</text>
 </g>
 <g transform="translate(66220)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1888,15 +1945,6 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >?</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="a"  >Star</text>
-<text x="264" y="400" class="a"  >Trek</text>
-<text x="324" y="400" class="a"  >The</text>
-<text x="372" y="400" class="a"  >Next</text>
-<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(67424)">
 <text x="0" y="0" class="a"  >$</text>
@@ -1945,15 +1993,6 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="a"  >Star</text>
-<text x="264" y="400" class="a"  >Trek</text>
-<text x="324" y="400" class="a"  >The</text>
-<text x="372" y="400" class="a"  >Next</text>
-<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(68628)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2002,15 +2041,6 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="a"  >Star</text>
-<text x="264" y="400" class="a"  >Trek</text>
-<text x="324" y="400" class="a"  >The</text>
-<text x="372" y="400" class="a"  >Next</text>
-<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(69832)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2059,15 +2089,15 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
+<text x="0" y="400" class="b"  >?</text>
 <text x="24" y="400" class="a"  >TV</text>
 <text x="60" y="400" class="a"  >Show</text>
 <text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
+<text x="204" y="400" class="a"  >Star</text>
+<text x="264" y="400" class="a"  >Trek</text>
+<text x="324" y="400" class="a"  >The</text>
+<text x="372" y="400" class="a"  >Next</text>
+<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(71036)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2116,15 +2146,15 @@
 <text x="108" y="375" class="a"  >for:</text>
 <text x="168" y="375" class="c"  >TV</text>
 <text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
+<text x="0" y="400" class="b"  >?</text>
 <text x="24" y="400" class="a"  >TV</text>
 <text x="60" y="400" class="a"  >Show</text>
 <text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
+<text x="204" y="400" class="a"  >Star</text>
+<text x="264" y="400" class="a"  >Trek</text>
+<text x="324" y="400" class="a"  >The</text>
+<text x="372" y="400" class="a"  >Next</text>
+<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(72240)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2177,11 +2207,11 @@
 <text x="24" y="400" class="a"  >TV</text>
 <text x="60" y="400" class="a"  >Show</text>
 <text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
+<text x="204" y="400" class="a"  >Star</text>
+<text x="264" y="400" class="a"  >Trek</text>
+<text x="324" y="400" class="a"  >The</text>
+<text x="372" y="400" class="a"  >Next</text>
+<text x="432" y="400" class="a"  >Generation</text>
 </g>
 <g transform="translate(73444)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2296,6 +2326,7 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
+<text x="0" y="425" class="b"  >?</text>
 </g>
 <g transform="translate(75852)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2353,6 +2384,33 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
+<text x="0" y="425" class="b"  >?</text>
+<text x="24" y="425" class="a"  >Select</text>
+<text x="108" y="425" class="a"  >a</text>
+<text x="132" y="425" class="a"  >TV</text>
+<text x="168" y="425" class="a"  >show:</text>
+<text x="0" y="450" class="c"  >&gt;</text>
+<text x="24" y="450" class="c"  >Star</text>
+<text x="84" y="450" class="c"  >Trek:</text>
+<text x="156" y="450" class="c"  >The</text>
+<text x="204" y="450" class="c"  >Next</text>
+<text x="264" y="450" class="c"  >Generation</text>
+<text x="396" y="450" class="c"  >(1987)</text>
+<text x="480" y="450" class="c"  >-</text>
+<text x="504" y="450" class="c"  >ID:</text>
+<text x="552" y="450" class="c"  >655</text>
+<text x="600" y="450" class="c"  >-</text>
+<text x="624" y="450" class="c"  >Popularity:</text>
+<text x="768" y="450" class="c"  >59.3</text>
+<text x="0" y="475" class="c"  >[↑↓</text>
+<text x="48" y="475" class="c"  >to</text>
+<text x="84" y="475" class="c"  >move,</text>
+<text x="156" y="475" class="c"  >enter</text>
+<text x="228" y="475" class="c"  >to</text>
+<text x="264" y="475" class="c"  >select,</text>
+<text x="360" y="475" class="c"  >type</text>
+<text x="420" y="475" class="c"  >to</text>
+<text x="456" y="475" class="c"  >filter]</text>
 </g>
 <g transform="translate(77056)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2410,7 +2468,7 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
@@ -2427,7 +2485,16 @@
 <text x="552" y="450" class="c"  >655</text>
 <text x="600" y="450" class="c"  >-</text>
 <text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
+<text x="768" y="450" class="c"  >59.3</text>
+<text x="0" y="475" class="c"  >[↑↓</text>
+<text x="48" y="475" class="c"  >to</text>
+<text x="84" y="475" class="c"  >move,</text>
+<text x="156" y="475" class="c"  >enter</text>
+<text x="228" y="475" class="c"  >to</text>
+<text x="264" y="475" class="c"  >select,</text>
+<text x="360" y="475" class="c"  >type</text>
+<text x="420" y="475" class="c"  >to</text>
+<text x="456" y="475" class="c"  >filter]</text>
 </g>
 <g transform="translate(78260)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2485,24 +2552,23 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
 <text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
+<text x="240" y="425" class="c"  >Star</text>
+<text x="300" y="425" class="c"  >Trek:</text>
+<text x="372" y="425" class="c"  >The</text>
+<text x="420" y="425" class="c"  >Next</text>
+<text x="480" y="425" class="c"  >Generation</text>
+<text x="612" y="425" class="c"  >(1987)</text>
+<text x="696" y="425" class="c"  >-</text>
+<text x="720" y="425" class="c"  >ID:</text>
+<text x="768" y="425" class="c"  >655</text>
+<text x="816" y="425" class="c"  >-</text>
+<text x="840" y="425" class="c"  >Popularity:</text>
+<text x="984" y="425" class="c"  >59.3</text>
 </g>
 <g transform="translate(79464)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2560,24 +2626,31 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
 <text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
+<text x="240" y="425" class="c"  >Star</text>
+<text x="300" y="425" class="c"  >Trek:</text>
+<text x="372" y="425" class="c"  >The</text>
+<text x="420" y="425" class="c"  >Next</text>
+<text x="480" y="425" class="c"  >Generation</text>
+<text x="612" y="425" class="c"  >(1987)</text>
+<text x="696" y="425" class="c"  >-</text>
+<text x="720" y="425" class="c"  >ID:</text>
+<text x="768" y="425" class="c"  >655</text>
+<text x="816" y="425" class="c"  >-</text>
+<text x="840" y="425" class="c"  >Popularity:</text>
+<text x="984" y="425" class="c"  >59.3</text>
+<text x="0" y="450" class="a"  >Selected:</text>
+<text x="120" y="450" class="d"  >Star</text>
+<text x="180" y="450" class="d"  >Trek:</text>
+<text x="252" y="450" class="d"  >The</text>
+<text x="300" y="450" class="d"  >Next</text>
+<text x="360" y="450" class="d"  >Generation</text>
+<text x="492" y="450" class="a"  >(ID:</text>
+<text x="552" y="450" class="a"  >655)</text>
 </g>
 <g transform="translate(80668)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2635,25 +2708,33 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
 <text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[</text>
+<text x="240" y="425" class="c"  >Star</text>
+<text x="300" y="425" class="c"  >Trek:</text>
+<text x="372" y="425" class="c"  >The</text>
+<text x="420" y="425" class="c"  >Next</text>
+<text x="480" y="425" class="c"  >Generation</text>
+<text x="612" y="425" class="c"  >(1987)</text>
+<text x="696" y="425" class="c"  >-</text>
+<text x="720" y="425" class="c"  >ID:</text>
+<text x="768" y="425" class="c"  >655</text>
+<text x="816" y="425" class="c"  >-</text>
+<text x="840" y="425" class="c"  >Popularity:</text>
+<text x="984" y="425" class="c"  >59.3</text>
+<text x="0" y="450" class="a"  >Selected:</text>
+<text x="120" y="450" class="d"  >Star</text>
+<text x="180" y="450" class="d"  >Trek:</text>
+<text x="252" y="450" class="d"  >The</text>
+<text x="300" y="450" class="d"  >Next</text>
+<text x="360" y="450" class="d"  >Generation</text>
+<text x="492" y="450" class="a"  >(ID:</text>
+<text x="552" y="450" class="a"  >655)</text>
+<text x="0" y="475" class="a"  >Skip</text>
+<text x="60" y="475" class="e"  >source/show/Sample.mkv</text>
 </g>
 <g transform="translate(81872)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2711,25 +2792,39 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
 <text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[</text>
+<text x="240" y="425" class="c"  >Star</text>
+<text x="300" y="425" class="c"  >Trek:</text>
+<text x="372" y="425" class="c"  >The</text>
+<text x="420" y="425" class="c"  >Next</text>
+<text x="480" y="425" class="c"  >Generation</text>
+<text x="612" y="425" class="c"  >(1987)</text>
+<text x="696" y="425" class="c"  >-</text>
+<text x="720" y="425" class="c"  >ID:</text>
+<text x="768" y="425" class="c"  >655</text>
+<text x="816" y="425" class="c"  >-</text>
+<text x="840" y="425" class="c"  >Popularity:</text>
+<text x="984" y="425" class="c"  >59.3</text>
+<text x="0" y="450" class="a"  >Selected:</text>
+<text x="120" y="450" class="d"  >Star</text>
+<text x="180" y="450" class="d"  >Trek:</text>
+<text x="252" y="450" class="d"  >The</text>
+<text x="300" y="450" class="d"  >Next</text>
+<text x="360" y="450" class="d"  >Generation</text>
+<text x="492" y="450" class="a"  >(ID:</text>
+<text x="552" y="450" class="a"  >655)</text>
+<text x="0" y="475" class="a"  >Skip</text>
+<text x="60" y="475" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="500" class="a bold"  >↪</text>
+<text x="60" y="500" class="f bold"  >Failed</text>
+<text x="144" y="500" class="f bold"  >to</text>
+<text x="180" y="500" class="f bold"  >extract</text>
+<text x="276" y="500" class="f bold"  >season</text>
+<text x="360" y="500" class="f bold"  >number</text>
 </g>
 <g transform="translate(83076)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2787,25 +2882,41 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
+<text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
 <text x="132" y="425" class="a"  >TV</text>
 <text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[</text>
+<text x="240" y="425" class="c"  >Star</text>
+<text x="300" y="425" class="c"  >Trek:</text>
+<text x="372" y="425" class="c"  >The</text>
+<text x="420" y="425" class="c"  >Next</text>
+<text x="480" y="425" class="c"  >Generation</text>
+<text x="612" y="425" class="c"  >(1987)</text>
+<text x="696" y="425" class="c"  >-</text>
+<text x="720" y="425" class="c"  >ID:</text>
+<text x="768" y="425" class="c"  >655</text>
+<text x="816" y="425" class="c"  >-</text>
+<text x="840" y="425" class="c"  >Popularity:</text>
+<text x="984" y="425" class="c"  >59.3</text>
+<text x="0" y="450" class="a"  >Selected:</text>
+<text x="120" y="450" class="d"  >Star</text>
+<text x="180" y="450" class="d"  >Trek:</text>
+<text x="252" y="450" class="d"  >The</text>
+<text x="300" y="450" class="d"  >Next</text>
+<text x="360" y="450" class="d"  >Generation</text>
+<text x="492" y="450" class="a"  >(ID:</text>
+<text x="552" y="450" class="a"  >655)</text>
+<text x="0" y="475" class="a"  >Skip</text>
+<text x="60" y="475" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="500" class="a bold"  >↪</text>
+<text x="60" y="500" class="f bold"  >Failed</text>
+<text x="144" y="500" class="f bold"  >to</text>
+<text x="180" y="500" class="f bold"  >extract</text>
+<text x="276" y="500" class="f bold"  >season</text>
+<text x="360" y="500" class="f bold"  >number</text>
+<text x="0" y="525" class="a"  >Link</text>
+<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
 </g>
 <g transform="translate(84280)">
 <text x="0" y="0" class="a"  >$</text>
@@ -2863,426 +2974,6 @@
 <text x="324" y="400" class="c"  >The</text>
 <text x="372" y="400" class="c"  >Next</text>
 <text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[↑↓</text>
-<text x="48" y="475" class="c"  >to</text>
-<text x="84" y="475" class="c"  >move,</text>
-<text x="156" y="475" class="c"  >enter</text>
-<text x="228" y="475" class="c"  >to</text>
-<text x="264" y="475" class="c"  >select,</text>
-<text x="360" y="475" class="c"  >type</text>
-<text x="420" y="475" class="c"  >to</text>
-<text x="456" y="475" class="c"  >filter</text>
-</g>
-<g transform="translate(85484)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[↑↓</text>
-<text x="48" y="475" class="c"  >to</text>
-<text x="84" y="475" class="c"  >move,</text>
-<text x="156" y="475" class="c"  >enter</text>
-<text x="228" y="475" class="c"  >to</text>
-<text x="264" y="475" class="c"  >select,</text>
-<text x="360" y="475" class="c"  >type</text>
-<text x="420" y="475" class="c"  >to</text>
-<text x="456" y="475" class="c"  >filter]</text>
-</g>
-<g transform="translate(86688)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[↑↓</text>
-<text x="48" y="475" class="c"  >to</text>
-<text x="84" y="475" class="c"  >move,</text>
-<text x="156" y="475" class="c"  >enter</text>
-<text x="228" y="475" class="c"  >to</text>
-<text x="264" y="475" class="c"  >select,</text>
-<text x="360" y="475" class="c"  >type</text>
-<text x="420" y="475" class="c"  >to</text>
-<text x="456" y="475" class="c"  >filter]</text>
-</g>
-<g transform="translate(87892)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[↑↓</text>
-<text x="48" y="475" class="c"  >to</text>
-<text x="84" y="475" class="c"  >move,</text>
-<text x="156" y="475" class="c"  >enter</text>
-<text x="228" y="475" class="c"  >to</text>
-<text x="264" y="475" class="c"  >select,</text>
-<text x="360" y="475" class="c"  >type</text>
-<text x="420" y="475" class="c"  >to</text>
-<text x="456" y="475" class="c"  >filter]</text>
-</g>
-<g transform="translate(89096)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >?</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="0" y="450" class="c"  >&gt;</text>
-<text x="24" y="450" class="c"  >Star</text>
-<text x="84" y="450" class="c"  >Trek:</text>
-<text x="156" y="450" class="c"  >The</text>
-<text x="204" y="450" class="c"  >Next</text>
-<text x="264" y="450" class="c"  >Generation</text>
-<text x="396" y="450" class="c"  >(1987)</text>
-<text x="480" y="450" class="c"  >-</text>
-<text x="504" y="450" class="c"  >ID:</text>
-<text x="552" y="450" class="c"  >655</text>
-<text x="600" y="450" class="c"  >-</text>
-<text x="624" y="450" class="c"  >Popularity:</text>
-<text x="768" y="450" class="c"  >53.3</text>
-<text x="0" y="475" class="c"  >[↑↓</text>
-<text x="48" y="475" class="c"  >to</text>
-<text x="84" y="475" class="c"  >move,</text>
-<text x="156" y="475" class="c"  >enter</text>
-<text x="228" y="475" class="c"  >to</text>
-<text x="264" y="475" class="c"  >select,</text>
-<text x="360" y="475" class="c"  >type</text>
-<text x="420" y="475" class="c"  >to</text>
-<text x="456" y="475" class="c"  >filter]</text>
-</g>
-<g transform="translate(90300)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
 <text x="0" y="425" class="b"  >&gt;</text>
 <text x="24" y="425" class="a"  >Select</text>
 <text x="108" y="425" class="a"  >a</text>
@@ -3299,253 +2990,7 @@
 <text x="768" y="425" class="c"  >655</text>
 <text x="816" y="425" class="c"  >-</text>
 <text x="840" y="425" class="c"  >Popularity:</text>
-<text x="984" y="425" class="c"  >53.3</text>
-</g>
-<g transform="translate(91504)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >&gt;</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="240" y="425" class="c"  >Star</text>
-<text x="300" y="425" class="c"  >Trek:</text>
-<text x="372" y="425" class="c"  >The</text>
-<text x="420" y="425" class="c"  >Next</text>
-<text x="480" y="425" class="c"  >Generation</text>
-<text x="612" y="425" class="c"  >(1987)</text>
-<text x="696" y="425" class="c"  >-</text>
-<text x="720" y="425" class="c"  >ID:</text>
-<text x="768" y="425" class="c"  >655</text>
-<text x="816" y="425" class="c"  >-</text>
-<text x="840" y="425" class="c"  >Popularity:</text>
-<text x="984" y="425" class="c"  >53.3</text>
-<text x="0" y="450" class="a"  >Selected:</text>
-<text x="120" y="450" class="d"  >Star</text>
-<text x="180" y="450" class="d"  >Trek:</text>
-<text x="252" y="450" class="d"  >The</text>
-<text x="300" y="450" class="d"  >Next</text>
-<text x="360" y="450" class="d"  >Generation</text>
-<text x="492" y="450" class="a"  >(ID:</text>
-<text x="552" y="450" class="a"  >655)</text>
-</g>
-<g transform="translate(92708)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >&gt;</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="240" y="425" class="c"  >Star</text>
-<text x="300" y="425" class="c"  >Trek:</text>
-<text x="372" y="425" class="c"  >The</text>
-<text x="420" y="425" class="c"  >Next</text>
-<text x="480" y="425" class="c"  >Generation</text>
-<text x="612" y="425" class="c"  >(1987)</text>
-<text x="696" y="425" class="c"  >-</text>
-<text x="720" y="425" class="c"  >ID:</text>
-<text x="768" y="425" class="c"  >655</text>
-<text x="816" y="425" class="c"  >-</text>
-<text x="840" y="425" class="c"  >Popularity:</text>
-<text x="984" y="425" class="c"  >53.3</text>
-<text x="0" y="450" class="a"  >Selected:</text>
-<text x="120" y="450" class="d"  >Star</text>
-<text x="180" y="450" class="d"  >Trek:</text>
-<text x="252" y="450" class="d"  >The</text>
-<text x="300" y="450" class="d"  >Next</text>
-<text x="360" y="450" class="d"  >Generation</text>
-<text x="492" y="450" class="a"  >(ID:</text>
-<text x="552" y="450" class="a"  >655)</text>
-<text x="0" y="475" class="a"  >Skip</text>
-<text x="60" y="475" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="500" class="a bold"  >↪</text>
-<text x="60" y="500" class="f bold"  >Failed</text>
-<text x="144" y="500" class="f bold"  >to</text>
-<text x="180" y="500" class="f bold"  >extract</text>
-<text x="276" y="500" class="f bold"  >season</text>
-<text x="360" y="500" class="f bold"  >number</text>
-</g>
-<g transform="translate(93912)">
-<text x="0" y="0" class="a"  >$</text>
-<text x="24" y="0" class="a"  >tree</text>
-<text x="0" y="25" class="a"  >.</text>
-<text x="0" y="50" class="a"  >├──</text>
-<text x="48" y="50" class="a"  >source</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="48" y="75" class="a"  >├──</text>
-<text x="96" y="75" class="a"  >movie</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="48" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.Generations.mkv</text>
-<text x="0" y="125" class="a"  >│  </text>
-<text x="48" y="125" class="a"  >└──</text>
-<text x="96" y="125" class="a"  >show</text>
-<text x="0" y="150" class="a"  >│  </text>
-<text x="96" y="150" class="a"  >├──</text>
-<text x="144" y="150" class="a"  >Sample.mkv</text>
-<text x="0" y="175" class="a"  >│  </text>
-<text x="96" y="175" class="a"  >├──</text>
-<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="200" class="a"  >│  </text>
-<text x="96" y="200" class="a"  >├──</text>
-<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="225" class="a"  >│  </text>
-<text x="96" y="225" class="a"  >├──</text>
-<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="250" class="a"  >│  </text>
-<text x="96" y="250" class="a"  >└──</text>
-<text x="144" y="250" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="275" class="a"  >└──</text>
-<text x="48" y="275" class="a"  >target</text>
-<text x="0" y="325" class="a"  >5</text>
-<text x="24" y="325" class="a"  >directories,</text>
-<text x="180" y="325" class="a"  >6</text>
-<text x="204" y="325" class="a"  >files</text>
-<text x="0" y="350" class="a"  >$</text>
-<text x="24" y="350" class="a"  >mediar</text>
-<text x="108" y="350" class="a"  >link</text>
-<text x="168" y="350" class="a"  >source/show</text>
-<text x="312" y="350" class="a"  >target/</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Search</text>
-<text x="108" y="375" class="a"  >for:</text>
-<text x="168" y="375" class="c"  >TV</text>
-<text x="204" y="375" class="c"  >Show</text>
-<text x="0" y="400" class="b"  >&gt;</text>
-<text x="24" y="400" class="a"  >TV</text>
-<text x="60" y="400" class="a"  >Show</text>
-<text x="120" y="400" class="a"  >Title:</text>
-<text x="204" y="400" class="c"  >Star</text>
-<text x="264" y="400" class="c"  >Trek</text>
-<text x="324" y="400" class="c"  >The</text>
-<text x="372" y="400" class="c"  >Next</text>
-<text x="432" y="400" class="c"  >Generation</text>
-<text x="0" y="425" class="b"  >&gt;</text>
-<text x="24" y="425" class="a"  >Select</text>
-<text x="108" y="425" class="a"  >a</text>
-<text x="132" y="425" class="a"  >TV</text>
-<text x="168" y="425" class="a"  >show:</text>
-<text x="240" y="425" class="c"  >Star</text>
-<text x="300" y="425" class="c"  >Trek:</text>
-<text x="372" y="425" class="c"  >The</text>
-<text x="420" y="425" class="c"  >Next</text>
-<text x="480" y="425" class="c"  >Generation</text>
-<text x="612" y="425" class="c"  >(1987)</text>
-<text x="696" y="425" class="c"  >-</text>
-<text x="720" y="425" class="c"  >ID:</text>
-<text x="768" y="425" class="c"  >655</text>
-<text x="816" y="425" class="c"  >-</text>
-<text x="840" y="425" class="c"  >Popularity:</text>
-<text x="984" y="425" class="c"  >53.3</text>
+<text x="984" y="425" class="c"  >59.3</text>
 <text x="0" y="450" class="a"  >Selected:</text>
 <text x="120" y="450" class="d"  >Star</text>
 <text x="180" y="450" class="d"  >Trek:</text>
@@ -3585,7 +3030,424 @@
 <text x="0" y="600" class="a"  >Link</text>
 <text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
 </g>
-<g transform="translate(95116)">
+<g transform="translate(85484)">
+<text x="0" y="0" class="a"  >.</text>
+<text x="0" y="25" class="a"  >├──</text>
+<text x="48" y="25" class="a"  >source</text>
+<text x="0" y="50" class="a"  >│  </text>
+<text x="48" y="50" class="a"  >├──</text>
+<text x="96" y="50" class="a"  >movie</text>
+<text x="0" y="75" class="a"  >│  </text>
+<text x="48" y="75" class="a"  >│  </text>
+<text x="96" y="75" class="a"  >└──</text>
+<text x="144" y="75" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="0" y="100" class="a"  >│  </text>
+<text x="48" y="100" class="a"  >└──</text>
+<text x="96" y="100" class="a"  >show</text>
+<text x="0" y="125" class="a"  >│  </text>
+<text x="96" y="125" class="a"  >├──</text>
+<text x="144" y="125" class="a"  >Sample.mkv</text>
+<text x="0" y="150" class="a"  >│  </text>
+<text x="96" y="150" class="a"  >├──</text>
+<text x="144" y="150" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="0" y="175" class="a"  >│  </text>
+<text x="96" y="175" class="a"  >├──</text>
+<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="0" y="200" class="a"  >│  </text>
+<text x="96" y="200" class="a"  >├──</text>
+<text x="144" y="200" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="0" y="225" class="a"  >│  </text>
+<text x="96" y="225" class="a"  >└──</text>
+<text x="144" y="225" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="0" y="250" class="a"  >└──</text>
+<text x="48" y="250" class="a"  >target</text>
+<text x="0" y="300" class="a"  >5</text>
+<text x="24" y="300" class="a"  >directories,</text>
+<text x="180" y="300" class="a"  >6</text>
+<text x="204" y="300" class="a"  >files</text>
+<text x="0" y="325" class="a"  >$</text>
+<text x="24" y="325" class="a"  >mediar</text>
+<text x="108" y="325" class="a"  >link</text>
+<text x="168" y="325" class="a"  >source/show</text>
+<text x="312" y="325" class="a"  >target/</text>
+<text x="0" y="350" class="b"  >&gt;</text>
+<text x="24" y="350" class="a"  >Search</text>
+<text x="108" y="350" class="a"  >for:</text>
+<text x="168" y="350" class="c"  >TV</text>
+<text x="204" y="350" class="c"  >Show</text>
+<text x="0" y="375" class="b"  >&gt;</text>
+<text x="24" y="375" class="a"  >TV</text>
+<text x="60" y="375" class="a"  >Show</text>
+<text x="120" y="375" class="a"  >Title:</text>
+<text x="204" y="375" class="c"  >Star</text>
+<text x="264" y="375" class="c"  >Trek</text>
+<text x="324" y="375" class="c"  >The</text>
+<text x="372" y="375" class="c"  >Next</text>
+<text x="432" y="375" class="c"  >Generation</text>
+<text x="0" y="400" class="b"  >&gt;</text>
+<text x="24" y="400" class="a"  >Select</text>
+<text x="108" y="400" class="a"  >a</text>
+<text x="132" y="400" class="a"  >TV</text>
+<text x="168" y="400" class="a"  >show:</text>
+<text x="240" y="400" class="c"  >Star</text>
+<text x="300" y="400" class="c"  >Trek:</text>
+<text x="372" y="400" class="c"  >The</text>
+<text x="420" y="400" class="c"  >Next</text>
+<text x="480" y="400" class="c"  >Generation</text>
+<text x="612" y="400" class="c"  >(1987)</text>
+<text x="696" y="400" class="c"  >-</text>
+<text x="720" y="400" class="c"  >ID:</text>
+<text x="768" y="400" class="c"  >655</text>
+<text x="816" y="400" class="c"  >-</text>
+<text x="840" y="400" class="c"  >Popularity:</text>
+<text x="984" y="400" class="c"  >59.3</text>
+<text x="0" y="425" class="a"  >Selected:</text>
+<text x="120" y="425" class="d"  >Star</text>
+<text x="180" y="425" class="d"  >Trek:</text>
+<text x="252" y="425" class="d"  >The</text>
+<text x="300" y="425" class="d"  >Next</text>
+<text x="360" y="425" class="d"  >Generation</text>
+<text x="492" y="425" class="a"  >(ID:</text>
+<text x="552" y="425" class="a"  >655)</text>
+<text x="0" y="450" class="a"  >Skip</text>
+<text x="60" y="450" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="475" class="a bold"  >↪</text>
+<text x="60" y="475" class="f bold"  >Failed</text>
+<text x="144" y="475" class="f bold"  >to</text>
+<text x="180" y="475" class="f bold"  >extract</text>
+<text x="276" y="475" class="f bold"  >season</text>
+<text x="360" y="475" class="f bold"  >number</text>
+<text x="0" y="500" class="a"  >Link</text>
+<text x="60" y="500" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="24" y="525" class="a bold"  >↪</text>
+<text x="60" y="525" class="h bold"  >target/Star</text>
+<text x="204" y="525" class="h bold"  >Trek</text>
+<text x="264" y="525" class="h bold"  >The</text>
+<text x="312" y="525" class="h bold"  >Next</text>
+<text x="372" y="525" class="h bold"  >Generation</text>
+<text x="504" y="525" class="h bold"  >(1987)/Season</text>
+<text x="672" y="525" class="h bold"  >01/Star</text>
+<text x="768" y="525" class="h bold"  >Trek</text>
+<text x="828" y="525" class="h bold"  >The</text>
+<text x="876" y="525" class="h bold"  >Next</text>
+<text x="936" y="525" class="h bold"  >Generation</text>
+<text x="1068" y="525" class="h bold"  >-</text>
+<text x="1092" y="525" class="h" >S01E01</text>
+<text x="60" y="550" class="h bold"  >-</text>
+<text x="84" y="550" class="h bold"  >Encounter</text>
+<text x="204" y="550" class="h bold"  >at</text>
+<text x="240" y="550" class="h bold"  >Farpoint.mkv</text>
+<text x="0" y="575" class="a"  >Link</text>
+<text x="60" y="575" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="24" y="600" class="a bold"  >↪</text>
+<text x="60" y="600" class="h bold"  >target/Star</text>
+<text x="204" y="600" class="h bold"  >Trek</text>
+<text x="264" y="600" class="h bold"  >The</text>
+<text x="312" y="600" class="h bold"  >Next</text>
+<text x="372" y="600" class="h bold"  >Generation</text>
+<text x="504" y="600" class="h bold"  >(1987)/Season</text>
+<text x="672" y="600" class="h bold"  >01/Star</text>
+<text x="768" y="600" class="h bold"  >Trek</text>
+<text x="828" y="600" class="h bold"  >The</text>
+<text x="876" y="600" class="h bold"  >Next</text>
+<text x="936" y="600" class="h bold"  >Generation</text>
+<text x="1068" y="600" class="h bold"  >-</text>
+<text x="1092" y="600" class="h" >S01E02</text>
+<text x="60" y="625" class="h bold"  >-</text>
+<text x="84" y="625" class="h bold"  >The</text>
+<text x="132" y="625" class="h bold"  >Naked</text>
+<text x="204" y="625" class="h bold"  >Now.mkv</text>
+<text x="0" y="650" class="a"  >Link</text>
+<text x="60" y="650" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
+</g>
+<g transform="translate(86688)">
+<text x="0" y="0" class="a"  >│  </text>
+<text x="48" y="0" class="a"  >├──</text>
+<text x="96" y="0" class="a"  >movie</text>
+<text x="0" y="25" class="a"  >│  </text>
+<text x="48" y="25" class="a"  >│  </text>
+<text x="96" y="25" class="a"  >└──</text>
+<text x="144" y="25" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="0" y="50" class="a"  >│  </text>
+<text x="48" y="50" class="a"  >└──</text>
+<text x="96" y="50" class="a"  >show</text>
+<text x="0" y="75" class="a"  >│  </text>
+<text x="96" y="75" class="a"  >├──</text>
+<text x="144" y="75" class="a"  >Sample.mkv</text>
+<text x="0" y="100" class="a"  >│  </text>
+<text x="96" y="100" class="a"  >├──</text>
+<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="0" y="125" class="a"  >│  </text>
+<text x="96" y="125" class="a"  >├──</text>
+<text x="144" y="125" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="0" y="150" class="a"  >│  </text>
+<text x="96" y="150" class="a"  >├──</text>
+<text x="144" y="150" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="0" y="175" class="a"  >│  </text>
+<text x="96" y="175" class="a"  >└──</text>
+<text x="144" y="175" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="0" y="200" class="a"  >└──</text>
+<text x="48" y="200" class="a"  >target</text>
+<text x="0" y="250" class="a"  >5</text>
+<text x="24" y="250" class="a"  >directories,</text>
+<text x="180" y="250" class="a"  >6</text>
+<text x="204" y="250" class="a"  >files</text>
+<text x="0" y="275" class="a"  >$</text>
+<text x="24" y="275" class="a"  >mediar</text>
+<text x="108" y="275" class="a"  >link</text>
+<text x="168" y="275" class="a"  >source/show</text>
+<text x="312" y="275" class="a"  >target/</text>
+<text x="0" y="300" class="b"  >&gt;</text>
+<text x="24" y="300" class="a"  >Search</text>
+<text x="108" y="300" class="a"  >for:</text>
+<text x="168" y="300" class="c"  >TV</text>
+<text x="204" y="300" class="c"  >Show</text>
+<text x="0" y="325" class="b"  >&gt;</text>
+<text x="24" y="325" class="a"  >TV</text>
+<text x="60" y="325" class="a"  >Show</text>
+<text x="120" y="325" class="a"  >Title:</text>
+<text x="204" y="325" class="c"  >Star</text>
+<text x="264" y="325" class="c"  >Trek</text>
+<text x="324" y="325" class="c"  >The</text>
+<text x="372" y="325" class="c"  >Next</text>
+<text x="432" y="325" class="c"  >Generation</text>
+<text x="0" y="350" class="b"  >&gt;</text>
+<text x="24" y="350" class="a"  >Select</text>
+<text x="108" y="350" class="a"  >a</text>
+<text x="132" y="350" class="a"  >TV</text>
+<text x="168" y="350" class="a"  >show:</text>
+<text x="240" y="350" class="c"  >Star</text>
+<text x="300" y="350" class="c"  >Trek:</text>
+<text x="372" y="350" class="c"  >The</text>
+<text x="420" y="350" class="c"  >Next</text>
+<text x="480" y="350" class="c"  >Generation</text>
+<text x="612" y="350" class="c"  >(1987)</text>
+<text x="696" y="350" class="c"  >-</text>
+<text x="720" y="350" class="c"  >ID:</text>
+<text x="768" y="350" class="c"  >655</text>
+<text x="816" y="350" class="c"  >-</text>
+<text x="840" y="350" class="c"  >Popularity:</text>
+<text x="984" y="350" class="c"  >59.3</text>
+<text x="0" y="375" class="a"  >Selected:</text>
+<text x="120" y="375" class="d"  >Star</text>
+<text x="180" y="375" class="d"  >Trek:</text>
+<text x="252" y="375" class="d"  >The</text>
+<text x="300" y="375" class="d"  >Next</text>
+<text x="360" y="375" class="d"  >Generation</text>
+<text x="492" y="375" class="a"  >(ID:</text>
+<text x="552" y="375" class="a"  >655)</text>
+<text x="0" y="400" class="a"  >Skip</text>
+<text x="60" y="400" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="425" class="a bold"  >↪</text>
+<text x="60" y="425" class="f bold"  >Failed</text>
+<text x="144" y="425" class="f bold"  >to</text>
+<text x="180" y="425" class="f bold"  >extract</text>
+<text x="276" y="425" class="f bold"  >season</text>
+<text x="360" y="425" class="f bold"  >number</text>
+<text x="0" y="450" class="a"  >Link</text>
+<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="24" y="475" class="a bold"  >↪</text>
+<text x="60" y="475" class="h bold"  >target/Star</text>
+<text x="204" y="475" class="h bold"  >Trek</text>
+<text x="264" y="475" class="h bold"  >The</text>
+<text x="312" y="475" class="h bold"  >Next</text>
+<text x="372" y="475" class="h bold"  >Generation</text>
+<text x="504" y="475" class="h bold"  >(1987)/Season</text>
+<text x="672" y="475" class="h bold"  >01/Star</text>
+<text x="768" y="475" class="h bold"  >Trek</text>
+<text x="828" y="475" class="h bold"  >The</text>
+<text x="876" y="475" class="h bold"  >Next</text>
+<text x="936" y="475" class="h bold"  >Generation</text>
+<text x="1068" y="475" class="h bold"  >-</text>
+<text x="1092" y="475" class="h" >S01E01</text>
+<text x="60" y="500" class="h bold"  >-</text>
+<text x="84" y="500" class="h bold"  >Encounter</text>
+<text x="204" y="500" class="h bold"  >at</text>
+<text x="240" y="500" class="h bold"  >Farpoint.mkv</text>
+<text x="0" y="525" class="a"  >Link</text>
+<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="24" y="550" class="a bold"  >↪</text>
+<text x="60" y="550" class="h bold"  >target/Star</text>
+<text x="204" y="550" class="h bold"  >Trek</text>
+<text x="264" y="550" class="h bold"  >The</text>
+<text x="312" y="550" class="h bold"  >Next</text>
+<text x="372" y="550" class="h bold"  >Generation</text>
+<text x="504" y="550" class="h bold"  >(1987)/Season</text>
+<text x="672" y="550" class="h bold"  >01/Star</text>
+<text x="768" y="550" class="h bold"  >Trek</text>
+<text x="828" y="550" class="h bold"  >The</text>
+<text x="876" y="550" class="h bold"  >Next</text>
+<text x="936" y="550" class="h bold"  >Generation</text>
+<text x="1068" y="550" class="h bold"  >-</text>
+<text x="1092" y="550" class="h" >S01E02</text>
+<text x="60" y="575" class="h bold"  >-</text>
+<text x="84" y="575" class="h bold"  >The</text>
+<text x="132" y="575" class="h bold"  >Naked</text>
+<text x="204" y="575" class="h bold"  >Now.mkv</text>
+<text x="0" y="600" class="a"  >Link</text>
+<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="24" y="625" class="a bold"  >↪</text>
+<text x="60" y="625" class="h bold"  >target/Star</text>
+<text x="204" y="625" class="h bold"  >Trek</text>
+<text x="264" y="625" class="h bold"  >The</text>
+<text x="312" y="625" class="h bold"  >Next</text>
+<text x="372" y="625" class="h bold"  >Generation</text>
+<text x="504" y="625" class="h bold"  >(1987)/Season</text>
+<text x="672" y="625" class="h bold"  >02/Star</text>
+<text x="768" y="625" class="h bold"  >Trek</text>
+<text x="828" y="625" class="h bold"  >The</text>
+<text x="876" y="625" class="h bold"  >Next</text>
+<text x="936" y="625" class="h bold"  >Generation</text>
+<text x="1068" y="625" class="h bold"  >-</text>
+<text x="1092" y="625" class="h" >S02E01</text>
+<text x="60" y="650" class="h bold"  >-</text>
+<text x="84" y="650" class="h bold"  >The</text>
+<text x="132" y="650" class="h bold"  >Child.mkv</text>
+</g>
+<g transform="translate(87892)">
+<text x="0" y="0" class="a"  >│  </text>
+<text x="48" y="0" class="a"  >│  </text>
+<text x="96" y="0" class="a"  >└──</text>
+<text x="144" y="0" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="0" y="25" class="a"  >│  </text>
+<text x="48" y="25" class="a"  >└──</text>
+<text x="96" y="25" class="a"  >show</text>
+<text x="0" y="50" class="a"  >│  </text>
+<text x="96" y="50" class="a"  >├──</text>
+<text x="144" y="50" class="a"  >Sample.mkv</text>
+<text x="0" y="75" class="a"  >│  </text>
+<text x="96" y="75" class="a"  >├──</text>
+<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="0" y="100" class="a"  >│  </text>
+<text x="96" y="100" class="a"  >├──</text>
+<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="0" y="125" class="a"  >│  </text>
+<text x="96" y="125" class="a"  >├──</text>
+<text x="144" y="125" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="0" y="150" class="a"  >│  </text>
+<text x="96" y="150" class="a"  >└──</text>
+<text x="144" y="150" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="0" y="175" class="a"  >└──</text>
+<text x="48" y="175" class="a"  >target</text>
+<text x="0" y="225" class="a"  >5</text>
+<text x="24" y="225" class="a"  >directories,</text>
+<text x="180" y="225" class="a"  >6</text>
+<text x="204" y="225" class="a"  >files</text>
+<text x="0" y="250" class="a"  >$</text>
+<text x="24" y="250" class="a"  >mediar</text>
+<text x="108" y="250" class="a"  >link</text>
+<text x="168" y="250" class="a"  >source/show</text>
+<text x="312" y="250" class="a"  >target/</text>
+<text x="0" y="275" class="b"  >&gt;</text>
+<text x="24" y="275" class="a"  >Search</text>
+<text x="108" y="275" class="a"  >for:</text>
+<text x="168" y="275" class="c"  >TV</text>
+<text x="204" y="275" class="c"  >Show</text>
+<text x="0" y="300" class="b"  >&gt;</text>
+<text x="24" y="300" class="a"  >TV</text>
+<text x="60" y="300" class="a"  >Show</text>
+<text x="120" y="300" class="a"  >Title:</text>
+<text x="204" y="300" class="c"  >Star</text>
+<text x="264" y="300" class="c"  >Trek</text>
+<text x="324" y="300" class="c"  >The</text>
+<text x="372" y="300" class="c"  >Next</text>
+<text x="432" y="300" class="c"  >Generation</text>
+<text x="0" y="325" class="b"  >&gt;</text>
+<text x="24" y="325" class="a"  >Select</text>
+<text x="108" y="325" class="a"  >a</text>
+<text x="132" y="325" class="a"  >TV</text>
+<text x="168" y="325" class="a"  >show:</text>
+<text x="240" y="325" class="c"  >Star</text>
+<text x="300" y="325" class="c"  >Trek:</text>
+<text x="372" y="325" class="c"  >The</text>
+<text x="420" y="325" class="c"  >Next</text>
+<text x="480" y="325" class="c"  >Generation</text>
+<text x="612" y="325" class="c"  >(1987)</text>
+<text x="696" y="325" class="c"  >-</text>
+<text x="720" y="325" class="c"  >ID:</text>
+<text x="768" y="325" class="c"  >655</text>
+<text x="816" y="325" class="c"  >-</text>
+<text x="840" y="325" class="c"  >Popularity:</text>
+<text x="984" y="325" class="c"  >59.3</text>
+<text x="0" y="350" class="a"  >Selected:</text>
+<text x="120" y="350" class="d"  >Star</text>
+<text x="180" y="350" class="d"  >Trek:</text>
+<text x="252" y="350" class="d"  >The</text>
+<text x="300" y="350" class="d"  >Next</text>
+<text x="360" y="350" class="d"  >Generation</text>
+<text x="492" y="350" class="a"  >(ID:</text>
+<text x="552" y="350" class="a"  >655)</text>
+<text x="0" y="375" class="a"  >Skip</text>
+<text x="60" y="375" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="400" class="a bold"  >↪</text>
+<text x="60" y="400" class="f bold"  >Failed</text>
+<text x="144" y="400" class="f bold"  >to</text>
+<text x="180" y="400" class="f bold"  >extract</text>
+<text x="276" y="400" class="f bold"  >season</text>
+<text x="360" y="400" class="f bold"  >number</text>
+<text x="0" y="425" class="a"  >Link</text>
+<text x="60" y="425" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="24" y="450" class="a bold"  >↪</text>
+<text x="60" y="450" class="h bold"  >target/Star</text>
+<text x="204" y="450" class="h bold"  >Trek</text>
+<text x="264" y="450" class="h bold"  >The</text>
+<text x="312" y="450" class="h bold"  >Next</text>
+<text x="372" y="450" class="h bold"  >Generation</text>
+<text x="504" y="450" class="h bold"  >(1987)/Season</text>
+<text x="672" y="450" class="h bold"  >01/Star</text>
+<text x="768" y="450" class="h bold"  >Trek</text>
+<text x="828" y="450" class="h bold"  >The</text>
+<text x="876" y="450" class="h bold"  >Next</text>
+<text x="936" y="450" class="h bold"  >Generation</text>
+<text x="1068" y="450" class="h bold"  >-</text>
+<text x="1092" y="450" class="h" >S01E01</text>
+<text x="60" y="475" class="h bold"  >-</text>
+<text x="84" y="475" class="h bold"  >Encounter</text>
+<text x="204" y="475" class="h bold"  >at</text>
+<text x="240" y="475" class="h bold"  >Farpoint.mkv</text>
+<text x="0" y="500" class="a"  >Link</text>
+<text x="60" y="500" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="24" y="525" class="a bold"  >↪</text>
+<text x="60" y="525" class="h bold"  >target/Star</text>
+<text x="204" y="525" class="h bold"  >Trek</text>
+<text x="264" y="525" class="h bold"  >The</text>
+<text x="312" y="525" class="h bold"  >Next</text>
+<text x="372" y="525" class="h bold"  >Generation</text>
+<text x="504" y="525" class="h bold"  >(1987)/Season</text>
+<text x="672" y="525" class="h bold"  >01/Star</text>
+<text x="768" y="525" class="h bold"  >Trek</text>
+<text x="828" y="525" class="h bold"  >The</text>
+<text x="876" y="525" class="h bold"  >Next</text>
+<text x="936" y="525" class="h bold"  >Generation</text>
+<text x="1068" y="525" class="h bold"  >-</text>
+<text x="1092" y="525" class="h" >S01E02</text>
+<text x="60" y="550" class="h bold"  >-</text>
+<text x="84" y="550" class="h bold"  >The</text>
+<text x="132" y="550" class="h bold"  >Naked</text>
+<text x="204" y="550" class="h bold"  >Now.mkv</text>
+<text x="0" y="575" class="a"  >Link</text>
+<text x="60" y="575" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="24" y="600" class="a bold"  >↪</text>
+<text x="60" y="600" class="h bold"  >target/Star</text>
+<text x="204" y="600" class="h bold"  >Trek</text>
+<text x="264" y="600" class="h bold"  >The</text>
+<text x="312" y="600" class="h bold"  >Next</text>
+<text x="372" y="600" class="h bold"  >Generation</text>
+<text x="504" y="600" class="h bold"  >(1987)/Season</text>
+<text x="672" y="600" class="h bold"  >02/Star</text>
+<text x="768" y="600" class="h bold"  >Trek</text>
+<text x="828" y="600" class="h bold"  >The</text>
+<text x="876" y="600" class="h bold"  >Next</text>
+<text x="936" y="600" class="h bold"  >Generation</text>
+<text x="1068" y="600" class="h bold"  >-</text>
+<text x="1092" y="600" class="h" >S02E01</text>
+<text x="60" y="625" class="h bold"  >-</text>
+<text x="84" y="625" class="h bold"  >The</text>
+<text x="132" y="625" class="h bold"  >Child.mkv</text>
+<text x="0" y="650" class="a"  >Link</text>
+<text x="60" y="650" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
+</g>
+<g transform="translate(89096)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Sample.mkv</text>
@@ -3642,7 +3504,7 @@
 <text x="768" y="275" class="c"  >655</text>
 <text x="816" y="275" class="c"  >-</text>
 <text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
+<text x="984" y="275" class="c"  >59.3</text>
 <text x="0" y="300" class="a"  >Selected:</text>
 <text x="120" y="300" class="d"  >Star</text>
 <text x="180" y="300" class="d"  >Trek:</text>
@@ -3740,7 +3602,7 @@
 <text x="252" y="650" class="h bold"  >Has</text>
 <text x="300" y="650" class="h bold"  >Lease.mkv</text>
 </g>
-<g transform="translate(96320)">
+<g transform="translate(90300)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Sample.mkv</text>
@@ -3797,474 +3659,7 @@
 <text x="768" y="275" class="c"  >655</text>
 <text x="816" y="275" class="c"  >-</text>
 <text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
-<text x="0" y="300" class="a"  >Selected:</text>
-<text x="120" y="300" class="d"  >Star</text>
-<text x="180" y="300" class="d"  >Trek:</text>
-<text x="252" y="300" class="d"  >The</text>
-<text x="300" y="300" class="d"  >Next</text>
-<text x="360" y="300" class="d"  >Generation</text>
-<text x="492" y="300" class="a"  >(ID:</text>
-<text x="552" y="300" class="a"  >655)</text>
-<text x="0" y="325" class="a"  >Skip</text>
-<text x="60" y="325" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="f bold"  >Failed</text>
-<text x="144" y="350" class="f bold"  >to</text>
-<text x="180" y="350" class="f bold"  >extract</text>
-<text x="276" y="350" class="f bold"  >season</text>
-<text x="360" y="350" class="f bold"  >number</text>
-<text x="0" y="375" class="a"  >Link</text>
-<text x="60" y="375" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="400" class="a bold"  >↪</text>
-<text x="60" y="400" class="h bold"  >target/Star</text>
-<text x="204" y="400" class="h bold"  >Trek</text>
-<text x="264" y="400" class="h bold"  >The</text>
-<text x="312" y="400" class="h bold"  >Next</text>
-<text x="372" y="400" class="h bold"  >Generation</text>
-<text x="504" y="400" class="h bold"  >(1987)/Season</text>
-<text x="672" y="400" class="h bold"  >01/Star</text>
-<text x="768" y="400" class="h bold"  >Trek</text>
-<text x="828" y="400" class="h bold"  >The</text>
-<text x="876" y="400" class="h bold"  >Next</text>
-<text x="936" y="400" class="h bold"  >Generation</text>
-<text x="1068" y="400" class="h bold"  >-</text>
-<text x="1092" y="400" class="h" >S01E01</text>
-<text x="60" y="425" class="h bold"  >-</text>
-<text x="84" y="425" class="h bold"  >Encounter</text>
-<text x="204" y="425" class="h bold"  >at</text>
-<text x="240" y="425" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="450" class="a"  >Link</text>
-<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="475" class="a bold"  >↪</text>
-<text x="60" y="475" class="h bold"  >target/Star</text>
-<text x="204" y="475" class="h bold"  >Trek</text>
-<text x="264" y="475" class="h bold"  >The</text>
-<text x="312" y="475" class="h bold"  >Next</text>
-<text x="372" y="475" class="h bold"  >Generation</text>
-<text x="504" y="475" class="h bold"  >(1987)/Season</text>
-<text x="672" y="475" class="h bold"  >01/Star</text>
-<text x="768" y="475" class="h bold"  >Trek</text>
-<text x="828" y="475" class="h bold"  >The</text>
-<text x="876" y="475" class="h bold"  >Next</text>
-<text x="936" y="475" class="h bold"  >Generation</text>
-<text x="1068" y="475" class="h bold"  >-</text>
-<text x="1092" y="475" class="h" >S01E02</text>
-<text x="60" y="500" class="h bold"  >-</text>
-<text x="84" y="500" class="h bold"  >The</text>
-<text x="132" y="500" class="h bold"  >Naked</text>
-<text x="204" y="500" class="h bold"  >Now.mkv</text>
-<text x="0" y="525" class="a"  >Link</text>
-<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="550" class="a bold"  >↪</text>
-<text x="60" y="550" class="h bold"  >target/Star</text>
-<text x="204" y="550" class="h bold"  >Trek</text>
-<text x="264" y="550" class="h bold"  >The</text>
-<text x="312" y="550" class="h bold"  >Next</text>
-<text x="372" y="550" class="h bold"  >Generation</text>
-<text x="504" y="550" class="h bold"  >(1987)/Season</text>
-<text x="672" y="550" class="h bold"  >02/Star</text>
-<text x="768" y="550" class="h bold"  >Trek</text>
-<text x="828" y="550" class="h bold"  >The</text>
-<text x="876" y="550" class="h bold"  >Next</text>
-<text x="936" y="550" class="h bold"  >Generation</text>
-<text x="1068" y="550" class="h bold"  >-</text>
-<text x="1092" y="550" class="h" >S02E01</text>
-<text x="60" y="575" class="h bold"  >-</text>
-<text x="84" y="575" class="h bold"  >The</text>
-<text x="132" y="575" class="h bold"  >Child.mkv</text>
-<text x="0" y="600" class="a"  >Link</text>
-<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="625" class="a bold"  >↪</text>
-<text x="60" y="625" class="h bold"  >target/Star</text>
-<text x="204" y="625" class="h bold"  >Trek</text>
-<text x="264" y="625" class="h bold"  >The</text>
-<text x="312" y="625" class="h bold"  >Next</text>
-<text x="372" y="625" class="h bold"  >Generation</text>
-<text x="504" y="625" class="h bold"  >(1987)/Season</text>
-<text x="672" y="625" class="h bold"  >02/Star</text>
-<text x="768" y="625" class="h bold"  >Trek</text>
-<text x="828" y="625" class="h bold"  >The</text>
-<text x="876" y="625" class="h bold"  >Next</text>
-<text x="936" y="625" class="h bold"  >Generation</text>
-<text x="1068" y="625" class="h bold"  >-</text>
-<text x="1092" y="625" class="h" >S02E02</text>
-<text x="60" y="650" class="h bold"  >-</text>
-<text x="84" y="650" class="h bold"  >Where</text>
-<text x="156" y="650" class="h bold"  >Silence</text>
-<text x="252" y="650" class="h bold"  >Has</text>
-<text x="300" y="650" class="h bold"  >Lease.mkv</text>
-</g>
-<g transform="translate(97524)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Sample.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >├──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="96" y="75" class="a"  >├──</text>
-<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="125" class="a"  >└──</text>
-<text x="48" y="125" class="a"  >target</text>
-<text x="0" y="175" class="a"  >5</text>
-<text x="24" y="175" class="a"  >directories,</text>
-<text x="180" y="175" class="a"  >6</text>
-<text x="204" y="175" class="a"  >files</text>
-<text x="0" y="200" class="a"  >$</text>
-<text x="24" y="200" class="a"  >mediar</text>
-<text x="108" y="200" class="a"  >link</text>
-<text x="168" y="200" class="a"  >source/show</text>
-<text x="312" y="200" class="a"  >target/</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Search</text>
-<text x="108" y="225" class="a"  >for:</text>
-<text x="168" y="225" class="c"  >TV</text>
-<text x="204" y="225" class="c"  >Show</text>
-<text x="0" y="250" class="b"  >&gt;</text>
-<text x="24" y="250" class="a"  >TV</text>
-<text x="60" y="250" class="a"  >Show</text>
-<text x="120" y="250" class="a"  >Title:</text>
-<text x="204" y="250" class="c"  >Star</text>
-<text x="264" y="250" class="c"  >Trek</text>
-<text x="324" y="250" class="c"  >The</text>
-<text x="372" y="250" class="c"  >Next</text>
-<text x="432" y="250" class="c"  >Generation</text>
-<text x="0" y="275" class="b"  >&gt;</text>
-<text x="24" y="275" class="a"  >Select</text>
-<text x="108" y="275" class="a"  >a</text>
-<text x="132" y="275" class="a"  >TV</text>
-<text x="168" y="275" class="a"  >show:</text>
-<text x="240" y="275" class="c"  >Star</text>
-<text x="300" y="275" class="c"  >Trek:</text>
-<text x="372" y="275" class="c"  >The</text>
-<text x="420" y="275" class="c"  >Next</text>
-<text x="480" y="275" class="c"  >Generation</text>
-<text x="612" y="275" class="c"  >(1987)</text>
-<text x="696" y="275" class="c"  >-</text>
-<text x="720" y="275" class="c"  >ID:</text>
-<text x="768" y="275" class="c"  >655</text>
-<text x="816" y="275" class="c"  >-</text>
-<text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
-<text x="0" y="300" class="a"  >Selected:</text>
-<text x="120" y="300" class="d"  >Star</text>
-<text x="180" y="300" class="d"  >Trek:</text>
-<text x="252" y="300" class="d"  >The</text>
-<text x="300" y="300" class="d"  >Next</text>
-<text x="360" y="300" class="d"  >Generation</text>
-<text x="492" y="300" class="a"  >(ID:</text>
-<text x="552" y="300" class="a"  >655)</text>
-<text x="0" y="325" class="a"  >Skip</text>
-<text x="60" y="325" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="f bold"  >Failed</text>
-<text x="144" y="350" class="f bold"  >to</text>
-<text x="180" y="350" class="f bold"  >extract</text>
-<text x="276" y="350" class="f bold"  >season</text>
-<text x="360" y="350" class="f bold"  >number</text>
-<text x="0" y="375" class="a"  >Link</text>
-<text x="60" y="375" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="400" class="a bold"  >↪</text>
-<text x="60" y="400" class="h bold"  >target/Star</text>
-<text x="204" y="400" class="h bold"  >Trek</text>
-<text x="264" y="400" class="h bold"  >The</text>
-<text x="312" y="400" class="h bold"  >Next</text>
-<text x="372" y="400" class="h bold"  >Generation</text>
-<text x="504" y="400" class="h bold"  >(1987)/Season</text>
-<text x="672" y="400" class="h bold"  >01/Star</text>
-<text x="768" y="400" class="h bold"  >Trek</text>
-<text x="828" y="400" class="h bold"  >The</text>
-<text x="876" y="400" class="h bold"  >Next</text>
-<text x="936" y="400" class="h bold"  >Generation</text>
-<text x="1068" y="400" class="h bold"  >-</text>
-<text x="1092" y="400" class="h" >S01E01</text>
-<text x="60" y="425" class="h bold"  >-</text>
-<text x="84" y="425" class="h bold"  >Encounter</text>
-<text x="204" y="425" class="h bold"  >at</text>
-<text x="240" y="425" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="450" class="a"  >Link</text>
-<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="475" class="a bold"  >↪</text>
-<text x="60" y="475" class="h bold"  >target/Star</text>
-<text x="204" y="475" class="h bold"  >Trek</text>
-<text x="264" y="475" class="h bold"  >The</text>
-<text x="312" y="475" class="h bold"  >Next</text>
-<text x="372" y="475" class="h bold"  >Generation</text>
-<text x="504" y="475" class="h bold"  >(1987)/Season</text>
-<text x="672" y="475" class="h bold"  >01/Star</text>
-<text x="768" y="475" class="h bold"  >Trek</text>
-<text x="828" y="475" class="h bold"  >The</text>
-<text x="876" y="475" class="h bold"  >Next</text>
-<text x="936" y="475" class="h bold"  >Generation</text>
-<text x="1068" y="475" class="h bold"  >-</text>
-<text x="1092" y="475" class="h" >S01E02</text>
-<text x="60" y="500" class="h bold"  >-</text>
-<text x="84" y="500" class="h bold"  >The</text>
-<text x="132" y="500" class="h bold"  >Naked</text>
-<text x="204" y="500" class="h bold"  >Now.mkv</text>
-<text x="0" y="525" class="a"  >Link</text>
-<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="550" class="a bold"  >↪</text>
-<text x="60" y="550" class="h bold"  >target/Star</text>
-<text x="204" y="550" class="h bold"  >Trek</text>
-<text x="264" y="550" class="h bold"  >The</text>
-<text x="312" y="550" class="h bold"  >Next</text>
-<text x="372" y="550" class="h bold"  >Generation</text>
-<text x="504" y="550" class="h bold"  >(1987)/Season</text>
-<text x="672" y="550" class="h bold"  >02/Star</text>
-<text x="768" y="550" class="h bold"  >Trek</text>
-<text x="828" y="550" class="h bold"  >The</text>
-<text x="876" y="550" class="h bold"  >Next</text>
-<text x="936" y="550" class="h bold"  >Generation</text>
-<text x="1068" y="550" class="h bold"  >-</text>
-<text x="1092" y="550" class="h" >S02E01</text>
-<text x="60" y="575" class="h bold"  >-</text>
-<text x="84" y="575" class="h bold"  >The</text>
-<text x="132" y="575" class="h bold"  >Child.mkv</text>
-<text x="0" y="600" class="a"  >Link</text>
-<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="625" class="a bold"  >↪</text>
-<text x="60" y="625" class="h bold"  >target/Star</text>
-<text x="204" y="625" class="h bold"  >Trek</text>
-<text x="264" y="625" class="h bold"  >The</text>
-<text x="312" y="625" class="h bold"  >Next</text>
-<text x="372" y="625" class="h bold"  >Generation</text>
-<text x="504" y="625" class="h bold"  >(1987)/Season</text>
-<text x="672" y="625" class="h bold"  >02/Star</text>
-<text x="768" y="625" class="h bold"  >Trek</text>
-<text x="828" y="625" class="h bold"  >The</text>
-<text x="876" y="625" class="h bold"  >Next</text>
-<text x="936" y="625" class="h bold"  >Generation</text>
-<text x="1068" y="625" class="h bold"  >-</text>
-<text x="1092" y="625" class="h" >S02E02</text>
-<text x="60" y="650" class="h bold"  >-</text>
-<text x="84" y="650" class="h bold"  >Where</text>
-<text x="156" y="650" class="h bold"  >Silence</text>
-<text x="252" y="650" class="h bold"  >Has</text>
-<text x="300" y="650" class="h bold"  >Lease.mkv</text>
-<text x="0" y="675" class="b"  >?</text>
-</g>
-<g transform="translate(98728)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Sample.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >├──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="96" y="75" class="a"  >├──</text>
-<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="125" class="a"  >└──</text>
-<text x="48" y="125" class="a"  >target</text>
-<text x="0" y="175" class="a"  >5</text>
-<text x="24" y="175" class="a"  >directories,</text>
-<text x="180" y="175" class="a"  >6</text>
-<text x="204" y="175" class="a"  >files</text>
-<text x="0" y="200" class="a"  >$</text>
-<text x="24" y="200" class="a"  >mediar</text>
-<text x="108" y="200" class="a"  >link</text>
-<text x="168" y="200" class="a"  >source/show</text>
-<text x="312" y="200" class="a"  >target/</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Search</text>
-<text x="108" y="225" class="a"  >for:</text>
-<text x="168" y="225" class="c"  >TV</text>
-<text x="204" y="225" class="c"  >Show</text>
-<text x="0" y="250" class="b"  >&gt;</text>
-<text x="24" y="250" class="a"  >TV</text>
-<text x="60" y="250" class="a"  >Show</text>
-<text x="120" y="250" class="a"  >Title:</text>
-<text x="204" y="250" class="c"  >Star</text>
-<text x="264" y="250" class="c"  >Trek</text>
-<text x="324" y="250" class="c"  >The</text>
-<text x="372" y="250" class="c"  >Next</text>
-<text x="432" y="250" class="c"  >Generation</text>
-<text x="0" y="275" class="b"  >&gt;</text>
-<text x="24" y="275" class="a"  >Select</text>
-<text x="108" y="275" class="a"  >a</text>
-<text x="132" y="275" class="a"  >TV</text>
-<text x="168" y="275" class="a"  >show:</text>
-<text x="240" y="275" class="c"  >Star</text>
-<text x="300" y="275" class="c"  >Trek:</text>
-<text x="372" y="275" class="c"  >The</text>
-<text x="420" y="275" class="c"  >Next</text>
-<text x="480" y="275" class="c"  >Generation</text>
-<text x="612" y="275" class="c"  >(1987)</text>
-<text x="696" y="275" class="c"  >-</text>
-<text x="720" y="275" class="c"  >ID:</text>
-<text x="768" y="275" class="c"  >655</text>
-<text x="816" y="275" class="c"  >-</text>
-<text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
-<text x="0" y="300" class="a"  >Selected:</text>
-<text x="120" y="300" class="d"  >Star</text>
-<text x="180" y="300" class="d"  >Trek:</text>
-<text x="252" y="300" class="d"  >The</text>
-<text x="300" y="300" class="d"  >Next</text>
-<text x="360" y="300" class="d"  >Generation</text>
-<text x="492" y="300" class="a"  >(ID:</text>
-<text x="552" y="300" class="a"  >655)</text>
-<text x="0" y="325" class="a"  >Skip</text>
-<text x="60" y="325" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="f bold"  >Failed</text>
-<text x="144" y="350" class="f bold"  >to</text>
-<text x="180" y="350" class="f bold"  >extract</text>
-<text x="276" y="350" class="f bold"  >season</text>
-<text x="360" y="350" class="f bold"  >number</text>
-<text x="0" y="375" class="a"  >Link</text>
-<text x="60" y="375" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="400" class="a bold"  >↪</text>
-<text x="60" y="400" class="h bold"  >target/Star</text>
-<text x="204" y="400" class="h bold"  >Trek</text>
-<text x="264" y="400" class="h bold"  >The</text>
-<text x="312" y="400" class="h bold"  >Next</text>
-<text x="372" y="400" class="h bold"  >Generation</text>
-<text x="504" y="400" class="h bold"  >(1987)/Season</text>
-<text x="672" y="400" class="h bold"  >01/Star</text>
-<text x="768" y="400" class="h bold"  >Trek</text>
-<text x="828" y="400" class="h bold"  >The</text>
-<text x="876" y="400" class="h bold"  >Next</text>
-<text x="936" y="400" class="h bold"  >Generation</text>
-<text x="1068" y="400" class="h bold"  >-</text>
-<text x="1092" y="400" class="h" >S01E01</text>
-<text x="60" y="425" class="h bold"  >-</text>
-<text x="84" y="425" class="h bold"  >Encounter</text>
-<text x="204" y="425" class="h bold"  >at</text>
-<text x="240" y="425" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="450" class="a"  >Link</text>
-<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="475" class="a bold"  >↪</text>
-<text x="60" y="475" class="h bold"  >target/Star</text>
-<text x="204" y="475" class="h bold"  >Trek</text>
-<text x="264" y="475" class="h bold"  >The</text>
-<text x="312" y="475" class="h bold"  >Next</text>
-<text x="372" y="475" class="h bold"  >Generation</text>
-<text x="504" y="475" class="h bold"  >(1987)/Season</text>
-<text x="672" y="475" class="h bold"  >01/Star</text>
-<text x="768" y="475" class="h bold"  >Trek</text>
-<text x="828" y="475" class="h bold"  >The</text>
-<text x="876" y="475" class="h bold"  >Next</text>
-<text x="936" y="475" class="h bold"  >Generation</text>
-<text x="1068" y="475" class="h bold"  >-</text>
-<text x="1092" y="475" class="h" >S01E02</text>
-<text x="60" y="500" class="h bold"  >-</text>
-<text x="84" y="500" class="h bold"  >The</text>
-<text x="132" y="500" class="h bold"  >Naked</text>
-<text x="204" y="500" class="h bold"  >Now.mkv</text>
-<text x="0" y="525" class="a"  >Link</text>
-<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="550" class="a bold"  >↪</text>
-<text x="60" y="550" class="h bold"  >target/Star</text>
-<text x="204" y="550" class="h bold"  >Trek</text>
-<text x="264" y="550" class="h bold"  >The</text>
-<text x="312" y="550" class="h bold"  >Next</text>
-<text x="372" y="550" class="h bold"  >Generation</text>
-<text x="504" y="550" class="h bold"  >(1987)/Season</text>
-<text x="672" y="550" class="h bold"  >02/Star</text>
-<text x="768" y="550" class="h bold"  >Trek</text>
-<text x="828" y="550" class="h bold"  >The</text>
-<text x="876" y="550" class="h bold"  >Next</text>
-<text x="936" y="550" class="h bold"  >Generation</text>
-<text x="1068" y="550" class="h bold"  >-</text>
-<text x="1092" y="550" class="h" >S02E01</text>
-<text x="60" y="575" class="h bold"  >-</text>
-<text x="84" y="575" class="h bold"  >The</text>
-<text x="132" y="575" class="h bold"  >Child.mkv</text>
-<text x="0" y="600" class="a"  >Link</text>
-<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="625" class="a bold"  >↪</text>
-<text x="60" y="625" class="h bold"  >target/Star</text>
-<text x="204" y="625" class="h bold"  >Trek</text>
-<text x="264" y="625" class="h bold"  >The</text>
-<text x="312" y="625" class="h bold"  >Next</text>
-<text x="372" y="625" class="h bold"  >Generation</text>
-<text x="504" y="625" class="h bold"  >(1987)/Season</text>
-<text x="672" y="625" class="h bold"  >02/Star</text>
-<text x="768" y="625" class="h bold"  >Trek</text>
-<text x="828" y="625" class="h bold"  >The</text>
-<text x="876" y="625" class="h bold"  >Next</text>
-<text x="936" y="625" class="h bold"  >Generation</text>
-<text x="1068" y="625" class="h bold"  >-</text>
-<text x="1092" y="625" class="h" >S02E02</text>
-<text x="60" y="650" class="h bold"  >-</text>
-<text x="84" y="650" class="h bold"  >Where</text>
-<text x="156" y="650" class="h bold"  >Silence</text>
-<text x="252" y="650" class="h bold"  >Has</text>
-<text x="300" y="650" class="h bold"  >Lease.mkv</text>
-<text x="0" y="675" class="b"  >?</text>
-</g>
-<g transform="translate(99932)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Sample.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >├──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="96" y="75" class="a"  >├──</text>
-<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="125" class="a"  >└──</text>
-<text x="48" y="125" class="a"  >target</text>
-<text x="0" y="175" class="a"  >5</text>
-<text x="24" y="175" class="a"  >directories,</text>
-<text x="180" y="175" class="a"  >6</text>
-<text x="204" y="175" class="a"  >files</text>
-<text x="0" y="200" class="a"  >$</text>
-<text x="24" y="200" class="a"  >mediar</text>
-<text x="108" y="200" class="a"  >link</text>
-<text x="168" y="200" class="a"  >source/show</text>
-<text x="312" y="200" class="a"  >target/</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Search</text>
-<text x="108" y="225" class="a"  >for:</text>
-<text x="168" y="225" class="c"  >TV</text>
-<text x="204" y="225" class="c"  >Show</text>
-<text x="0" y="250" class="b"  >&gt;</text>
-<text x="24" y="250" class="a"  >TV</text>
-<text x="60" y="250" class="a"  >Show</text>
-<text x="120" y="250" class="a"  >Title:</text>
-<text x="204" y="250" class="c"  >Star</text>
-<text x="264" y="250" class="c"  >Trek</text>
-<text x="324" y="250" class="c"  >The</text>
-<text x="372" y="250" class="c"  >Next</text>
-<text x="432" y="250" class="c"  >Generation</text>
-<text x="0" y="275" class="b"  >&gt;</text>
-<text x="24" y="275" class="a"  >Select</text>
-<text x="108" y="275" class="a"  >a</text>
-<text x="132" y="275" class="a"  >TV</text>
-<text x="168" y="275" class="a"  >show:</text>
-<text x="240" y="275" class="c"  >Star</text>
-<text x="300" y="275" class="c"  >Trek:</text>
-<text x="372" y="275" class="c"  >The</text>
-<text x="420" y="275" class="c"  >Next</text>
-<text x="480" y="275" class="c"  >Generation</text>
-<text x="612" y="275" class="c"  >(1987)</text>
-<text x="696" y="275" class="c"  >-</text>
-<text x="720" y="275" class="c"  >ID:</text>
-<text x="768" y="275" class="c"  >655</text>
-<text x="816" y="275" class="c"  >-</text>
-<text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
+<text x="984" y="275" class="c"  >59.3</text>
 <text x="0" y="300" class="a"  >Selected:</text>
 <text x="120" y="300" class="d"  >Star</text>
 <text x="180" y="300" class="d"  >Trek:</text>
@@ -4366,7 +3761,7 @@
 <text x="120" y="675" class="a"  >with</text>
 <text x="180" y="675" class="a"  >operations?</text>
 </g>
-<g transform="translate(101136)">
+<g transform="translate(91504)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Sample.mkv</text>
@@ -4423,7 +3818,7 @@
 <text x="768" y="275" class="c"  >655</text>
 <text x="816" y="275" class="c"  >-</text>
 <text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
+<text x="984" y="275" class="c"  >59.3</text>
 <text x="0" y="300" class="a"  >Selected:</text>
 <text x="120" y="300" class="d"  >Star</text>
 <text x="180" y="300" class="d"  >Trek:</text>
@@ -4526,7 +3921,7 @@
 <text x="180" y="675" class="a"  >operations?</text>
 <text x="324" y="675" class="a"  >(Y/n)</text>
 </g>
-<g transform="translate(102340)">
+<g transform="translate(92708)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Sample.mkv</text>
@@ -4583,7 +3978,7 @@
 <text x="768" y="275" class="c"  >655</text>
 <text x="816" y="275" class="c"  >-</text>
 <text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
+<text x="984" y="275" class="c"  >59.3</text>
 <text x="0" y="300" class="a"  >Selected:</text>
 <text x="120" y="300" class="d"  >Star</text>
 <text x="180" y="300" class="d"  >Trek:</text>
@@ -4680,333 +4075,13 @@
 <text x="156" y="650" class="h bold"  >Silence</text>
 <text x="252" y="650" class="h bold"  >Has</text>
 <text x="300" y="650" class="h bold"  >Lease.mkv</text>
-<text x="0" y="675" class="b"  >?</text>
+<text x="0" y="675" class="b"  >&gt;</text>
 <text x="24" y="675" class="a"  >Proceed</text>
 <text x="120" y="675" class="a"  >with</text>
 <text x="180" y="675" class="a"  >operations?</text>
 <text x="324" y="675" class="a"  >(Y/n)</text>
 </g>
-<g transform="translate(103544)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Sample.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >├──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="96" y="75" class="a"  >├──</text>
-<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="125" class="a"  >└──</text>
-<text x="48" y="125" class="a"  >target</text>
-<text x="0" y="175" class="a"  >5</text>
-<text x="24" y="175" class="a"  >directories,</text>
-<text x="180" y="175" class="a"  >6</text>
-<text x="204" y="175" class="a"  >files</text>
-<text x="0" y="200" class="a"  >$</text>
-<text x="24" y="200" class="a"  >mediar</text>
-<text x="108" y="200" class="a"  >link</text>
-<text x="168" y="200" class="a"  >source/show</text>
-<text x="312" y="200" class="a"  >target/</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Search</text>
-<text x="108" y="225" class="a"  >for:</text>
-<text x="168" y="225" class="c"  >TV</text>
-<text x="204" y="225" class="c"  >Show</text>
-<text x="0" y="250" class="b"  >&gt;</text>
-<text x="24" y="250" class="a"  >TV</text>
-<text x="60" y="250" class="a"  >Show</text>
-<text x="120" y="250" class="a"  >Title:</text>
-<text x="204" y="250" class="c"  >Star</text>
-<text x="264" y="250" class="c"  >Trek</text>
-<text x="324" y="250" class="c"  >The</text>
-<text x="372" y="250" class="c"  >Next</text>
-<text x="432" y="250" class="c"  >Generation</text>
-<text x="0" y="275" class="b"  >&gt;</text>
-<text x="24" y="275" class="a"  >Select</text>
-<text x="108" y="275" class="a"  >a</text>
-<text x="132" y="275" class="a"  >TV</text>
-<text x="168" y="275" class="a"  >show:</text>
-<text x="240" y="275" class="c"  >Star</text>
-<text x="300" y="275" class="c"  >Trek:</text>
-<text x="372" y="275" class="c"  >The</text>
-<text x="420" y="275" class="c"  >Next</text>
-<text x="480" y="275" class="c"  >Generation</text>
-<text x="612" y="275" class="c"  >(1987)</text>
-<text x="696" y="275" class="c"  >-</text>
-<text x="720" y="275" class="c"  >ID:</text>
-<text x="768" y="275" class="c"  >655</text>
-<text x="816" y="275" class="c"  >-</text>
-<text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
-<text x="0" y="300" class="a"  >Selected:</text>
-<text x="120" y="300" class="d"  >Star</text>
-<text x="180" y="300" class="d"  >Trek:</text>
-<text x="252" y="300" class="d"  >The</text>
-<text x="300" y="300" class="d"  >Next</text>
-<text x="360" y="300" class="d"  >Generation</text>
-<text x="492" y="300" class="a"  >(ID:</text>
-<text x="552" y="300" class="a"  >655)</text>
-<text x="0" y="325" class="a"  >Skip</text>
-<text x="60" y="325" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="f bold"  >Failed</text>
-<text x="144" y="350" class="f bold"  >to</text>
-<text x="180" y="350" class="f bold"  >extract</text>
-<text x="276" y="350" class="f bold"  >season</text>
-<text x="360" y="350" class="f bold"  >number</text>
-<text x="0" y="375" class="a"  >Link</text>
-<text x="60" y="375" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="400" class="a bold"  >↪</text>
-<text x="60" y="400" class="h bold"  >target/Star</text>
-<text x="204" y="400" class="h bold"  >Trek</text>
-<text x="264" y="400" class="h bold"  >The</text>
-<text x="312" y="400" class="h bold"  >Next</text>
-<text x="372" y="400" class="h bold"  >Generation</text>
-<text x="504" y="400" class="h bold"  >(1987)/Season</text>
-<text x="672" y="400" class="h bold"  >01/Star</text>
-<text x="768" y="400" class="h bold"  >Trek</text>
-<text x="828" y="400" class="h bold"  >The</text>
-<text x="876" y="400" class="h bold"  >Next</text>
-<text x="936" y="400" class="h bold"  >Generation</text>
-<text x="1068" y="400" class="h bold"  >-</text>
-<text x="1092" y="400" class="h" >S01E01</text>
-<text x="60" y="425" class="h bold"  >-</text>
-<text x="84" y="425" class="h bold"  >Encounter</text>
-<text x="204" y="425" class="h bold"  >at</text>
-<text x="240" y="425" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="450" class="a"  >Link</text>
-<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="475" class="a bold"  >↪</text>
-<text x="60" y="475" class="h bold"  >target/Star</text>
-<text x="204" y="475" class="h bold"  >Trek</text>
-<text x="264" y="475" class="h bold"  >The</text>
-<text x="312" y="475" class="h bold"  >Next</text>
-<text x="372" y="475" class="h bold"  >Generation</text>
-<text x="504" y="475" class="h bold"  >(1987)/Season</text>
-<text x="672" y="475" class="h bold"  >01/Star</text>
-<text x="768" y="475" class="h bold"  >Trek</text>
-<text x="828" y="475" class="h bold"  >The</text>
-<text x="876" y="475" class="h bold"  >Next</text>
-<text x="936" y="475" class="h bold"  >Generation</text>
-<text x="1068" y="475" class="h bold"  >-</text>
-<text x="1092" y="475" class="h" >S01E02</text>
-<text x="60" y="500" class="h bold"  >-</text>
-<text x="84" y="500" class="h bold"  >The</text>
-<text x="132" y="500" class="h bold"  >Naked</text>
-<text x="204" y="500" class="h bold"  >Now.mkv</text>
-<text x="0" y="525" class="a"  >Link</text>
-<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="550" class="a bold"  >↪</text>
-<text x="60" y="550" class="h bold"  >target/Star</text>
-<text x="204" y="550" class="h bold"  >Trek</text>
-<text x="264" y="550" class="h bold"  >The</text>
-<text x="312" y="550" class="h bold"  >Next</text>
-<text x="372" y="550" class="h bold"  >Generation</text>
-<text x="504" y="550" class="h bold"  >(1987)/Season</text>
-<text x="672" y="550" class="h bold"  >02/Star</text>
-<text x="768" y="550" class="h bold"  >Trek</text>
-<text x="828" y="550" class="h bold"  >The</text>
-<text x="876" y="550" class="h bold"  >Next</text>
-<text x="936" y="550" class="h bold"  >Generation</text>
-<text x="1068" y="550" class="h bold"  >-</text>
-<text x="1092" y="550" class="h" >S02E01</text>
-<text x="60" y="575" class="h bold"  >-</text>
-<text x="84" y="575" class="h bold"  >The</text>
-<text x="132" y="575" class="h bold"  >Child.mkv</text>
-<text x="0" y="600" class="a"  >Link</text>
-<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="625" class="a bold"  >↪</text>
-<text x="60" y="625" class="h bold"  >target/Star</text>
-<text x="204" y="625" class="h bold"  >Trek</text>
-<text x="264" y="625" class="h bold"  >The</text>
-<text x="312" y="625" class="h bold"  >Next</text>
-<text x="372" y="625" class="h bold"  >Generation</text>
-<text x="504" y="625" class="h bold"  >(1987)/Season</text>
-<text x="672" y="625" class="h bold"  >02/Star</text>
-<text x="768" y="625" class="h bold"  >Trek</text>
-<text x="828" y="625" class="h bold"  >The</text>
-<text x="876" y="625" class="h bold"  >Next</text>
-<text x="936" y="625" class="h bold"  >Generation</text>
-<text x="1068" y="625" class="h bold"  >-</text>
-<text x="1092" y="625" class="h" >S02E02</text>
-<text x="60" y="650" class="h bold"  >-</text>
-<text x="84" y="650" class="h bold"  >Where</text>
-<text x="156" y="650" class="h bold"  >Silence</text>
-<text x="252" y="650" class="h bold"  >Has</text>
-<text x="300" y="650" class="h bold"  >Lease.mkv</text>
-<text x="0" y="675" class="b"  >?</text>
-<text x="24" y="675" class="a"  >Proceed</text>
-<text x="120" y="675" class="a"  >with</text>
-<text x="180" y="675" class="a"  >operations?</text>
-<text x="324" y="675" class="a"  >(Y/n)</text>
-</g>
-<g transform="translate(104748)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Sample.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >├──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="75" class="a"  >│  </text>
-<text x="96" y="75" class="a"  >├──</text>
-<text x="144" y="75" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="100" class="a"  >│  </text>
-<text x="96" y="100" class="a"  >└──</text>
-<text x="144" y="100" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="125" class="a"  >└──</text>
-<text x="48" y="125" class="a"  >target</text>
-<text x="0" y="175" class="a"  >5</text>
-<text x="24" y="175" class="a"  >directories,</text>
-<text x="180" y="175" class="a"  >6</text>
-<text x="204" y="175" class="a"  >files</text>
-<text x="0" y="200" class="a"  >$</text>
-<text x="24" y="200" class="a"  >mediar</text>
-<text x="108" y="200" class="a"  >link</text>
-<text x="168" y="200" class="a"  >source/show</text>
-<text x="312" y="200" class="a"  >target/</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Search</text>
-<text x="108" y="225" class="a"  >for:</text>
-<text x="168" y="225" class="c"  >TV</text>
-<text x="204" y="225" class="c"  >Show</text>
-<text x="0" y="250" class="b"  >&gt;</text>
-<text x="24" y="250" class="a"  >TV</text>
-<text x="60" y="250" class="a"  >Show</text>
-<text x="120" y="250" class="a"  >Title:</text>
-<text x="204" y="250" class="c"  >Star</text>
-<text x="264" y="250" class="c"  >Trek</text>
-<text x="324" y="250" class="c"  >The</text>
-<text x="372" y="250" class="c"  >Next</text>
-<text x="432" y="250" class="c"  >Generation</text>
-<text x="0" y="275" class="b"  >&gt;</text>
-<text x="24" y="275" class="a"  >Select</text>
-<text x="108" y="275" class="a"  >a</text>
-<text x="132" y="275" class="a"  >TV</text>
-<text x="168" y="275" class="a"  >show:</text>
-<text x="240" y="275" class="c"  >Star</text>
-<text x="300" y="275" class="c"  >Trek:</text>
-<text x="372" y="275" class="c"  >The</text>
-<text x="420" y="275" class="c"  >Next</text>
-<text x="480" y="275" class="c"  >Generation</text>
-<text x="612" y="275" class="c"  >(1987)</text>
-<text x="696" y="275" class="c"  >-</text>
-<text x="720" y="275" class="c"  >ID:</text>
-<text x="768" y="275" class="c"  >655</text>
-<text x="816" y="275" class="c"  >-</text>
-<text x="840" y="275" class="c"  >Popularity:</text>
-<text x="984" y="275" class="c"  >53.3</text>
-<text x="0" y="300" class="a"  >Selected:</text>
-<text x="120" y="300" class="d"  >Star</text>
-<text x="180" y="300" class="d"  >Trek:</text>
-<text x="252" y="300" class="d"  >The</text>
-<text x="300" y="300" class="d"  >Next</text>
-<text x="360" y="300" class="d"  >Generation</text>
-<text x="492" y="300" class="a"  >(ID:</text>
-<text x="552" y="300" class="a"  >655)</text>
-<text x="0" y="325" class="a"  >Skip</text>
-<text x="60" y="325" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="f bold"  >Failed</text>
-<text x="144" y="350" class="f bold"  >to</text>
-<text x="180" y="350" class="f bold"  >extract</text>
-<text x="276" y="350" class="f bold"  >season</text>
-<text x="360" y="350" class="f bold"  >number</text>
-<text x="0" y="375" class="a"  >Link</text>
-<text x="60" y="375" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="400" class="a bold"  >↪</text>
-<text x="60" y="400" class="h bold"  >target/Star</text>
-<text x="204" y="400" class="h bold"  >Trek</text>
-<text x="264" y="400" class="h bold"  >The</text>
-<text x="312" y="400" class="h bold"  >Next</text>
-<text x="372" y="400" class="h bold"  >Generation</text>
-<text x="504" y="400" class="h bold"  >(1987)/Season</text>
-<text x="672" y="400" class="h bold"  >01/Star</text>
-<text x="768" y="400" class="h bold"  >Trek</text>
-<text x="828" y="400" class="h bold"  >The</text>
-<text x="876" y="400" class="h bold"  >Next</text>
-<text x="936" y="400" class="h bold"  >Generation</text>
-<text x="1068" y="400" class="h bold"  >-</text>
-<text x="1092" y="400" class="h" >S01E01</text>
-<text x="60" y="425" class="h bold"  >-</text>
-<text x="84" y="425" class="h bold"  >Encounter</text>
-<text x="204" y="425" class="h bold"  >at</text>
-<text x="240" y="425" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="450" class="a"  >Link</text>
-<text x="60" y="450" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="475" class="a bold"  >↪</text>
-<text x="60" y="475" class="h bold"  >target/Star</text>
-<text x="204" y="475" class="h bold"  >Trek</text>
-<text x="264" y="475" class="h bold"  >The</text>
-<text x="312" y="475" class="h bold"  >Next</text>
-<text x="372" y="475" class="h bold"  >Generation</text>
-<text x="504" y="475" class="h bold"  >(1987)/Season</text>
-<text x="672" y="475" class="h bold"  >01/Star</text>
-<text x="768" y="475" class="h bold"  >Trek</text>
-<text x="828" y="475" class="h bold"  >The</text>
-<text x="876" y="475" class="h bold"  >Next</text>
-<text x="936" y="475" class="h bold"  >Generation</text>
-<text x="1068" y="475" class="h bold"  >-</text>
-<text x="1092" y="475" class="h" >S01E02</text>
-<text x="60" y="500" class="h bold"  >-</text>
-<text x="84" y="500" class="h bold"  >The</text>
-<text x="132" y="500" class="h bold"  >Naked</text>
-<text x="204" y="500" class="h bold"  >Now.mkv</text>
-<text x="0" y="525" class="a"  >Link</text>
-<text x="60" y="525" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="550" class="a bold"  >↪</text>
-<text x="60" y="550" class="h bold"  >target/Star</text>
-<text x="204" y="550" class="h bold"  >Trek</text>
-<text x="264" y="550" class="h bold"  >The</text>
-<text x="312" y="550" class="h bold"  >Next</text>
-<text x="372" y="550" class="h bold"  >Generation</text>
-<text x="504" y="550" class="h bold"  >(1987)/Season</text>
-<text x="672" y="550" class="h bold"  >02/Star</text>
-<text x="768" y="550" class="h bold"  >Trek</text>
-<text x="828" y="550" class="h bold"  >The</text>
-<text x="876" y="550" class="h bold"  >Next</text>
-<text x="936" y="550" class="h bold"  >Generation</text>
-<text x="1068" y="550" class="h bold"  >-</text>
-<text x="1092" y="550" class="h" >S02E01</text>
-<text x="60" y="575" class="h bold"  >-</text>
-<text x="84" y="575" class="h bold"  >The</text>
-<text x="132" y="575" class="h bold"  >Child.mkv</text>
-<text x="0" y="600" class="a"  >Link</text>
-<text x="60" y="600" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="625" class="a bold"  >↪</text>
-<text x="60" y="625" class="h bold"  >target/Star</text>
-<text x="204" y="625" class="h bold"  >Trek</text>
-<text x="264" y="625" class="h bold"  >The</text>
-<text x="312" y="625" class="h bold"  >Next</text>
-<text x="372" y="625" class="h bold"  >Generation</text>
-<text x="504" y="625" class="h bold"  >(1987)/Season</text>
-<text x="672" y="625" class="h bold"  >02/Star</text>
-<text x="768" y="625" class="h bold"  >Trek</text>
-<text x="828" y="625" class="h bold"  >The</text>
-<text x="876" y="625" class="h bold"  >Next</text>
-<text x="936" y="625" class="h bold"  >Generation</text>
-<text x="1068" y="625" class="h bold"  >-</text>
-<text x="1092" y="625" class="h" >S02E02</text>
-<text x="60" y="650" class="h bold"  >-</text>
-<text x="84" y="650" class="h bold"  >Where</text>
-<text x="156" y="650" class="h bold"  >Silence</text>
-<text x="252" y="650" class="h bold"  >Has</text>
-<text x="300" y="650" class="h bold"  >Lease.mkv</text>
-<text x="0" y="675" class="b"  >?</text>
-<text x="24" y="675" class="a"  >Proceed</text>
-<text x="120" y="675" class="a"  >with</text>
-<text x="180" y="675" class="a"  >operations?</text>
-<text x="324" y="675" class="a"  >(Y/n)</text>
-</g>
-<g transform="translate(105952)">
+<g transform="translate(93912)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
@@ -5060,7 +4135,7 @@
 <text x="768" y="250" class="c"  >655</text>
 <text x="816" y="250" class="c"  >-</text>
 <text x="840" y="250" class="c"  >Popularity:</text>
-<text x="984" y="250" class="c"  >53.3</text>
+<text x="984" y="250" class="c"  >59.3</text>
 <text x="0" y="275" class="a"  >Selected:</text>
 <text x="120" y="275" class="d"  >Star</text>
 <text x="180" y="275" class="d"  >Trek:</text>
@@ -5163,7 +4238,7 @@
 <text x="180" y="650" class="a"  >operations?</text>
 <text x="324" y="650" class="c"  >Yes</text>
 </g>
-<g transform="translate(107156)">
+<g transform="translate(95116)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -5214,7 +4289,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -5319,7 +4394,7 @@
 <text x="0" y="650" class="b bold"  >✓</text>
 <text x="24" y="650" class="a"  >Done.</text>
 </g>
-<g transform="translate(108360)">
+<g transform="translate(96320)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -5370,7 +4445,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -5475,7 +4550,7 @@
 <text x="0" y="650" class="b bold"  >✓</text>
 <text x="24" y="650" class="a"  >Done.</text>
 </g>
-<g transform="translate(109564)">
+<g transform="translate(97524)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -5526,164 +4601,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
-<text x="0" y="250" class="a"  >Selected:</text>
-<text x="120" y="250" class="d"  >Star</text>
-<text x="180" y="250" class="d"  >Trek:</text>
-<text x="252" y="250" class="d"  >The</text>
-<text x="300" y="250" class="d"  >Next</text>
-<text x="360" y="250" class="d"  >Generation</text>
-<text x="492" y="250" class="a"  >(ID:</text>
-<text x="552" y="250" class="a"  >655)</text>
-<text x="0" y="275" class="a"  >Skip</text>
-<text x="60" y="275" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="300" class="a bold"  >↪</text>
-<text x="60" y="300" class="f bold"  >Failed</text>
-<text x="144" y="300" class="f bold"  >to</text>
-<text x="180" y="300" class="f bold"  >extract</text>
-<text x="276" y="300" class="f bold"  >season</text>
-<text x="360" y="300" class="f bold"  >number</text>
-<text x="0" y="325" class="a"  >Link</text>
-<text x="60" y="325" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="350" class="a bold"  >↪</text>
-<text x="60" y="350" class="h bold"  >target/Star</text>
-<text x="204" y="350" class="h bold"  >Trek</text>
-<text x="264" y="350" class="h bold"  >The</text>
-<text x="312" y="350" class="h bold"  >Next</text>
-<text x="372" y="350" class="h bold"  >Generation</text>
-<text x="504" y="350" class="h bold"  >(1987)/Season</text>
-<text x="672" y="350" class="h bold"  >01/Star</text>
-<text x="768" y="350" class="h bold"  >Trek</text>
-<text x="828" y="350" class="h bold"  >The</text>
-<text x="876" y="350" class="h bold"  >Next</text>
-<text x="936" y="350" class="h bold"  >Generation</text>
-<text x="1068" y="350" class="h bold"  >-</text>
-<text x="1092" y="350" class="h" >S01E01</text>
-<text x="60" y="375" class="h bold"  >-</text>
-<text x="84" y="375" class="h bold"  >Encounter</text>
-<text x="204" y="375" class="h bold"  >at</text>
-<text x="240" y="375" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="400" class="a"  >Link</text>
-<text x="60" y="400" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="425" class="a bold"  >↪</text>
-<text x="60" y="425" class="h bold"  >target/Star</text>
-<text x="204" y="425" class="h bold"  >Trek</text>
-<text x="264" y="425" class="h bold"  >The</text>
-<text x="312" y="425" class="h bold"  >Next</text>
-<text x="372" y="425" class="h bold"  >Generation</text>
-<text x="504" y="425" class="h bold"  >(1987)/Season</text>
-<text x="672" y="425" class="h bold"  >01/Star</text>
-<text x="768" y="425" class="h bold"  >Trek</text>
-<text x="828" y="425" class="h bold"  >The</text>
-<text x="876" y="425" class="h bold"  >Next</text>
-<text x="936" y="425" class="h bold"  >Generation</text>
-<text x="1068" y="425" class="h bold"  >-</text>
-<text x="1092" y="425" class="h" >S01E02</text>
-<text x="60" y="450" class="h bold"  >-</text>
-<text x="84" y="450" class="h bold"  >The</text>
-<text x="132" y="450" class="h bold"  >Naked</text>
-<text x="204" y="450" class="h bold"  >Now.mkv</text>
-<text x="0" y="475" class="a"  >Link</text>
-<text x="60" y="475" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="500" class="a bold"  >↪</text>
-<text x="60" y="500" class="h bold"  >target/Star</text>
-<text x="204" y="500" class="h bold"  >Trek</text>
-<text x="264" y="500" class="h bold"  >The</text>
-<text x="312" y="500" class="h bold"  >Next</text>
-<text x="372" y="500" class="h bold"  >Generation</text>
-<text x="504" y="500" class="h bold"  >(1987)/Season</text>
-<text x="672" y="500" class="h bold"  >02/Star</text>
-<text x="768" y="500" class="h bold"  >Trek</text>
-<text x="828" y="500" class="h bold"  >The</text>
-<text x="876" y="500" class="h bold"  >Next</text>
-<text x="936" y="500" class="h bold"  >Generation</text>
-<text x="1068" y="500" class="h bold"  >-</text>
-<text x="1092" y="500" class="h" >S02E01</text>
-<text x="60" y="525" class="h bold"  >-</text>
-<text x="84" y="525" class="h bold"  >The</text>
-<text x="132" y="525" class="h bold"  >Child.mkv</text>
-<text x="0" y="550" class="a"  >Link</text>
-<text x="60" y="550" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="575" class="a bold"  >↪</text>
-<text x="60" y="575" class="h bold"  >target/Star</text>
-<text x="204" y="575" class="h bold"  >Trek</text>
-<text x="264" y="575" class="h bold"  >The</text>
-<text x="312" y="575" class="h bold"  >Next</text>
-<text x="372" y="575" class="h bold"  >Generation</text>
-<text x="504" y="575" class="h bold"  >(1987)/Season</text>
-<text x="672" y="575" class="h bold"  >02/Star</text>
-<text x="768" y="575" class="h bold"  >Trek</text>
-<text x="828" y="575" class="h bold"  >The</text>
-<text x="876" y="575" class="h bold"  >Next</text>
-<text x="936" y="575" class="h bold"  >Generation</text>
-<text x="1068" y="575" class="h bold"  >-</text>
-<text x="1092" y="575" class="h" >S02E02</text>
-<text x="60" y="600" class="h bold"  >-</text>
-<text x="84" y="600" class="h bold"  >Where</text>
-<text x="156" y="600" class="h bold"  >Silence</text>
-<text x="252" y="600" class="h bold"  >Has</text>
-<text x="300" y="600" class="h bold"  >Lease.mkv</text>
-<text x="0" y="625" class="b"  >&gt;</text>
-<text x="24" y="625" class="a"  >Proceed</text>
-<text x="120" y="625" class="a"  >with</text>
-<text x="180" y="625" class="a"  >operations?</text>
-<text x="324" y="625" class="c"  >Yes</text>
-<text x="0" y="650" class="b bold"  >✓</text>
-<text x="24" y="650" class="a"  >Done.</text>
-<text x="0" y="675" class="a"  >$</text>
-</g>
-<g transform="translate(110768)">
-<text x="0" y="0" class="a"  >│  </text>
-<text x="96" y="0" class="a"  >├──</text>
-<text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="0" y="25" class="a"  >│  </text>
-<text x="96" y="25" class="a"  >├──</text>
-<text x="144" y="25" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="0" y="50" class="a"  >│  </text>
-<text x="96" y="50" class="a"  >└──</text>
-<text x="144" y="50" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="0" y="75" class="a"  >└──</text>
-<text x="48" y="75" class="a"  >target</text>
-<text x="0" y="125" class="a"  >5</text>
-<text x="24" y="125" class="a"  >directories,</text>
-<text x="180" y="125" class="a"  >6</text>
-<text x="204" y="125" class="a"  >files</text>
-<text x="0" y="150" class="a"  >$</text>
-<text x="24" y="150" class="a"  >mediar</text>
-<text x="108" y="150" class="a"  >link</text>
-<text x="168" y="150" class="a"  >source/show</text>
-<text x="312" y="150" class="a"  >target/</text>
-<text x="0" y="175" class="b"  >&gt;</text>
-<text x="24" y="175" class="a"  >Search</text>
-<text x="108" y="175" class="a"  >for:</text>
-<text x="168" y="175" class="c"  >TV</text>
-<text x="204" y="175" class="c"  >Show</text>
-<text x="0" y="200" class="b"  >&gt;</text>
-<text x="24" y="200" class="a"  >TV</text>
-<text x="60" y="200" class="a"  >Show</text>
-<text x="120" y="200" class="a"  >Title:</text>
-<text x="204" y="200" class="c"  >Star</text>
-<text x="264" y="200" class="c"  >Trek</text>
-<text x="324" y="200" class="c"  >The</text>
-<text x="372" y="200" class="c"  >Next</text>
-<text x="432" y="200" class="c"  >Generation</text>
-<text x="0" y="225" class="b"  >&gt;</text>
-<text x="24" y="225" class="a"  >Select</text>
-<text x="108" y="225" class="a"  >a</text>
-<text x="132" y="225" class="a"  >TV</text>
-<text x="168" y="225" class="a"  >show:</text>
-<text x="240" y="225" class="c"  >Star</text>
-<text x="300" y="225" class="c"  >Trek:</text>
-<text x="372" y="225" class="c"  >The</text>
-<text x="420" y="225" class="c"  >Next</text>
-<text x="480" y="225" class="c"  >Generation</text>
-<text x="612" y="225" class="c"  >(1987)</text>
-<text x="696" y="225" class="c"  >-</text>
-<text x="720" y="225" class="c"  >ID:</text>
-<text x="768" y="225" class="c"  >655</text>
-<text x="816" y="225" class="c"  >-</text>
-<text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -5789,7 +4707,7 @@
 <text x="24" y="650" class="a"  >Done.</text>
 <text x="0" y="675" class="a"  >$</text>
 </g>
-<g transform="translate(111972)">
+<g transform="translate(98728)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -5840,7 +4758,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -5947,7 +4865,7 @@
 <text x="0" y="675" class="a"  >$</text>
 <text x="24" y="675" class="a"  >t</text>
 </g>
-<g transform="translate(113176)">
+<g transform="translate(99932)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -5998,7 +4916,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -6105,7 +5023,7 @@
 <text x="0" y="675" class="a"  >$</text>
 <text x="24" y="675" class="a"  >tr</text>
 </g>
-<g transform="translate(114380)">
+<g transform="translate(101136)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -6156,7 +5074,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -6263,7 +5181,7 @@
 <text x="0" y="675" class="a"  >$</text>
 <text x="24" y="675" class="a"  >tre</text>
 </g>
-<g transform="translate(115584)">
+<g transform="translate(102340)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
@@ -6314,7 +5232,7 @@
 <text x="768" y="225" class="c"  >655</text>
 <text x="816" y="225" class="c"  >-</text>
 <text x="840" y="225" class="c"  >Popularity:</text>
-<text x="984" y="225" class="c"  >53.3</text>
+<text x="984" y="225" class="c"  >59.3</text>
 <text x="0" y="250" class="a"  >Selected:</text>
 <text x="120" y="250" class="d"  >Star</text>
 <text x="180" y="250" class="d"  >Trek:</text>
@@ -6421,7 +5339,7 @@
 <text x="0" y="675" class="a"  >$</text>
 <text x="24" y="675" class="a"  >tree</text>
 </g>
-<g transform="translate(116788)">
+<g transform="translate(103544)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >├──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
@@ -6469,7 +5387,7 @@
 <text x="768" y="200" class="c"  >655</text>
 <text x="816" y="200" class="c"  >-</text>
 <text x="840" y="200" class="c"  >Popularity:</text>
-<text x="984" y="200" class="c"  >53.3</text>
+<text x="984" y="200" class="c"  >59.3</text>
 <text x="0" y="225" class="a"  >Selected:</text>
 <text x="120" y="225" class="d"  >Star</text>
 <text x="180" y="225" class="d"  >Trek:</text>
@@ -6576,7 +5494,7 @@
 <text x="0" y="650" class="a"  >$</text>
 <text x="24" y="650" class="a"  >tree</text>
 </g>
-<g transform="translate(117992)">
+<g transform="translate(104748)">
 <text x="0" y="0" class="a"  >│  </text>
 <text x="96" y="0" class="a"  >└──</text>
 <text x="144" y="0" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
@@ -6621,7 +5539,7 @@
 <text x="768" y="175" class="c"  >655</text>
 <text x="816" y="175" class="c"  >-</text>
 <text x="840" y="175" class="c"  >Popularity:</text>
-<text x="984" y="175" class="c"  >53.3</text>
+<text x="984" y="175" class="c"  >59.3</text>
 <text x="0" y="200" class="a"  >Selected:</text>
 <text x="120" y="200" class="d"  >Star</text>
 <text x="180" y="200" class="d"  >Trek:</text>
@@ -6729,7 +5647,7 @@
 <text x="24" y="625" class="a"  >tree</text>
 <text x="0" y="650" class="a"  >.</text>
 </g>
-<g transform="translate(119196)">
+<g transform="translate(105952)">
 <text x="0" y="0" class="a"  >└──</text>
 <text x="48" y="0" class="a"  >target</text>
 <text x="0" y="50" class="a"  >5</text>
@@ -6771,7 +5689,7 @@
 <text x="768" y="150" class="c"  >655</text>
 <text x="816" y="150" class="c"  >-</text>
 <text x="840" y="150" class="c"  >Popularity:</text>
-<text x="984" y="150" class="c"  >53.3</text>
+<text x="984" y="150" class="c"  >59.3</text>
 <text x="0" y="175" class="a"  >Selected:</text>
 <text x="120" y="175" class="d"  >Star</text>
 <text x="180" y="175" class="d"  >Trek:</text>
@@ -6881,7 +5799,7 @@
 <text x="0" y="650" class="a"  >├──</text>
 <text x="48" y="650" class="a"  >source</text>
 </g>
-<g transform="translate(120400)">
+<g transform="translate(107156)">
 <text x="0" y="0" class="a"  >5</text>
 <text x="24" y="0" class="a"  >directories,</text>
 <text x="180" y="0" class="a"  >6</text>
@@ -6921,7 +5839,7 @@
 <text x="768" y="100" class="c"  >655</text>
 <text x="816" y="100" class="c"  >-</text>
 <text x="840" y="100" class="c"  >Popularity:</text>
-<text x="984" y="100" class="c"  >53.3</text>
+<text x="984" y="100" class="c"  >59.3</text>
 <text x="0" y="125" class="a"  >Selected:</text>
 <text x="120" y="125" class="d"  >Star</text>
 <text x="180" y="125" class="d"  >Trek:</text>
@@ -7038,7 +5956,7 @@
 <text x="96" y="650" class="a"  >└──</text>
 <text x="144" y="650" class="a"  >Star.Trek.Generations.mkv</text>
 </g>
-<g transform="translate(121604)">
+<g transform="translate(108360)">
 <text x="0" y="0" class="a"  >$</text>
 <text x="24" y="0" class="a"  >mediar</text>
 <text x="108" y="0" class="a"  >link</text>
@@ -7074,7 +5992,7 @@
 <text x="768" y="75" class="c"  >655</text>
 <text x="816" y="75" class="c"  >-</text>
 <text x="840" y="75" class="c"  >Popularity:</text>
-<text x="984" y="75" class="c"  >53.3</text>
+<text x="984" y="75" class="c"  >59.3</text>
 <text x="0" y="100" class="a"  >Selected:</text>
 <text x="120" y="100" class="d"  >Star</text>
 <text x="180" y="100" class="d"  >Trek:</text>
@@ -7194,7 +6112,7 @@
 <text x="48" y="650" class="a"  >└──</text>
 <text x="96" y="650" class="a"  >show</text>
 </g>
-<g transform="translate(122808)">
+<g transform="translate(109564)">
 <text x="0" y="0" class="b"  >&gt;</text>
 <text x="24" y="0" class="a"  >TV</text>
 <text x="60" y="0" class="a"  >Show</text>
@@ -7220,7 +6138,7 @@
 <text x="768" y="25" class="c"  >655</text>
 <text x="816" y="25" class="c"  >-</text>
 <text x="840" y="25" class="c"  >Popularity:</text>
-<text x="984" y="25" class="c"  >53.3</text>
+<text x="984" y="25" class="c"  >59.3</text>
 <text x="0" y="50" class="a"  >Selected:</text>
 <text x="120" y="50" class="d"  >Star</text>
 <text x="180" y="50" class="d"  >Trek:</text>
@@ -7346,139 +6264,153 @@
 <text x="96" y="650" class="a"  >├──</text>
 <text x="144" y="650" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
 </g>
-<g transform="translate(124012)">
-<text x="0" y="0" class="a"  >Selected:</text>
-<text x="120" y="0" class="d"  >Star</text>
-<text x="180" y="0" class="d"  >Trek:</text>
-<text x="252" y="0" class="d"  >The</text>
-<text x="300" y="0" class="d"  >Next</text>
-<text x="360" y="0" class="d"  >Generation</text>
-<text x="492" y="0" class="a"  >(ID:</text>
-<text x="552" y="0" class="a"  >655)</text>
-<text x="0" y="25" class="a"  >Skip</text>
-<text x="60" y="25" class="e"  >source/show/Sample.mkv</text>
-<text x="24" y="50" class="a bold"  >↪</text>
-<text x="60" y="50" class="f bold"  >Failed</text>
-<text x="144" y="50" class="f bold"  >to</text>
-<text x="180" y="50" class="f bold"  >extract</text>
-<text x="276" y="50" class="f bold"  >season</text>
-<text x="360" y="50" class="f bold"  >number</text>
-<text x="0" y="75" class="a"  >Link</text>
-<text x="60" y="75" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
-<text x="24" y="100" class="a bold"  >↪</text>
-<text x="60" y="100" class="h bold"  >target/Star</text>
-<text x="204" y="100" class="h bold"  >Trek</text>
-<text x="264" y="100" class="h bold"  >The</text>
-<text x="312" y="100" class="h bold"  >Next</text>
-<text x="372" y="100" class="h bold"  >Generation</text>
-<text x="504" y="100" class="h bold"  >(1987)/Season</text>
-<text x="672" y="100" class="h bold"  >01/Star</text>
-<text x="768" y="100" class="h bold"  >Trek</text>
-<text x="828" y="100" class="h bold"  >The</text>
-<text x="876" y="100" class="h bold"  >Next</text>
-<text x="936" y="100" class="h bold"  >Generation</text>
-<text x="1068" y="100" class="h bold"  >-</text>
-<text x="1092" y="100" class="h" >S01E01</text>
-<text x="60" y="125" class="h bold"  >-</text>
-<text x="84" y="125" class="h bold"  >Encounter</text>
-<text x="204" y="125" class="h bold"  >at</text>
-<text x="240" y="125" class="h bold"  >Farpoint.mkv</text>
-<text x="0" y="150" class="a"  >Link</text>
-<text x="60" y="150" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
-<text x="24" y="175" class="a bold"  >↪</text>
-<text x="60" y="175" class="h bold"  >target/Star</text>
-<text x="204" y="175" class="h bold"  >Trek</text>
-<text x="264" y="175" class="h bold"  >The</text>
-<text x="312" y="175" class="h bold"  >Next</text>
-<text x="372" y="175" class="h bold"  >Generation</text>
-<text x="504" y="175" class="h bold"  >(1987)/Season</text>
-<text x="672" y="175" class="h bold"  >01/Star</text>
-<text x="768" y="175" class="h bold"  >Trek</text>
-<text x="828" y="175" class="h bold"  >The</text>
-<text x="876" y="175" class="h bold"  >Next</text>
-<text x="936" y="175" class="h bold"  >Generation</text>
-<text x="1068" y="175" class="h bold"  >-</text>
-<text x="1092" y="175" class="h" >S01E02</text>
-<text x="60" y="200" class="h bold"  >-</text>
-<text x="84" y="200" class="h bold"  >The</text>
-<text x="132" y="200" class="h bold"  >Naked</text>
-<text x="204" y="200" class="h bold"  >Now.mkv</text>
-<text x="0" y="225" class="a"  >Link</text>
-<text x="60" y="225" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
-<text x="24" y="250" class="a bold"  >↪</text>
-<text x="60" y="250" class="h bold"  >target/Star</text>
-<text x="204" y="250" class="h bold"  >Trek</text>
-<text x="264" y="250" class="h bold"  >The</text>
-<text x="312" y="250" class="h bold"  >Next</text>
-<text x="372" y="250" class="h bold"  >Generation</text>
-<text x="504" y="250" class="h bold"  >(1987)/Season</text>
-<text x="672" y="250" class="h bold"  >02/Star</text>
-<text x="768" y="250" class="h bold"  >Trek</text>
-<text x="828" y="250" class="h bold"  >The</text>
-<text x="876" y="250" class="h bold"  >Next</text>
-<text x="936" y="250" class="h bold"  >Generation</text>
-<text x="1068" y="250" class="h bold"  >-</text>
-<text x="1092" y="250" class="h" >S02E01</text>
-<text x="60" y="275" class="h bold"  >-</text>
-<text x="84" y="275" class="h bold"  >The</text>
-<text x="132" y="275" class="h bold"  >Child.mkv</text>
-<text x="0" y="300" class="a"  >Link</text>
-<text x="60" y="300" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
-<text x="24" y="325" class="a bold"  >↪</text>
-<text x="60" y="325" class="h bold"  >target/Star</text>
-<text x="204" y="325" class="h bold"  >Trek</text>
-<text x="264" y="325" class="h bold"  >The</text>
-<text x="312" y="325" class="h bold"  >Next</text>
-<text x="372" y="325" class="h bold"  >Generation</text>
-<text x="504" y="325" class="h bold"  >(1987)/Season</text>
-<text x="672" y="325" class="h bold"  >02/Star</text>
-<text x="768" y="325" class="h bold"  >Trek</text>
-<text x="828" y="325" class="h bold"  >The</text>
-<text x="876" y="325" class="h bold"  >Next</text>
-<text x="936" y="325" class="h bold"  >Generation</text>
-<text x="1068" y="325" class="h bold"  >-</text>
-<text x="1092" y="325" class="h" >S02E02</text>
-<text x="60" y="350" class="h bold"  >-</text>
-<text x="84" y="350" class="h bold"  >Where</text>
-<text x="156" y="350" class="h bold"  >Silence</text>
-<text x="252" y="350" class="h bold"  >Has</text>
-<text x="300" y="350" class="h bold"  >Lease.mkv</text>
-<text x="0" y="375" class="b"  >&gt;</text>
-<text x="24" y="375" class="a"  >Proceed</text>
-<text x="120" y="375" class="a"  >with</text>
-<text x="180" y="375" class="a"  >operations?</text>
-<text x="324" y="375" class="c"  >Yes</text>
-<text x="0" y="400" class="b bold"  >✓</text>
-<text x="24" y="400" class="a"  >Done.</text>
-<text x="0" y="425" class="a"  >$</text>
-<text x="24" y="425" class="a"  >tree</text>
-<text x="0" y="450" class="a"  >.</text>
-<text x="0" y="475" class="a"  >├──</text>
-<text x="48" y="475" class="a"  >source</text>
-<text x="0" y="500" class="a"  >│  </text>
-<text x="48" y="500" class="a"  >├──</text>
-<text x="96" y="500" class="a"  >movie</text>
+<g transform="translate(110768)">
+<text x="0" y="0" class="b"  >&gt;</text>
+<text x="24" y="0" class="a"  >Select</text>
+<text x="108" y="0" class="a"  >a</text>
+<text x="132" y="0" class="a"  >TV</text>
+<text x="168" y="0" class="a"  >show:</text>
+<text x="240" y="0" class="c"  >Star</text>
+<text x="300" y="0" class="c"  >Trek:</text>
+<text x="372" y="0" class="c"  >The</text>
+<text x="420" y="0" class="c"  >Next</text>
+<text x="480" y="0" class="c"  >Generation</text>
+<text x="612" y="0" class="c"  >(1987)</text>
+<text x="696" y="0" class="c"  >-</text>
+<text x="720" y="0" class="c"  >ID:</text>
+<text x="768" y="0" class="c"  >655</text>
+<text x="816" y="0" class="c"  >-</text>
+<text x="840" y="0" class="c"  >Popularity:</text>
+<text x="984" y="0" class="c"  >59.3</text>
+<text x="0" y="25" class="a"  >Selected:</text>
+<text x="120" y="25" class="d"  >Star</text>
+<text x="180" y="25" class="d"  >Trek:</text>
+<text x="252" y="25" class="d"  >The</text>
+<text x="300" y="25" class="d"  >Next</text>
+<text x="360" y="25" class="d"  >Generation</text>
+<text x="492" y="25" class="a"  >(ID:</text>
+<text x="552" y="25" class="a"  >655)</text>
+<text x="0" y="50" class="a"  >Skip</text>
+<text x="60" y="50" class="e"  >source/show/Sample.mkv</text>
+<text x="24" y="75" class="a bold"  >↪</text>
+<text x="60" y="75" class="f bold"  >Failed</text>
+<text x="144" y="75" class="f bold"  >to</text>
+<text x="180" y="75" class="f bold"  >extract</text>
+<text x="276" y="75" class="f bold"  >season</text>
+<text x="360" y="75" class="f bold"  >number</text>
+<text x="0" y="100" class="a"  >Link</text>
+<text x="60" y="100" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="24" y="125" class="a bold"  >↪</text>
+<text x="60" y="125" class="h bold"  >target/Star</text>
+<text x="204" y="125" class="h bold"  >Trek</text>
+<text x="264" y="125" class="h bold"  >The</text>
+<text x="312" y="125" class="h bold"  >Next</text>
+<text x="372" y="125" class="h bold"  >Generation</text>
+<text x="504" y="125" class="h bold"  >(1987)/Season</text>
+<text x="672" y="125" class="h bold"  >01/Star</text>
+<text x="768" y="125" class="h bold"  >Trek</text>
+<text x="828" y="125" class="h bold"  >The</text>
+<text x="876" y="125" class="h bold"  >Next</text>
+<text x="936" y="125" class="h bold"  >Generation</text>
+<text x="1068" y="125" class="h bold"  >-</text>
+<text x="1092" y="125" class="h" >S01E01</text>
+<text x="60" y="150" class="h bold"  >-</text>
+<text x="84" y="150" class="h bold"  >Encounter</text>
+<text x="204" y="150" class="h bold"  >at</text>
+<text x="240" y="150" class="h bold"  >Farpoint.mkv</text>
+<text x="0" y="175" class="a"  >Link</text>
+<text x="60" y="175" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="24" y="200" class="a bold"  >↪</text>
+<text x="60" y="200" class="h bold"  >target/Star</text>
+<text x="204" y="200" class="h bold"  >Trek</text>
+<text x="264" y="200" class="h bold"  >The</text>
+<text x="312" y="200" class="h bold"  >Next</text>
+<text x="372" y="200" class="h bold"  >Generation</text>
+<text x="504" y="200" class="h bold"  >(1987)/Season</text>
+<text x="672" y="200" class="h bold"  >01/Star</text>
+<text x="768" y="200" class="h bold"  >Trek</text>
+<text x="828" y="200" class="h bold"  >The</text>
+<text x="876" y="200" class="h bold"  >Next</text>
+<text x="936" y="200" class="h bold"  >Generation</text>
+<text x="1068" y="200" class="h bold"  >-</text>
+<text x="1092" y="200" class="h" >S01E02</text>
+<text x="60" y="225" class="h bold"  >-</text>
+<text x="84" y="225" class="h bold"  >The</text>
+<text x="132" y="225" class="h bold"  >Naked</text>
+<text x="204" y="225" class="h bold"  >Now.mkv</text>
+<text x="0" y="250" class="a"  >Link</text>
+<text x="60" y="250" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="24" y="275" class="a bold"  >↪</text>
+<text x="60" y="275" class="h bold"  >target/Star</text>
+<text x="204" y="275" class="h bold"  >Trek</text>
+<text x="264" y="275" class="h bold"  >The</text>
+<text x="312" y="275" class="h bold"  >Next</text>
+<text x="372" y="275" class="h bold"  >Generation</text>
+<text x="504" y="275" class="h bold"  >(1987)/Season</text>
+<text x="672" y="275" class="h bold"  >02/Star</text>
+<text x="768" y="275" class="h bold"  >Trek</text>
+<text x="828" y="275" class="h bold"  >The</text>
+<text x="876" y="275" class="h bold"  >Next</text>
+<text x="936" y="275" class="h bold"  >Generation</text>
+<text x="1068" y="275" class="h bold"  >-</text>
+<text x="1092" y="275" class="h" >S02E01</text>
+<text x="60" y="300" class="h bold"  >-</text>
+<text x="84" y="300" class="h bold"  >The</text>
+<text x="132" y="300" class="h bold"  >Child.mkv</text>
+<text x="0" y="325" class="a"  >Link</text>
+<text x="60" y="325" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="24" y="350" class="a bold"  >↪</text>
+<text x="60" y="350" class="h bold"  >target/Star</text>
+<text x="204" y="350" class="h bold"  >Trek</text>
+<text x="264" y="350" class="h bold"  >The</text>
+<text x="312" y="350" class="h bold"  >Next</text>
+<text x="372" y="350" class="h bold"  >Generation</text>
+<text x="504" y="350" class="h bold"  >(1987)/Season</text>
+<text x="672" y="350" class="h bold"  >02/Star</text>
+<text x="768" y="350" class="h bold"  >Trek</text>
+<text x="828" y="350" class="h bold"  >The</text>
+<text x="876" y="350" class="h bold"  >Next</text>
+<text x="936" y="350" class="h bold"  >Generation</text>
+<text x="1068" y="350" class="h bold"  >-</text>
+<text x="1092" y="350" class="h" >S02E02</text>
+<text x="60" y="375" class="h bold"  >-</text>
+<text x="84" y="375" class="h bold"  >Where</text>
+<text x="156" y="375" class="h bold"  >Silence</text>
+<text x="252" y="375" class="h bold"  >Has</text>
+<text x="300" y="375" class="h bold"  >Lease.mkv</text>
+<text x="0" y="400" class="b"  >&gt;</text>
+<text x="24" y="400" class="a"  >Proceed</text>
+<text x="120" y="400" class="a"  >with</text>
+<text x="180" y="400" class="a"  >operations?</text>
+<text x="324" y="400" class="c"  >Yes</text>
+<text x="0" y="425" class="b bold"  >✓</text>
+<text x="24" y="425" class="a"  >Done.</text>
+<text x="0" y="450" class="a"  >$</text>
+<text x="24" y="450" class="a"  >tree</text>
+<text x="0" y="475" class="a"  >.</text>
+<text x="0" y="500" class="a"  >├──</text>
+<text x="48" y="500" class="a"  >source</text>
 <text x="0" y="525" class="a"  >│  </text>
-<text x="48" y="525" class="a"  >│  </text>
-<text x="96" y="525" class="a"  >└──</text>
-<text x="144" y="525" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="48" y="525" class="a"  >├──</text>
+<text x="96" y="525" class="a"  >movie</text>
 <text x="0" y="550" class="a"  >│  </text>
-<text x="48" y="550" class="a"  >└──</text>
-<text x="96" y="550" class="a"  >show</text>
+<text x="48" y="550" class="a"  >│  </text>
+<text x="96" y="550" class="a"  >└──</text>
+<text x="144" y="550" class="a"  >Star.Trek.Generations.mkv</text>
 <text x="0" y="575" class="a"  >│  </text>
-<text x="96" y="575" class="a"  >├──</text>
-<text x="144" y="575" class="a"  >Sample.mkv</text>
+<text x="48" y="575" class="a"  >└──</text>
+<text x="96" y="575" class="a"  >show</text>
 <text x="0" y="600" class="a"  >│  </text>
 <text x="96" y="600" class="a"  >├──</text>
-<text x="144" y="600" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="144" y="600" class="a"  >Sample.mkv</text>
 <text x="0" y="625" class="a"  >│  </text>
 <text x="96" y="625" class="a"  >├──</text>
-<text x="144" y="625" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="144" y="625" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
 <text x="0" y="650" class="a"  >│  </text>
 <text x="96" y="650" class="a"  >├──</text>
-<text x="144" y="650" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="144" y="650" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
 </g>
-<g transform="translate(125216)">
+<g transform="translate(111972)">
 <text x="0" y="0" class="a"  >Skip</text>
 <text x="60" y="0" class="e"  >source/show/Sample.mkv</text>
 <text x="24" y="25" class="a bold"  >↪</text>
@@ -7605,7 +6537,7 @@
 <text x="96" y="650" class="a"  >└──</text>
 <text x="144" y="650" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
 </g>
-<g transform="translate(126420)">
+<g transform="translate(113176)">
 <text x="24" y="0" class="a bold"  >↪</text>
 <text x="60" y="0" class="f bold"  >Failed</text>
 <text x="144" y="0" class="f bold"  >to</text>
@@ -7732,7 +6664,7 @@
 <text x="0" y="650" class="a"  >└──</text>
 <text x="48" y="650" class="a"  >target</text>
 </g>
-<g transform="translate(127624)">
+<g transform="translate(114380)">
 <text x="0" y="0" class="a"  >Link</text>
 <text x="60" y="0" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E01.mkv</text>
 <text x="24" y="25" class="a bold"  >↪</text>
@@ -7860,7 +6792,7 @@
 <text x="324" y="650" class="a"  >Generation</text>
 <text x="456" y="650" class="a"  >(1987)</text>
 </g>
-<g transform="translate(128828)">
+<g transform="translate(115584)">
 <text x="24" y="0" class="a bold"  >↪</text>
 <text x="60" y="0" class="h bold"  >target/Star</text>
 <text x="204" y="0" class="h bold"  >Trek</text>
@@ -7989,7 +6921,7 @@
 <text x="144" y="650" class="a"  >Season</text>
 <text x="228" y="650" class="a"  >01</text>
 </g>
-<g transform="translate(130032)">
+<g transform="translate(116788)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >Encounter</text>
 <text x="204" y="0" class="h bold"  >at</text>
@@ -8117,7 +7049,7 @@
 <text x="804" y="650" class="a"  >at</text>
 <text x="840" y="650" class="a"  >Farpoint.mkv</text>
 </g>
-<g transform="translate(131236)">
+<g transform="translate(117992)">
 <text x="0" y="0" class="a"  >Link</text>
 <text x="60" y="0" class="g"  >source/show/Star.Trek.The.Next.Generation.S01E02.mkv</text>
 <text x="24" y="25" class="a bold"  >↪</text>
@@ -8254,7 +7186,7 @@
 <text x="732" y="650" class="a"  >Naked</text>
 <text x="804" y="650" class="a"  >Now.mkv</text>
 </g>
-<g transform="translate(132440)">
+<g transform="translate(119196)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >The</text>
 <text x="132" y="0" class="h bold"  >Naked</text>
@@ -8389,7 +7321,7 @@
 <text x="684" y="650" class="a"  >The</text>
 <text x="732" y="650" class="a"  >Child.mkv</text>
 </g>
-<g transform="translate(133644)">
+<g transform="translate(120400)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >The</text>
 <text x="132" y="0" class="h bold"  >Child.mkv</text>
@@ -8521,7 +7453,7 @@
 <text x="180" y="650" class="a"  >10</text>
 <text x="216" y="650" class="a"  >files</text>
 </g>
-<g transform="translate(134848)">
+<g transform="translate(121604)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >The</text>
 <text x="132" y="0" class="h bold"  >Child.mkv</text>
@@ -8653,7 +7585,7 @@
 <text x="180" y="650" class="a"  >10</text>
 <text x="216" y="650" class="a"  >files</text>
 </g>
-<g transform="translate(136052)">
+<g transform="translate(122808)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >The</text>
 <text x="132" y="0" class="h bold"  >Child.mkv</text>
@@ -8786,7 +7718,140 @@
 <text x="216" y="650" class="a"  >files</text>
 <text x="0" y="675" class="a"  >$</text>
 </g>
-<g transform="translate(137256)">
+<g transform="translate(124012)">
+<text x="60" y="0" class="h bold"  >-</text>
+<text x="84" y="0" class="h bold"  >The</text>
+<text x="132" y="0" class="h bold"  >Child.mkv</text>
+<text x="0" y="25" class="a"  >Link</text>
+<text x="60" y="25" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="24" y="50" class="a bold"  >↪</text>
+<text x="60" y="50" class="h bold"  >target/Star</text>
+<text x="204" y="50" class="h bold"  >Trek</text>
+<text x="264" y="50" class="h bold"  >The</text>
+<text x="312" y="50" class="h bold"  >Next</text>
+<text x="372" y="50" class="h bold"  >Generation</text>
+<text x="504" y="50" class="h bold"  >(1987)/Season</text>
+<text x="672" y="50" class="h bold"  >02/Star</text>
+<text x="768" y="50" class="h bold"  >Trek</text>
+<text x="828" y="50" class="h bold"  >The</text>
+<text x="876" y="50" class="h bold"  >Next</text>
+<text x="936" y="50" class="h bold"  >Generation</text>
+<text x="1068" y="50" class="h bold"  >-</text>
+<text x="1092" y="50" class="h" >S02E02</text>
+<text x="60" y="75" class="h bold"  >-</text>
+<text x="84" y="75" class="h bold"  >Where</text>
+<text x="156" y="75" class="h bold"  >Silence</text>
+<text x="252" y="75" class="h bold"  >Has</text>
+<text x="300" y="75" class="h bold"  >Lease.mkv</text>
+<text x="0" y="100" class="b"  >&gt;</text>
+<text x="24" y="100" class="a"  >Proceed</text>
+<text x="120" y="100" class="a"  >with</text>
+<text x="180" y="100" class="a"  >operations?</text>
+<text x="324" y="100" class="c"  >Yes</text>
+<text x="0" y="125" class="b bold"  >✓</text>
+<text x="24" y="125" class="a"  >Done.</text>
+<text x="0" y="150" class="a"  >$</text>
+<text x="24" y="150" class="a"  >tree</text>
+<text x="0" y="175" class="a"  >.</text>
+<text x="0" y="200" class="a"  >├──</text>
+<text x="48" y="200" class="a"  >source</text>
+<text x="0" y="225" class="a"  >│  </text>
+<text x="48" y="225" class="a"  >├──</text>
+<text x="96" y="225" class="a"  >movie</text>
+<text x="0" y="250" class="a"  >│  </text>
+<text x="48" y="250" class="a"  >│  </text>
+<text x="96" y="250" class="a"  >└──</text>
+<text x="144" y="250" class="a"  >Star.Trek.Generations.mkv</text>
+<text x="0" y="275" class="a"  >│  </text>
+<text x="48" y="275" class="a"  >└──</text>
+<text x="96" y="275" class="a"  >show</text>
+<text x="0" y="300" class="a"  >│  </text>
+<text x="96" y="300" class="a"  >├──</text>
+<text x="144" y="300" class="a"  >Sample.mkv</text>
+<text x="0" y="325" class="a"  >│  </text>
+<text x="96" y="325" class="a"  >├──</text>
+<text x="144" y="325" class="a"  >Star.Trek.The.Next.Generation.S01E01.mkv</text>
+<text x="0" y="350" class="a"  >│  </text>
+<text x="96" y="350" class="a"  >├──</text>
+<text x="144" y="350" class="a"  >Star.Trek.The.Next.Generation.S01E02.mkv</text>
+<text x="0" y="375" class="a"  >│  </text>
+<text x="96" y="375" class="a"  >├──</text>
+<text x="144" y="375" class="a"  >Star.Trek.The.Next.Generation.S02E01.mkv</text>
+<text x="0" y="400" class="a"  >│  </text>
+<text x="96" y="400" class="a"  >└──</text>
+<text x="144" y="400" class="a"  >Star.Trek.The.Next.Generation.S02E02.mkv</text>
+<text x="0" y="425" class="a"  >└──</text>
+<text x="48" y="425" class="a"  >target</text>
+<text x="48" y="450" class="a"  >└──</text>
+<text x="96" y="450" class="a"  >Star</text>
+<text x="156" y="450" class="a"  >Trek</text>
+<text x="216" y="450" class="a"  >The</text>
+<text x="264" y="450" class="a"  >Next</text>
+<text x="324" y="450" class="a"  >Generation</text>
+<text x="456" y="450" class="a"  >(1987)</text>
+<text x="96" y="475" class="a"  >├──</text>
+<text x="144" y="475" class="a"  >Season</text>
+<text x="228" y="475" class="a"  >01</text>
+<text x="96" y="500" class="a"  >│  </text>
+<text x="144" y="500" class="a"  >├──</text>
+<text x="192" y="500" class="a"  >Star</text>
+<text x="252" y="500" class="a"  >Trek</text>
+<text x="312" y="500" class="a"  >The</text>
+<text x="360" y="500" class="a"  >Next</text>
+<text x="420" y="500" class="a"  >Generation</text>
+<text x="552" y="500" class="a"  >-</text>
+<text x="576" y="500" class="a"  >S01E01</text>
+<text x="660" y="500" class="a"  >-</text>
+<text x="684" y="500" class="a"  >Encounter</text>
+<text x="804" y="500" class="a"  >at</text>
+<text x="840" y="500" class="a"  >Farpoint.mkv</text>
+<text x="96" y="525" class="a"  >│  </text>
+<text x="144" y="525" class="a"  >└──</text>
+<text x="192" y="525" class="a"  >Star</text>
+<text x="252" y="525" class="a"  >Trek</text>
+<text x="312" y="525" class="a"  >The</text>
+<text x="360" y="525" class="a"  >Next</text>
+<text x="420" y="525" class="a"  >Generation</text>
+<text x="552" y="525" class="a"  >-</text>
+<text x="576" y="525" class="a"  >S01E02</text>
+<text x="660" y="525" class="a"  >-</text>
+<text x="684" y="525" class="a"  >The</text>
+<text x="732" y="525" class="a"  >Naked</text>
+<text x="804" y="525" class="a"  >Now.mkv</text>
+<text x="96" y="550" class="a"  >└──</text>
+<text x="144" y="550" class="a"  >Season</text>
+<text x="228" y="550" class="a"  >02</text>
+<text x="144" y="575" class="a"  >├──</text>
+<text x="192" y="575" class="a"  >Star</text>
+<text x="252" y="575" class="a"  >Trek</text>
+<text x="312" y="575" class="a"  >The</text>
+<text x="360" y="575" class="a"  >Next</text>
+<text x="420" y="575" class="a"  >Generation</text>
+<text x="552" y="575" class="a"  >-</text>
+<text x="576" y="575" class="a"  >S02E01</text>
+<text x="660" y="575" class="a"  >-</text>
+<text x="684" y="575" class="a"  >The</text>
+<text x="732" y="575" class="a"  >Child.mkv</text>
+<text x="144" y="600" class="a"  >└──</text>
+<text x="192" y="600" class="a"  >Star</text>
+<text x="252" y="600" class="a"  >Trek</text>
+<text x="312" y="600" class="a"  >The</text>
+<text x="360" y="600" class="a"  >Next</text>
+<text x="420" y="600" class="a"  >Generation</text>
+<text x="552" y="600" class="a"  >-</text>
+<text x="576" y="600" class="a"  >S02E02</text>
+<text x="660" y="600" class="a"  >-</text>
+<text x="684" y="600" class="a"  >Where</text>
+<text x="756" y="600" class="a"  >Silence</text>
+<text x="852" y="600" class="a"  >Has</text>
+<text x="900" y="600" class="a"  >Lease.mkv</text>
+<text x="0" y="650" class="a"  >8</text>
+<text x="24" y="650" class="a"  >directories,</text>
+<text x="180" y="650" class="a"  >10</text>
+<text x="216" y="650" class="a"  >files</text>
+<text x="0" y="675" class="a"  >$</text>
+</g>
+<g transform="translate(125216)">
 <text x="0" y="0" class="a"  >Link</text>
 <text x="60" y="0" class="g"  >source/show/Star.Trek.The.Next.Generation.S02E02.mkv</text>
 <text x="24" y="25" class="a bold"  >↪</text>
@@ -8916,7 +7981,7 @@
 <text x="216" y="625" class="a"  >files</text>
 <text x="0" y="650" class="a"  >$</text>
 </g>
-<g transform="translate(138460)">
+<g transform="translate(126420)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >Where</text>
 <text x="156" y="0" class="h bold"  >Silence</text>
@@ -9033,7 +8098,7 @@
 <text x="60" y="625" class="a"  >locking</text>
 <text x="156" y="625" class="a"  >failed</text>
 <text x="240" y="625" class="a"  >for</text>
-<text x="288" y="625" class="a" >/var/folders/x_/lz1805t51mng3xhc06r650580000gn/T/tmpc6izab0w/.zsh_history</text>
+<text x="288" y="625" class="a" >/var/folders/x_/lz1805t51mng3xhc06r650580000gn/T/tmpey020r_l/.zsh_history</text>
 <text x="0" y="650" class="a"  >:</text>
 <text x="24" y="650" class="a"  >no</text>
 <text x="60" y="650" class="a"  >such</text>
@@ -9041,7 +8106,7 @@
 <text x="180" y="650" class="a"  >or</text>
 <text x="216" y="650" class="a"  >directory</text>
 </g>
-<g transform="translate(139664)">
+<g transform="translate(127624)">
 <text x="60" y="0" class="h bold"  >-</text>
 <text x="84" y="0" class="h bold"  >Where</text>
 <text x="156" y="0" class="h bold"  >Silence</text>
@@ -9158,7 +8223,7 @@
 <text x="60" y="625" class="a"  >locking</text>
 <text x="156" y="625" class="a"  >failed</text>
 <text x="240" y="625" class="a"  >for</text>
-<text x="288" y="625" class="a" >/var/folders/x_/lz1805t51mng3xhc06r650580000gn/T/tmpc6izab0w/.zsh_history</text>
+<text x="288" y="625" class="a" >/var/folders/x_/lz1805t51mng3xhc06r650580000gn/T/tmpey020r_l/.zsh_history</text>
 <text x="0" y="650" class="a"  >:</text>
 <text x="24" y="650" class="a"  >no</text>
 <text x="60" y="650" class="a"  >such</text>
