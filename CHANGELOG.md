@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8](https://github.com/shadanan/mediar/compare/v0.1.7...v0.1.8) - 2026-01-06
+
+### Other
+
+- Update to latest codeanim and fix terminal colors ([#40](https://github.com/shadanan/mediar/pull/40))
+
 ## [0.1.7](https://github.com/shadanan/mediar/compare/v0.1.6...v0.1.7) - 2026-01-05
 
 ### Other
