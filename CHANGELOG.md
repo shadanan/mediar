@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.10](https://github.com/shadanan/mediar/compare/v0.1.9...v0.1.10) - 2026-01-16
+
+### Fixed
+
+- add missing environment name ([#45](https://github.com/shadanan/mediar/pull/45))
+- release with koso labs releaser ([#44](https://github.com/shadanan/mediar/pull/44))
+
 ## [0.1.9](https://github.com/shadanan/mediar/compare/v0.1.8...v0.1.9) - 2026-01-12
 
 ### Other
