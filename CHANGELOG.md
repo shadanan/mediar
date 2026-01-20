@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.11](https://github.com/shadanan/mediar/compare/v0.1.10...v0.1.11) - 2026-01-20
+
+### Other
+
+- configure renovate to auto merge ([#52](https://github.com/shadanan/mediar/pull/52))
+- configure renovate to group updates ([#51](https://github.com/shadanan/mediar/pull/51))
+- *(deps)* update rust crate colored to v3.1.1 ([#49](https://github.com/shadanan/mediar/pull/49))
+- *(deps)* update rust crate inquire to v0.9.2 ([#48](https://github.com/shadanan/mediar/pull/48))
+- *(deps)* update release-plz/action action to v0.5.121 ([#47](https://github.com/shadanan/mediar/pull/47))
+
 ## [0.1.10](https://github.com/shadanan/mediar/compare/v0.1.9...v0.1.10) - 2026-01-16
 
 ### Fixed
