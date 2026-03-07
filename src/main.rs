@@ -747,7 +747,6 @@ mod tests {
                     season_number: 1,
                     name: "Season 1".to_string(),
                     overview: "First season".to_string(),
-                    air_date: "2008-01-20".to_string(),
                     episodes: vec![
                         TvSeasonEpisode {
                             id: 101,
@@ -755,7 +754,6 @@ mod tests {
                             episode_number: 1,
                             name: "One".to_string(),
                             overview: "Pilot".to_string(),
-                            air_date: "2008-01-20".to_string(),
                         },
                         TvSeasonEpisode {
                             id: 102,
@@ -763,7 +761,6 @@ mod tests {
                             episode_number: 2,
                             name: "Two".to_string(),
                             overview: "Second episode".to_string(),
-                            air_date: "2008-01-27".to_string(),
                         },
                     ],
                 },
@@ -772,7 +769,6 @@ mod tests {
                     season_number: 2,
                     name: "Season 2".to_string(),
                     overview: "Second season".to_string(),
-                    air_date: "2009-03-08".to_string(),
                     episodes: vec![
                         TvSeasonEpisode {
                             id: 201,
@@ -780,7 +776,6 @@ mod tests {
                             episode_number: 1,
                             name: "Three".to_string(),
                             overview: "Season 2 premiere".to_string(),
-                            air_date: "2009-03-08".to_string(),
                         },
                         TvSeasonEpisode {
                             id: 202,
@@ -788,7 +783,6 @@ mod tests {
                             episode_number: 2,
                             name: "Four".to_string(),
                             overview: "Fourth episode".to_string(),
-                            air_date: "2009-03-08".to_string(),
                         },
                     ],
                 },
