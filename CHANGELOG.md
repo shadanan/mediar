@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0](https://github.com/shadanan/mediar/compare/v0.1.17...v0.2.0) - 2026-04-02
+
+### Added
+
+- add support for interactive config ([#71](https://github.com/shadanan/mediar/pull/71))
+- [**breaking**] add support for glob patterns ([#70](https://github.com/shadanan/mediar/pull/70))
+- add support for configured target shows and movies ([#68](https://github.com/shadanan/mediar/pull/68))
+
 ## [0.1.17](https://github.com/shadanan/mediar/compare/v0.1.16...v0.1.17) - 2026-04-02
 
 ### Fixed
