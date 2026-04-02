@@ -128,10 +128,10 @@ pub struct TmdbClient {
 }
 
 impl TmdbClient {
-    pub fn new() -> Result<Self> {
+    pub fn new(token: String) -> Result<Self> {
         Ok(Self {
             client: reqwest::Client::new(),
-            token: std::env::var("TMDB_API_TOKEN")?,
+            token,
         })
     }
 
