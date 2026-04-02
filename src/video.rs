@@ -99,7 +99,7 @@ pub fn parse_extension(path: &Path) -> Option<String> {
 pub fn parse_episode_id(path: &Path) -> Result<String> {
     let path_str = path.to_string_lossy();
 
-    let season_regex = Regex::new(r"[Ss](?:eason)?[._\-\s]*(\d+)")?;
+    let season_regex = Regex::new(r"(?:^|[^[:alpha:]])[Ss](?:eason)?[._\-\s]*(\d+)")?;
     let season_match = season_regex
         .captures_iter(&path_str)
         .last()
@@ -314,6 +314,12 @@ mod tests {
     fn test_parse_episode_id_period_separated() {
         let result = parse_episode_id(Path::new("show.S02.E15.avi"));
         assert_eq!(result.unwrap(), "S02E15");
+    }
+
+    #[test]
+    fn test_parse_episode_id_title_and_resolution_ambiguity() {
+        let result = parse_episode_id(Path::new("Show.S03E05.Titles.1080p.mkv"));
+        assert_eq!(result.unwrap(), "S03E05");
     }
 
     #[test]
