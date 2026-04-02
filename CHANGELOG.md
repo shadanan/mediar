@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0](https://github.com/shadanan/mediar/compare/v0.1.17...v0.2.0) - 2026-04-02
+## [1.0.0](https://github.com/shadanan/mediar/compare/v0.1.17...v1.0.0) - 2026-04-02
 
 ### Added
 
