@@ -1,7 +1,9 @@
+mod config;
 mod tmdb;
 mod video;
 
 use crate::{
+    config::{load_config, resolve_target, save_config},
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
     video::{ContentType, parse_content_type, parse_episode_id, parse_extension, parse_title},
 };
@@ -44,6 +46,15 @@ enum Commands {
         #[arg(long, default_value = "1.0")]
         min_popularity: f64,
     },
+    /// Configure default target directories
+    Config {
+        /// Set the default shows directory
+        #[arg(long)]
+        shows: Option<String>,
+        /// Set the default movies directory
+        #[arg(long)]
+        movies: Option<String>,
+    },
     /// Move files to the target directory
     Move {
         source: String,
@@ -52,6 +63,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
+        /// Organize files in place (use source's parent as target)
+        #[arg(long)]
+        in_place: bool,
         /// Skip confirmation prompt
         #[arg(short, long)]
         yes: bool,
@@ -64,6 +78,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
+        /// Organize files in place (use source's parent as target)
+        #[arg(long)]
+        in_place: bool,
         /// Skip confirmation prompt
         #[arg(short, long)]
         yes: bool,
@@ -76,6 +93,9 @@ enum Commands {
         tv_id: Option<i32>,
         #[arg(long)]
         movie_id: Option<i32>,
+        /// Organize files in place (use source's parent as target)
+        #[arg(long)]
+        in_place: bool,
         /// Skip confirmation prompt
         #[arg(short, long)]
         yes: bool,
@@ -241,14 +261,10 @@ fn execute_operations(
 fn organize_tv(
     mode: Mode,
     source: &Path,
-    target: Option<&Path>,
+    target: &Path,
     show: &Show,
     auto_confirm: bool,
 ) -> Result<()> {
-    let target = target
-        .or_else(|| Path::parent(source))
-        .context("Failed to determine target")?;
-
     let episodes = show.episodes();
     let title = sanitize(format!("{} ({})", show.name, show.year));
 
@@ -284,14 +300,10 @@ fn organize_tv(
 fn organize_movie(
     mode: Mode,
     source: &Path,
-    target: Option<&Path>,
+    target: &Path,
     movie: &Movie,
     auto_confirm: bool,
 ) -> Result<()> {
-    let target = target
-        .or_else(|| Path::parent(source))
-        .context("Failed to determine target")?;
-
     let year = movie
         .release_date
         .split('-')
@@ -629,35 +641,87 @@ async fn main() -> Result<()> {
             );
             Ok(())
         }
+        Commands::Config { shows, movies } => {
+            let mut config = load_config()?;
+
+            if shows.is_none() && movies.is_none() {
+                let shows_display = config
+                    .shows_dir
+                    .as_deref()
+                    .map(|p| p.to_string_lossy().into_owned())
+                    .unwrap_or_else(|| "(not set)".to_string());
+                let movies_display = config
+                    .movies_dir
+                    .as_deref()
+                    .map(|p| p.to_string_lossy().into_owned())
+                    .unwrap_or_else(|| "(not set)".to_string());
+                println!("Shows directory:  {}", shows_display);
+                println!("Movies directory: {}", movies_display);
+            } else {
+                if let Some(path) = shows {
+                    config.shows_dir = Some(PathBuf::from(path));
+                }
+                if let Some(path) = movies {
+                    config.movies_dir = Some(PathBuf::from(path));
+                }
+                save_config(&config)?;
+                println!("{} Config saved.", "✓".bold().green());
+            }
+            Ok(())
+        }
         Commands::Move {
             source,
             target,
             tv_id,
             movie_id,
+            in_place,
             yes,
         } => {
-            let source = Path::new(&source);
-            let target = target.as_ref().map(Path::new);
+            let config = load_config()?;
+            let source = PathBuf::from(&source);
 
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Move, source, target, &show, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.shows_dir.as_ref(),
+                    )?;
+                    organize_tv(Mode::Move, &source, &t, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Move, source, target, &movie, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.movies_dir.as_ref(),
+                    )?;
+                    organize_movie(Mode::Move, &source, &t, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => {
-                    // Auto-detect and select
-                    match auto_detect_and_select(&client, source).await? {
-                        Content::Show(show) => organize_tv(Mode::Move, source, target, &show, yes),
-                        Content::Movie(movie) => {
-                            organize_movie(Mode::Move, source, target, &movie, yes)
-                        }
+                (None, None) => match auto_detect_and_select(&client, &source).await? {
+                    Content::Show(show) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.shows_dir.as_ref(),
+                        )?;
+                        organize_tv(Mode::Move, &source, &t, &show, yes)
                     }
-                }
+                    Content::Movie(movie) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.movies_dir.as_ref(),
+                        )?;
+                        organize_movie(Mode::Move, &source, &t, &movie, yes)
+                    }
+                },
             }
         }
         Commands::Copy {
@@ -665,30 +729,54 @@ async fn main() -> Result<()> {
             target,
             tv_id,
             movie_id,
+            in_place,
             yes,
         } => {
-            let source = Path::new(&source);
-            let target = target.as_ref().map(Path::new);
+            let config = load_config()?;
+            let source = PathBuf::from(&source);
 
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Copy, source, target, &show, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.shows_dir.as_ref(),
+                    )?;
+                    organize_tv(Mode::Copy, &source, &t, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Copy, source, target, &movie, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.movies_dir.as_ref(),
+                    )?;
+                    organize_movie(Mode::Copy, &source, &t, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => {
-                    // Auto-detect and select
-                    match auto_detect_and_select(&client, source).await? {
-                        Content::Show(show) => organize_tv(Mode::Copy, source, target, &show, yes),
-                        Content::Movie(movie) => {
-                            organize_movie(Mode::Copy, source, target, &movie, yes)
-                        }
+                (None, None) => match auto_detect_and_select(&client, &source).await? {
+                    Content::Show(show) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.shows_dir.as_ref(),
+                        )?;
+                        organize_tv(Mode::Copy, &source, &t, &show, yes)
                     }
-                }
+                    Content::Movie(movie) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.movies_dir.as_ref(),
+                        )?;
+                        organize_movie(Mode::Copy, &source, &t, &movie, yes)
+                    }
+                },
             }
         }
         Commands::Link {
@@ -696,30 +784,54 @@ async fn main() -> Result<()> {
             target,
             tv_id,
             movie_id,
+            in_place,
             yes,
         } => {
-            let source = Path::new(&source);
-            let target = target.as_ref().map(Path::new);
+            let config = load_config()?;
+            let source = PathBuf::from(&source);
 
             match (tv_id, movie_id) {
                 (Some(id), None) => {
                     let show = client.show(id).await?;
-                    organize_tv(Mode::Link, source, target, &show, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.shows_dir.as_ref(),
+                    )?;
+                    organize_tv(Mode::Link, &source, &t, &show, yes)
                 }
                 (None, Some(id)) => {
                     let movie = client.movie(id).await?;
-                    organize_movie(Mode::Link, source, target, &movie, yes)
+                    let t = resolve_target(
+                        target.as_deref(),
+                        in_place,
+                        &source,
+                        config.movies_dir.as_ref(),
+                    )?;
+                    organize_movie(Mode::Link, &source, &t, &movie, yes)
                 }
                 (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => {
-                    // Auto-detect and select
-                    match auto_detect_and_select(&client, source).await? {
-                        Content::Show(show) => organize_tv(Mode::Link, source, target, &show, yes),
-                        Content::Movie(movie) => {
-                            organize_movie(Mode::Link, source, target, &movie, yes)
-                        }
+                (None, None) => match auto_detect_and_select(&client, &source).await? {
+                    Content::Show(show) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.shows_dir.as_ref(),
+                        )?;
+                        organize_tv(Mode::Link, &source, &t, &show, yes)
                     }
-                }
+                    Content::Movie(movie) => {
+                        let t = resolve_target(
+                            target.as_deref(),
+                            in_place,
+                            &source,
+                            config.movies_dir.as_ref(),
+                        )?;
+                        organize_movie(Mode::Link, &source, &t, &movie, yes)
+                    }
+                },
             }
         }
     }
@@ -830,7 +942,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize_tv(Mode::Move, &source, Some(&target), &show, true);
+        let result = organize_tv(Mode::Move, &source, &target, &show, true);
 
         assert!(
             result.is_ok(),
@@ -862,7 +974,7 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize_tv(Mode::Copy, &source, Some(&target), &show, true);
+        let result = organize_tv(Mode::Copy, &source, &target, &show, true);
 
         assert!(
             result.is_ok(),
@@ -911,7 +1023,8 @@ mod tests {
 
         let show = create_test_show();
 
-        let result = organize_tv(Mode::Move, &source, None, &show, true);
+        let target = source.parent().unwrap();
+        let result = organize_tv(Mode::Move, &source, target, &show, true);
 
         assert!(
             result.is_ok(),
@@ -983,7 +1096,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
+        let result = organize_movie(Mode::Copy, &source, &target, &movie, true);
 
         assert!(
             result.is_ok(),
@@ -1026,7 +1139,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
+        let result = organize_movie(Mode::Copy, &source, &target, &movie, true);
 
         assert!(
             result.is_ok(),
@@ -1066,7 +1179,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Copy, &source, Some(&target), &movie, true);
+        let result = organize_movie(Mode::Copy, &source, &target, &movie, true);
 
         assert!(
             result.is_err(),
@@ -1095,7 +1208,7 @@ mod tests {
 
         let movie = create_test_movie();
 
-        let result = organize_movie(Mode::Move, &source, Some(&target), &movie, true);
+        let result = organize_movie(Mode::Move, &source, &target, &movie, true);
 
         assert!(
             result.is_ok(),
