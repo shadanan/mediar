@@ -46,7 +46,7 @@ enum Commands {
         #[arg(long, default_value = "1.0")]
         min_popularity: f64,
     },
-    /// Configure default target directories
+    /// Configure default target directories and API token
     Config {
         /// Set the default shows directory
         #[arg(long)]
@@ -54,6 +54,9 @@ enum Commands {
         /// Set the default movies directory
         #[arg(long)]
         movies: Option<String>,
+        /// Set the TMDB API token
+        #[arg(long)]
+        token: Option<String>,
     },
     /// Move files to the target directory
     Move {
@@ -605,12 +608,22 @@ async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Co
     }
 }
 
+fn create_client(config: &crate::config::Config) -> Result<TmdbClient> {
+    let token = config
+        .tmdb_api_token
+        .clone()
+        .or_else(|| std::env::var("TMDB_API_TOKEN").ok())
+        .context(
+            "TMDB API token not set. Run `mediar config` to configure it, or set the \
+             TMDB_API_TOKEN environment variable.",
+        )?;
+    TmdbClient::new(token)
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let _ = dotenvy::dotenv();
     let args = Args::parse();
-
-    let client = TmdbClient::new()?;
 
     match args.command {
         Commands::Search {
@@ -618,6 +631,8 @@ async fn main() -> Result<()> {
             language,
             min_popularity,
         } => {
+            let config = load_config()?;
+            let client = create_client(&config)?;
             // Search both TV and movies in parallel
             let (tv_response, movie_response) =
                 tokio::join!(client.search_tv(&query), client.search_movie(&query));
@@ -664,28 +679,64 @@ async fn main() -> Result<()> {
             );
             Ok(())
         }
-        Commands::Config { shows, movies } => {
+        Commands::Config {
+            shows,
+            movies,
+            token,
+        } => {
             let mut config = load_config()?;
 
-            if shows.is_none() && movies.is_none() {
-                let shows_display = config
+            if shows.is_none() && movies.is_none() && token.is_none() {
+                // Interactive mode: present editable fields pre-populated with current values
+                let shows_initial = config
                     .shows_dir
                     .as_deref()
                     .map(|p| p.to_string_lossy().into_owned())
-                    .unwrap_or_else(|| "(not set)".to_string());
-                let movies_display = config
+                    .unwrap_or_default();
+                let movies_initial = config
                     .movies_dir
                     .as_deref()
                     .map(|p| p.to_string_lossy().into_owned())
-                    .unwrap_or_else(|| "(not set)".to_string());
-                println!("Shows directory:  {}", shows_display);
-                println!("Movies directory: {}", movies_display);
+                    .unwrap_or_default();
+                let token_initial = config.tmdb_api_token.clone().unwrap_or_default();
+
+                let shows_input = inquire::Text::new("Shows directory:")
+                    .with_initial_value(&shows_initial)
+                    .prompt()?;
+                let movies_input = inquire::Text::new("Movies directory:")
+                    .with_initial_value(&movies_initial)
+                    .prompt()?;
+                let token_input = inquire::Text::new("TMDB API token:")
+                    .with_initial_value(&token_initial)
+                    .prompt()?;
+
+                config.shows_dir = if shows_input.is_empty() {
+                    None
+                } else {
+                    Some(PathBuf::from(shows_input))
+                };
+                config.movies_dir = if movies_input.is_empty() {
+                    None
+                } else {
+                    Some(PathBuf::from(movies_input))
+                };
+                config.tmdb_api_token = if token_input.is_empty() {
+                    None
+                } else {
+                    Some(token_input)
+                };
+
+                save_config(&config)?;
+                println!("{} Config saved.", "✓".bold().green());
             } else {
                 if let Some(path) = shows {
                     config.shows_dir = Some(PathBuf::from(path));
                 }
                 if let Some(path) = movies {
                     config.movies_dir = Some(PathBuf::from(path));
+                }
+                if let Some(t) = token {
+                    config.tmdb_api_token = Some(t);
                 }
                 save_config(&config)?;
                 println!("{} Config saved.", "✓".bold().green());
@@ -701,6 +752,7 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
+            let client = create_client(&config)?;
             let content = match (tv_id, movie_id) {
                 (Some(id), None) => Content::Show(client.show(id).await?),
                 (None, Some(id)) => Content::Movie(client.movie(id).await?),
@@ -746,6 +798,7 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
+            let client = create_client(&config)?;
             let content = match (tv_id, movie_id) {
                 (Some(id), None) => Content::Show(client.show(id).await?),
                 (None, Some(id)) => Content::Movie(client.movie(id).await?),
@@ -791,6 +844,7 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
+            let client = create_client(&config)?;
             let content = match (tv_id, movie_id) {
                 (Some(id), None) => Content::Show(client.show(id).await?),
                 (None, Some(id)) => Content::Movie(client.movie(id).await?),

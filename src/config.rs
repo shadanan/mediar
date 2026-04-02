@@ -9,6 +9,7 @@ use std::{
 pub struct Config {
     pub shows_dir: Option<PathBuf>,
     pub movies_dir: Option<PathBuf>,
+    pub tmdb_api_token: Option<String>,
 }
 
 fn config_path() -> Result<PathBuf> {
@@ -149,6 +150,7 @@ mod tests {
         let config = Config {
             shows_dir: Some(PathBuf::from("/media/Shows")),
             movies_dir: Some(PathBuf::from("/media/Movies")),
+            tmdb_api_token: None,
         };
 
         let json = serde_json::to_string_pretty(&config).unwrap();
@@ -161,6 +163,7 @@ mod tests {
         let partial = Config {
             shows_dir: Some(PathBuf::from("/media/Shows")),
             movies_dir: None,
+            tmdb_api_token: None,
         };
         let json2 = serde_json::to_string_pretty(&partial).unwrap();
         let restored2: Config = serde_json::from_str(&json2).unwrap();
