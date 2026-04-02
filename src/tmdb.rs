@@ -47,6 +47,37 @@ pub struct Show {
     pub seasons: Vec<TvSeason>,
 }
 
+#[derive(Debug, Deserialize)]
+struct EpisodeGroupResult {
+    pub id: String,
+    pub name: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct EpisodeGroupsResponse {
+    pub results: Vec<EpisodeGroupResult>,
+}
+
+#[derive(Debug, Deserialize)]
+struct EpisodeGroupEpisode {
+    pub id: i32,
+    pub name: String,
+    pub overview: String,
+    pub order: i32,
+}
+
+#[derive(Debug, Deserialize)]
+struct EpisodeGroupSeason {
+    pub order: i32,
+    pub name: String,
+    pub episodes: Vec<EpisodeGroupEpisode>,
+}
+
+#[derive(Debug, Deserialize)]
+struct EpisodeGroupDetail {
+    pub groups: Vec<EpisodeGroupSeason>,
+}
+
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct TvSearchResult {
     pub id: i32,
@@ -122,6 +153,37 @@ impl Show {
     }
 }
 
+fn seasons_from_episode_group(detail: EpisodeGroupDetail) -> Vec<TvSeason> {
+    let mut groups: Vec<EpisodeGroupSeason> =
+        detail.groups.into_iter().filter(|g| g.order > 0).collect();
+    groups.sort_by_key(|g| g.order);
+    groups
+        .into_iter()
+        .enumerate()
+        .map(|(i, group)| {
+            let season_number = (i + 1) as i32;
+            let episodes = group
+                .episodes
+                .into_iter()
+                .map(|ep| TvSeasonEpisode {
+                    id: ep.id,
+                    season_number,
+                    episode_number: ep.order + 1,
+                    name: ep.name,
+                    overview: ep.overview,
+                })
+                .collect();
+            TvSeason {
+                id: season_number,
+                season_number,
+                name: group.name,
+                overview: String::new(),
+                episodes,
+            }
+        })
+        .collect()
+}
+
 pub struct TmdbClient {
     client: reqwest::Client,
     token: String,
@@ -136,13 +198,24 @@ impl TmdbClient {
     }
 
     pub async fn show(&self, id: i32) -> Result<Show> {
-        let series = self.series(id).await?;
-        let seasons = try_join_all(
-            (1..=series.number_of_seasons)
-                .map(|season_number| self.season(id, season_number))
-                .collect::<Vec<_>>(),
-        )
-        .await?;
+        let (series, episode_groups) =
+            futures::future::try_join(self.series(id), self.episode_groups(id)).await?;
+
+        let seasons =
+            if let Some(group) = episode_groups.results.iter().find(|g| g.name == "Seasons") {
+                let detail = self.episode_group(&group.id).await?;
+                seasons_from_episode_group(detail)
+            } else {
+                try_join_all(
+                    (1..=series.number_of_seasons)
+                        .map(|season_number| self.season(id, season_number))
+                        .collect::<Vec<_>>(),
+                )
+                .await?
+            };
+
+        let number_of_seasons = seasons.len() as i32;
+        let number_of_episodes = seasons.iter().map(|s| s.episodes.len() as i32).sum();
         let year = series
             .first_air_date
             .split('-')
@@ -156,10 +229,30 @@ impl TmdbClient {
             overview: series.overview,
             year,
             first_air_date: series.first_air_date,
-            number_of_episodes: series.number_of_episodes,
-            number_of_seasons: series.number_of_seasons,
+            number_of_episodes,
+            number_of_seasons,
             seasons,
         })
+    }
+
+    async fn episode_groups(&self, id: i32) -> Result<EpisodeGroupsResponse> {
+        self.client
+            .get(format!("{}/tv/{}/episode_groups", BASE_URL, id))
+            .bearer_auth(&self.token)
+            .send()
+            .await?
+            .decode()
+            .await
+    }
+
+    async fn episode_group(&self, group_id: &str) -> Result<EpisodeGroupDetail> {
+        self.client
+            .get(format!("{}/tv/episode_group/{}", BASE_URL, group_id))
+            .bearer_auth(&self.token)
+            .send()
+            .await?
+            .decode()
+            .await
     }
 
     pub async fn series(&self, id: i32) -> Result<Tv> {
