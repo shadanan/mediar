@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.17](https://github.com/shadanan/mediar/compare/v0.1.16...v0.1.17) - 2026-04-02
+
+### Fixed
+
+- episode ID parsing ambiguity where Words.1080p is matched ([#66](https://github.com/shadanan/mediar/pull/66))
+
 ## [0.1.16](https://github.com/shadanan/mediar/compare/v0.1.15...v0.1.16) - 2026-03-17
 
 ### Other
