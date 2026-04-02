@@ -57,7 +57,9 @@ enum Commands {
     },
     /// Move files to the target directory
     Move {
-        source: String,
+        #[arg(required = true, num_args = 1..)]
+        sources: Vec<String>,
+        #[arg(long)]
         target: Option<String>,
         #[arg(long)]
         tv_id: Option<i32>,
@@ -72,7 +74,9 @@ enum Commands {
     },
     /// Copy files to the target directory
     Copy {
-        source: String,
+        #[arg(required = true, num_args = 1..)]
+        sources: Vec<String>,
+        #[arg(long)]
         target: Option<String>,
         #[arg(long)]
         tv_id: Option<i32>,
@@ -87,7 +91,9 @@ enum Commands {
     },
     /// Create hard links in the target directory
     Link {
-        source: String,
+        #[arg(required = true, num_args = 1..)]
+        sources: Vec<String>,
+        #[arg(long)]
         target: Option<String>,
         #[arg(long)]
         tv_id: Option<i32>,
@@ -258,17 +264,15 @@ fn execute_operations(
     Ok(())
 }
 
-fn organize_tv(
-    mode: Mode,
+fn build_tv_operations(
     source: &Path,
     target: &Path,
     show: &Show,
-    auto_confirm: bool,
-) -> Result<()> {
+) -> Result<Vec<(PathBuf, PathBuf)>> {
     let episodes = show.episodes();
     let title = sanitize(format!("{} ({})", show.name, show.year));
 
-    let operations = collect_operations(source, |old, ext| {
+    collect_operations(source, |old, ext| {
         let episode_id = match parse_episode_id(old) {
             Ok(episode_id) => episode_id,
             Err(err) => {
@@ -292,18 +296,26 @@ fn organize_tv(
             )));
 
         Ok(Some(new))
-    })?;
-
-    execute_operations(&mode, operations, auto_confirm)
+    })
 }
 
-fn organize_movie(
+#[cfg(test)]
+fn organize_tv(
     mode: Mode,
     source: &Path,
     target: &Path,
-    movie: &Movie,
+    show: &Show,
     auto_confirm: bool,
 ) -> Result<()> {
+    let operations = build_tv_operations(source, target, show)?;
+    execute_operations(&mode, operations, auto_confirm)
+}
+
+fn build_movie_operations(
+    source: &Path,
+    target: &Path,
+    movie: &Movie,
+) -> Result<Vec<(PathBuf, PathBuf)>> {
     let year = movie
         .release_date
         .split('-')
@@ -313,14 +325,25 @@ fn organize_movie(
 
     let title = sanitize(format!("{} ({})", movie.title, year));
 
-    let operations = collect_operations(source, |_old, ext| {
+    collect_operations(source, |_old, ext| {
         let new = target
             .to_path_buf()
             .join(&title)
             .join(sanitize(format!("{} ({}).{}", movie.title, year, ext)));
 
         Ok(Some(new))
-    })?;
+    })
+}
+
+#[cfg(test)]
+fn organize_movie(
+    mode: Mode,
+    source: &Path,
+    target: &Path,
+    movie: &Movie,
+    auto_confirm: bool,
+) -> Result<()> {
+    let operations = build_movie_operations(source, target, movie)?;
 
     execute_operations(&mode, operations, auto_confirm)
 }
@@ -670,7 +693,7 @@ async fn main() -> Result<()> {
             Ok(())
         }
         Commands::Move {
-            source,
+            sources,
             target,
             tv_id,
             movie_id,
@@ -678,31 +701,20 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
-            let source = PathBuf::from(&source);
-
-            match (tv_id, movie_id) {
-                (Some(id), None) => {
-                    let show = client.show(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.shows_dir.as_ref(),
-                    )?;
-                    organize_tv(Mode::Move, &source, &t, &show, yes)
+            let content = match (tv_id, movie_id) {
+                (Some(id), None) => Content::Show(client.show(id).await?),
+                (None, Some(id)) => Content::Movie(client.movie(id).await?),
+                (Some(_), Some(_)) => {
+                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
                 }
-                (None, Some(id)) => {
-                    let movie = client.movie(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.movies_dir.as_ref(),
-                    )?;
-                    organize_movie(Mode::Move, &source, &t, &movie, yes)
+                (None, None) => {
+                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
                 }
-                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => match auto_detect_and_select(&client, &source).await? {
+            };
+            let mut all_operations = Vec::new();
+            for source_str in &sources {
+                let source = PathBuf::from(source_str);
+                match &content {
                     Content::Show(show) => {
                         let t = resolve_target(
                             target.as_deref(),
@@ -710,7 +722,7 @@ async fn main() -> Result<()> {
                             &source,
                             config.shows_dir.as_ref(),
                         )?;
-                        organize_tv(Mode::Move, &source, &t, &show, yes)
+                        all_operations.extend(build_tv_operations(&source, &t, show)?);
                     }
                     Content::Movie(movie) => {
                         let t = resolve_target(
@@ -719,13 +731,14 @@ async fn main() -> Result<()> {
                             &source,
                             config.movies_dir.as_ref(),
                         )?;
-                        organize_movie(Mode::Move, &source, &t, &movie, yes)
+                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
                     }
-                },
+                }
             }
+            execute_operations(&Mode::Move, all_operations, yes)
         }
         Commands::Copy {
-            source,
+            sources,
             target,
             tv_id,
             movie_id,
@@ -733,31 +746,20 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
-            let source = PathBuf::from(&source);
-
-            match (tv_id, movie_id) {
-                (Some(id), None) => {
-                    let show = client.show(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.shows_dir.as_ref(),
-                    )?;
-                    organize_tv(Mode::Copy, &source, &t, &show, yes)
+            let content = match (tv_id, movie_id) {
+                (Some(id), None) => Content::Show(client.show(id).await?),
+                (None, Some(id)) => Content::Movie(client.movie(id).await?),
+                (Some(_), Some(_)) => {
+                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
                 }
-                (None, Some(id)) => {
-                    let movie = client.movie(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.movies_dir.as_ref(),
-                    )?;
-                    organize_movie(Mode::Copy, &source, &t, &movie, yes)
+                (None, None) => {
+                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
                 }
-                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => match auto_detect_and_select(&client, &source).await? {
+            };
+            let mut all_operations = Vec::new();
+            for source_str in &sources {
+                let source = PathBuf::from(source_str);
+                match &content {
                     Content::Show(show) => {
                         let t = resolve_target(
                             target.as_deref(),
@@ -765,7 +767,7 @@ async fn main() -> Result<()> {
                             &source,
                             config.shows_dir.as_ref(),
                         )?;
-                        organize_tv(Mode::Copy, &source, &t, &show, yes)
+                        all_operations.extend(build_tv_operations(&source, &t, show)?);
                     }
                     Content::Movie(movie) => {
                         let t = resolve_target(
@@ -774,13 +776,14 @@ async fn main() -> Result<()> {
                             &source,
                             config.movies_dir.as_ref(),
                         )?;
-                        organize_movie(Mode::Copy, &source, &t, &movie, yes)
+                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
                     }
-                },
+                }
             }
+            execute_operations(&Mode::Copy, all_operations, yes)
         }
         Commands::Link {
-            source,
+            sources,
             target,
             tv_id,
             movie_id,
@@ -788,31 +791,20 @@ async fn main() -> Result<()> {
             yes,
         } => {
             let config = load_config()?;
-            let source = PathBuf::from(&source);
-
-            match (tv_id, movie_id) {
-                (Some(id), None) => {
-                    let show = client.show(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.shows_dir.as_ref(),
-                    )?;
-                    organize_tv(Mode::Link, &source, &t, &show, yes)
+            let content = match (tv_id, movie_id) {
+                (Some(id), None) => Content::Show(client.show(id).await?),
+                (None, Some(id)) => Content::Movie(client.movie(id).await?),
+                (Some(_), Some(_)) => {
+                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
                 }
-                (None, Some(id)) => {
-                    let movie = client.movie(id).await?;
-                    let t = resolve_target(
-                        target.as_deref(),
-                        in_place,
-                        &source,
-                        config.movies_dir.as_ref(),
-                    )?;
-                    organize_movie(Mode::Link, &source, &t, &movie, yes)
+                (None, None) => {
+                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
                 }
-                (Some(_), Some(_)) => Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
-                (None, None) => match auto_detect_and_select(&client, &source).await? {
+            };
+            let mut all_operations = Vec::new();
+            for source_str in &sources {
+                let source = PathBuf::from(source_str);
+                match &content {
                     Content::Show(show) => {
                         let t = resolve_target(
                             target.as_deref(),
@@ -820,7 +812,7 @@ async fn main() -> Result<()> {
                             &source,
                             config.shows_dir.as_ref(),
                         )?;
-                        organize_tv(Mode::Link, &source, &t, &show, yes)
+                        all_operations.extend(build_tv_operations(&source, &t, show)?);
                     }
                     Content::Movie(movie) => {
                         let t = resolve_target(
@@ -829,10 +821,11 @@ async fn main() -> Result<()> {
                             &source,
                             config.movies_dir.as_ref(),
                         )?;
-                        organize_movie(Mode::Link, &source, &t, &movie, yes)
+                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
                     }
-                },
+                }
             }
+            execute_operations(&Mode::Link, all_operations, yes)
         }
     }
 }
