@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0](https://github.com/shadanan/mediar/compare/v1.0.0...v1.1.0) - 2026-04-02
+
+### Added
+
+- support TMDB's insane handling of anime episode IDs ([#73](https://github.com/shadanan/mediar/pull/73))
+
 ## [1.0.0](https://github.com/shadanan/mediar/compare/v0.1.17...v1.0.0) - 2026-04-02
 
 ### Added
