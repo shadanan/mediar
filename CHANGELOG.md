@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1](https://github.com/shadanan/mediar/compare/v1.1.0...v1.1.1) - 2026-04-28
+
+### Other
+
+- *(deps)* update rust crate reqwest to v0.13.3 ([#78](https://github.com/shadanan/mediar/pull/78))
+- *(deps)* update all dependencies ([#77](https://github.com/shadanan/mediar/pull/77))
+
 ## [1.1.0](https://github.com/shadanan/mediar/compare/v1.0.0...v1.1.0) - 2026-04-02
 
 ### Added
