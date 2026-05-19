@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3](https://github.com/shadanan/mediar/compare/v1.1.2...v1.1.3) - 2026-05-19
+
+### Other
+
+- *(deps)* update actions/create-github-app-token action to v3.2.0 ([#81](https://github.com/shadanan/mediar/pull/81))
+
 ## [1.1.2](https://github.com/shadanan/mediar/compare/v1.1.1...v1.1.2) - 2026-05-12
 
 ### Other
