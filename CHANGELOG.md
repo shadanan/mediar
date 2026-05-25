@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0](https://github.com/shadanan/mediar/compare/v1.1.3...v1.2.0) - 2026-05-25
+
+### Added
+
+- add support for anime OVAs ([#83](https://github.com/shadanan/mediar/pull/83))
+
+### Fixed
+
+- ignore leading metadata tags in filenames ([#85](https://github.com/shadanan/mediar/pull/85))
+
 ## [1.1.3](https://github.com/shadanan/mediar/compare/v1.1.2...v1.1.3) - 2026-05-19
 
 ### Other
