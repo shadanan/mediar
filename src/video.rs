@@ -33,6 +33,11 @@ pub fn episode_id(season: i32, episode: i32) -> String {
 pub fn parse_title(path: &Path) -> Option<String> {
     let file_name = path.file_stem().and_then(|name| name.to_str())?;
 
+    // Strip leading metadata tags
+    let leading_group_re = Regex::new(r"^\[.*?\]\s*").ok()?;
+    let file_name = leading_group_re.replace(file_name, "");
+    let file_name = file_name.as_ref();
+
     // Patterns that indicate the start of metadata (case insensitive)
     let metadata_patterns = [
         r"[Ss]\d+",
@@ -183,6 +188,14 @@ mod tests {
     fn test_parse_title_with_ova() {
         assert_eq!(
             parse_title(Path::new("Show Name - OVA 1 [1080p].mkv")),
+            Some("Show Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_group() {
+        assert_eq!(
+            parse_title(Path::new("[Group] Show Name.mkv")),
             Some("Show Name".to_string())
         );
     }
