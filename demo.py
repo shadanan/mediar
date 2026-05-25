@@ -49,7 +49,7 @@ with CodeAnim() as ca:
         ca.write("tree")
         with ca.delay(end=5):
             ca.tap(Key.enter)
-        ca.write("mediar link source/show target/")
+        ca.write("mediar link source/show --target target/")
         ca.tap(Key.enter)
         ca.tap(Key.enter)
         ca.tap(Key.enter)

@@ -1,5 +1,5 @@
 use anyhow::Result;
-use futures::future::try_join_all;
+use futures::future::{try_join, try_join_all};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -49,33 +49,33 @@ pub struct Show {
 
 #[derive(Debug, Deserialize)]
 struct EpisodeGroupResult {
-    pub id: String,
-    pub name: String,
+    id: String,
+    name: String,
 }
 
 #[derive(Debug, Deserialize)]
 struct EpisodeGroupsResponse {
-    pub results: Vec<EpisodeGroupResult>,
+    results: Vec<EpisodeGroupResult>,
 }
 
 #[derive(Debug, Deserialize)]
 struct EpisodeGroupEpisode {
-    pub id: i32,
-    pub name: String,
-    pub overview: String,
-    pub order: i32,
+    id: i32,
+    name: String,
+    overview: String,
+    order: i32,
 }
 
 #[derive(Debug, Deserialize)]
 struct EpisodeGroupSeason {
-    pub order: i32,
-    pub name: String,
-    pub episodes: Vec<EpisodeGroupEpisode>,
+    order: i32,
+    name: String,
+    episodes: Vec<EpisodeGroupEpisode>,
 }
 
 #[derive(Debug, Deserialize)]
 struct EpisodeGroupDetail {
-    pub groups: Vec<EpisodeGroupSeason>,
+    groups: Vec<EpisodeGroupSeason>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -208,27 +208,25 @@ impl TmdbClient {
     }
 
     pub async fn show(&self, id: i32) -> Result<Show> {
-        let (series, episode_groups) =
-            futures::future::try_join(self.series(id), self.episode_groups(id)).await?;
+        let (series, episode_groups) = try_join(self.series(id), self.episode_groups(id)).await?;
 
-        let seasons =
-            if let Some(group) = episode_groups.results.iter().find(|g| g.name == "Seasons") {
-                let detail = self.episode_group(&group.id).await?;
-                seasons_from_episode_group(detail)
-            } else {
-                let mut seasons = try_join_all(
-                    (1..=series.number_of_seasons)
-                        .map(|season_number| self.season(id, season_number))
-                        .collect::<Vec<_>>(),
-                )
-                .await?;
-                if let Ok(season0) = self.season(id, 0).await
-                    && !season0.episodes.is_empty()
-                {
-                    seasons.insert(0, season0);
-                }
-                seasons
-            };
+        let seasons = if let Some(group) =
+            episode_groups.results.iter().find(|g| g.name == "Seasons")
+        {
+            let detail = self.episode_group(&group.id).await?;
+            seasons_from_episode_group(detail)
+        } else {
+            let mut seasons = try_join_all(
+                (1..=series.number_of_seasons).map(|season_number| self.season(id, season_number)),
+            )
+            .await?;
+            if let Ok(season0) = self.season(id, 0).await
+                && !season0.episodes.is_empty()
+            {
+                seasons.insert(0, season0);
+            }
+            seasons
+        };
 
         let number_of_seasons = seasons.len() as i32;
         let number_of_episodes = seasons.iter().map(|s| s.episodes.len() as i32).sum();
@@ -253,7 +251,7 @@ impl TmdbClient {
 
     async fn episode_groups(&self, id: i32) -> Result<EpisodeGroupsResponse> {
         self.client
-            .get(format!("{}/tv/{}/episode_groups", BASE_URL, id))
+            .get(format!("{BASE_URL}/tv/{id}/episode_groups"))
             .bearer_auth(&self.token)
             .send()
             .await?
@@ -263,7 +261,7 @@ impl TmdbClient {
 
     async fn episode_group(&self, group_id: &str) -> Result<EpisodeGroupDetail> {
         self.client
-            .get(format!("{}/tv/episode_group/{}", BASE_URL, group_id))
+            .get(format!("{BASE_URL}/tv/episode_group/{group_id}"))
             .bearer_auth(&self.token)
             .send()
             .await?
@@ -273,7 +271,7 @@ impl TmdbClient {
 
     pub async fn series(&self, id: i32) -> Result<Tv> {
         self.client
-            .get(format!("{}/tv/{}", BASE_URL, id))
+            .get(format!("{BASE_URL}/tv/{id}"))
             .bearer_auth(&self.token)
             .send()
             .await?
@@ -283,7 +281,7 @@ impl TmdbClient {
 
     pub async fn season(&self, id: i32, season: i32) -> Result<TvSeason> {
         self.client
-            .get(format!("{}/tv/{}/season/{}", BASE_URL, id, season))
+            .get(format!("{BASE_URL}/tv/{id}/season/{season}"))
             .bearer_auth(&self.token)
             .send()
             .await?
@@ -293,7 +291,7 @@ impl TmdbClient {
 
     pub async fn search_tv(&self, query: &str) -> Result<TvSearchResponse> {
         self.client
-            .get(format!("{}/search/tv", BASE_URL))
+            .get(format!("{BASE_URL}/search/tv"))
             .bearer_auth(&self.token)
             .query(&[("query", query)])
             .send()
@@ -304,7 +302,7 @@ impl TmdbClient {
 
     pub async fn search_movie(&self, query: &str) -> Result<MovieSearchResponse> {
         self.client
-            .get(format!("{}/search/movie", BASE_URL))
+            .get(format!("{BASE_URL}/search/movie"))
             .bearer_auth(&self.token)
             .query(&[("query", query)])
             .send()
@@ -315,7 +313,7 @@ impl TmdbClient {
 
     pub async fn movie(&self, id: i32) -> Result<Movie> {
         self.client
-            .get(format!("{}/movie/{}", BASE_URL, id))
+            .get(format!("{BASE_URL}/movie/{id}"))
             .bearer_auth(&self.token)
             .send()
             .await?
@@ -458,6 +456,6 @@ mod tests {
         };
 
         let episodes = show.episodes();
-        assert_eq!(episodes.len(), 0);
+        assert!(episodes.is_empty());
     }
 }
