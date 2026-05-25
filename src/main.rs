@@ -133,7 +133,6 @@ struct Args {
     command: Commands,
 }
 
-/// Print all operations with pagination for large lists
 fn print_operations(mode: &Mode, operations: &[(PathBuf, PathBuf)]) -> Result<()> {
     const MAX_DISPLAY: usize = 10;
 
@@ -165,7 +164,6 @@ fn print_operations(mode: &Mode, operations: &[(PathBuf, PathBuf)]) -> Result<()
     Ok(())
 }
 
-/// Execute a file operation based on mode
 fn execute_operation(mode: &Mode, old: PathBuf, new: PathBuf) -> Result<()> {
     let parent = new.parent().context("Failed to get parent")?;
     fs::create_dir_all(parent)?;
@@ -184,7 +182,6 @@ fn execute_operation(mode: &Mode, old: PathBuf, new: PathBuf) -> Result<()> {
     Ok(())
 }
 
-/// Prompt user for confirmation unless auto-confirmed
 fn confirm_operations(auto_confirm: bool) -> Result<bool> {
     if auto_confirm {
         return Ok(true);
@@ -195,7 +192,6 @@ fn confirm_operations(auto_confirm: bool) -> Result<bool> {
         .prompt()?)
 }
 
-/// Common function to collect operations from source directory
 fn collect_operations<F>(source: &Path, mut path_builder: F) -> Result<Vec<(PathBuf, PathBuf)>>
 where
     F: FnMut(&Path, &str) -> Result<Option<PathBuf>>,
@@ -215,33 +211,31 @@ where
             continue;
         };
 
-        if old != new {
-            if !new.exists() {
-                // Check if this output path has already been seen
-                if seen_outputs.contains(&new) {
-                    return Err(anyhow!(
-                        "Multiple input files map to the same output: {}",
-                        new.display()
-                    ));
-                }
-                seen_outputs.insert(new.clone());
-                operations.push((old, new));
-            } else {
-                print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
-                print_wrapped(
-                    "  ↪  ".bold(),
-                    format!("{} already exists", new.to_string_lossy())
-                        .bold()
-                        .yellow(),
-                );
-            }
+        if old == new {
+            continue;
         }
+        if new.exists() {
+            print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
+            print_wrapped(
+                "  ↪  ".bold(),
+                format!("{} already exists", new.to_string_lossy())
+                    .bold()
+                    .yellow(),
+            );
+            continue;
+        }
+        if !seen_outputs.insert(new.clone()) {
+            return Err(anyhow!(
+                "Multiple input files map to the same output: {}",
+                new.display()
+            ));
+        }
+        operations.push((old, new));
     }
 
     Ok(operations)
 }
 
-/// Execute all operations with confirmation
 fn execute_operations(
     mode: &Mode,
     operations: Vec<(PathBuf, PathBuf)>,
@@ -287,7 +281,7 @@ fn build_tv_operations(
 
         let episode = episodes
             .get(&episode_id)
-            .context(format!("Unable to get metadata for {:?}", episode_id))?;
+            .with_context(|| format!("Unable to get metadata for {episode_id:?}"))?;
 
         let new = target
             .to_path_buf()
@@ -300,18 +294,6 @@ fn build_tv_operations(
 
         Ok(Some(new))
     })
-}
-
-#[cfg(test)]
-fn organize_tv(
-    mode: Mode,
-    source: &Path,
-    target: &Path,
-    show: &Show,
-    auto_confirm: bool,
-) -> Result<()> {
-    let operations = build_tv_operations(source, target, show)?;
-    execute_operations(&mode, operations, auto_confirm)
 }
 
 fn build_movie_operations(
@@ -336,19 +318,6 @@ fn build_movie_operations(
 
         Ok(Some(new))
     })
-}
-
-#[cfg(test)]
-fn organize_movie(
-    mode: Mode,
-    source: &Path,
-    target: &Path,
-    movie: &Movie,
-    auto_confirm: bool,
-) -> Result<()> {
-    let operations = build_movie_operations(source, target, movie)?;
-
-    execute_operations(&mode, operations, auto_confirm)
 }
 
 #[derive(Tabled)]
@@ -417,7 +386,7 @@ impl From<MovieSearchResult> for SearchResultDisplay {
 
 fn filter_and_sort_search_results(
     results: Vec<SearchResultDisplay>,
-    language: &Option<String>,
+    language: Option<&str>,
     min_popularity: f64,
     query: &str,
 ) -> Vec<SearchResultDisplay> {
@@ -426,25 +395,17 @@ fn filter_and_sort_search_results(
     let mut filtered: Vec<_> = results
         .into_iter()
         .filter(|result| {
-            // Filter by language if specified
             let lang_match = language
-                .as_ref()
-                .map(|lang| &result.language == lang || result.language == "N/A")
+                .map(|lang| result.language == lang || result.language == "N/A")
                 .unwrap_or(true);
 
-            // Check if it's an exact match
             let is_exact_match = result.name.to_lowercase() == query_lower;
-
-            // Filter by minimum popularity (skip this check for exact matches)
-            let pop_match = if is_exact_match {
-                true
-            } else {
-                result
+            let pop_match = is_exact_match
+                || result
                     .popularity
                     .parse::<f64>()
                     .map(|p| p >= min_popularity)
-                    .unwrap_or(false)
-            };
+                    .unwrap_or(false);
 
             lang_match && pop_match
         })
@@ -474,7 +435,6 @@ fn filter_and_sort_search_results(
     filtered
 }
 
-/// Generic interactive selection helper for search results
 fn select_from_results<T>(
     results: &[T],
     prompt: &str,
@@ -487,12 +447,9 @@ fn select_from_results<T>(
         return Err(anyhow!("{}", no_results_msg));
     }
 
-    // Format options for selection
     let options: Vec<String> = results.iter().map(&format_option).collect();
-
     let selection = Select::new(prompt, options).with_page_size(10).prompt()?;
 
-    // Extract the ID from the selection
     let selected_index = results
         .iter()
         .position(|result| format_option(result) == selection)
@@ -508,7 +465,6 @@ fn select_from_results<T>(
     Ok(get_id(selected_result))
 }
 
-/// Interactive selection for TV shows
 async fn select_tv_show(client: &TmdbClient, query: &str) -> Result<Show> {
     let response = client.search_tv(query).await?;
 
@@ -537,7 +493,6 @@ async fn select_tv_show(client: &TmdbClient, query: &str) -> Result<Show> {
     client.show(id).await
 }
 
-/// Interactive selection for movies
 async fn select_movie(client: &TmdbClient, query: &str) -> Result<Movie> {
     let response = client.search_movie(query).await?;
 
@@ -566,9 +521,7 @@ async fn select_movie(client: &TmdbClient, query: &str) -> Result<Movie> {
     client.movie(id).await
 }
 
-/// Auto-detect and select content (TV show or movie)
 async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Content> {
-    // Find a video file to analyze
     let mut sample_video: Option<PathBuf> = None;
     for entry in WalkDir::new(source).max_depth(3) {
         let entry = entry?;
@@ -608,6 +561,50 @@ async fn auto_detect_and_select(client: &TmdbClient, source: &Path) -> Result<Co
     }
 }
 
+async fn run_operation(
+    mode: Mode,
+    sources: Vec<String>,
+    target: Option<String>,
+    tv_id: Option<i32>,
+    movie_id: Option<i32>,
+    in_place: bool,
+    yes: bool,
+) -> Result<()> {
+    let config = load_config()?;
+    let client = create_client(&config)?;
+    let content = match (tv_id, movie_id) {
+        (Some(id), None) => Content::Show(client.show(id).await?),
+        (None, Some(id)) => Content::Movie(client.movie(id).await?),
+        (Some(_), Some(_)) => return Err(anyhow!("Cannot specify both --tv-id and --movie-id")),
+        (None, None) => auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?,
+    };
+    let mut all_operations = Vec::new();
+    for source_str in &sources {
+        let source = PathBuf::from(source_str);
+        match &content {
+            Content::Show(show) => {
+                let t = resolve_target(
+                    target.as_deref(),
+                    in_place,
+                    &source,
+                    config.shows_dir.as_ref(),
+                )?;
+                all_operations.extend(build_tv_operations(&source, &t, show)?);
+            }
+            Content::Movie(movie) => {
+                let t = resolve_target(
+                    target.as_deref(),
+                    in_place,
+                    &source,
+                    config.movies_dir.as_ref(),
+                )?;
+                all_operations.extend(build_movie_operations(&source, &t, movie)?);
+            }
+        }
+    }
+    execute_operations(&mode, all_operations, yes)
+}
+
 fn create_client(config: &crate::config::Config) -> Result<TmdbClient> {
     let token = config
         .tmdb_api_token
@@ -633,34 +630,30 @@ async fn main() -> Result<()> {
         } => {
             let config = load_config()?;
             let client = create_client(&config)?;
-            // Search both TV and movies in parallel
             let (tv_response, movie_response) =
                 tokio::join!(client.search_tv(&query), client.search_movie(&query));
 
             let tv_response = tv_response?;
             let movie_response = movie_response?;
 
-            // Convert all results to SearchResultDisplay
             let tv_results: Vec<SearchResultDisplay> = tv_response
                 .results
                 .into_iter()
                 .map(SearchResultDisplay::from)
                 .collect();
-
             let movie_results: Vec<SearchResultDisplay> = movie_response
                 .results
                 .into_iter()
                 .map(SearchResultDisplay::from)
                 .collect();
+            let all_results: Vec<_> = tv_results.into_iter().chain(movie_results).collect();
 
-            // Combine all results
-            let mut all_results = Vec::new();
-            all_results.extend(tv_results);
-            all_results.extend(movie_results);
-
-            // Filter and sort combined results
-            let filtered_results =
-                filter_and_sort_search_results(all_results, &language, min_popularity, &query);
+            let filtered_results = filter_and_sort_search_results(
+                all_results,
+                language.as_deref(),
+                min_popularity,
+                &query,
+            );
 
             if filtered_results.is_empty() {
                 println!("No results found for: {}", query.yellow());
@@ -750,45 +743,7 @@ async fn main() -> Result<()> {
             movie_id,
             in_place,
             yes,
-        } => {
-            let config = load_config()?;
-            let client = create_client(&config)?;
-            let content = match (tv_id, movie_id) {
-                (Some(id), None) => Content::Show(client.show(id).await?),
-                (None, Some(id)) => Content::Movie(client.movie(id).await?),
-                (Some(_), Some(_)) => {
-                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
-                }
-                (None, None) => {
-                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
-                }
-            };
-            let mut all_operations = Vec::new();
-            for source_str in &sources {
-                let source = PathBuf::from(source_str);
-                match &content {
-                    Content::Show(show) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.shows_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_tv_operations(&source, &t, show)?);
-                    }
-                    Content::Movie(movie) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.movies_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
-                    }
-                }
-            }
-            execute_operations(&Mode::Move, all_operations, yes)
-        }
+        } => run_operation(Mode::Move, sources, target, tv_id, movie_id, in_place, yes).await,
         Commands::Copy {
             sources,
             target,
@@ -796,45 +751,7 @@ async fn main() -> Result<()> {
             movie_id,
             in_place,
             yes,
-        } => {
-            let config = load_config()?;
-            let client = create_client(&config)?;
-            let content = match (tv_id, movie_id) {
-                (Some(id), None) => Content::Show(client.show(id).await?),
-                (None, Some(id)) => Content::Movie(client.movie(id).await?),
-                (Some(_), Some(_)) => {
-                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
-                }
-                (None, None) => {
-                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
-                }
-            };
-            let mut all_operations = Vec::new();
-            for source_str in &sources {
-                let source = PathBuf::from(source_str);
-                match &content {
-                    Content::Show(show) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.shows_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_tv_operations(&source, &t, show)?);
-                    }
-                    Content::Movie(movie) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.movies_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
-                    }
-                }
-            }
-            execute_operations(&Mode::Copy, all_operations, yes)
-        }
+        } => run_operation(Mode::Copy, sources, target, tv_id, movie_id, in_place, yes).await,
         Commands::Link {
             sources,
             target,
@@ -842,45 +759,7 @@ async fn main() -> Result<()> {
             movie_id,
             in_place,
             yes,
-        } => {
-            let config = load_config()?;
-            let client = create_client(&config)?;
-            let content = match (tv_id, movie_id) {
-                (Some(id), None) => Content::Show(client.show(id).await?),
-                (None, Some(id)) => Content::Movie(client.movie(id).await?),
-                (Some(_), Some(_)) => {
-                    return Err(anyhow!("Cannot specify both --tv-id and --movie-id"));
-                }
-                (None, None) => {
-                    auto_detect_and_select(&client, &PathBuf::from(&sources[0])).await?
-                }
-            };
-            let mut all_operations = Vec::new();
-            for source_str in &sources {
-                let source = PathBuf::from(source_str);
-                match &content {
-                    Content::Show(show) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.shows_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_tv_operations(&source, &t, show)?);
-                    }
-                    Content::Movie(movie) => {
-                        let t = resolve_target(
-                            target.as_deref(),
-                            in_place,
-                            &source,
-                            config.movies_dir.as_ref(),
-                        )?;
-                        all_operations.extend(build_movie_operations(&source, &t, movie)?);
-                    }
-                }
-            }
-            execute_operations(&Mode::Link, all_operations, yes)
-        }
+        } => run_operation(Mode::Link, sources, target, tv_id, movie_id, in_place, yes).await,
     }
 }
 
@@ -890,6 +769,34 @@ mod tests {
     use crate::tmdb::{Movie, Show, TvSeason, TvSeasonEpisode};
     use std::fs;
     use tempfile::TempDir;
+
+    fn organize_tv(
+        mode: Mode,
+        source: &Path,
+        target: &Path,
+        show: &Show,
+        auto_confirm: bool,
+    ) -> Result<()> {
+        execute_operations(
+            &mode,
+            build_tv_operations(source, target, show)?,
+            auto_confirm,
+        )
+    }
+
+    fn organize_movie(
+        mode: Mode,
+        source: &Path,
+        target: &Path,
+        movie: &Movie,
+        auto_confirm: bool,
+    ) -> Result<()> {
+        execute_operations(
+            &mode,
+            build_movie_operations(source, target, movie)?,
+            auto_confirm,
+        )
+    }
 
     fn create_test_show() -> Show {
         Show {

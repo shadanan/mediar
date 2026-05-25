@@ -52,7 +52,7 @@ Found 23 results (1 TV, 22 movies)
 Link TV show episodes into a structured directory:
 
 ```bash
-mediar link --tv-id tv_id /path/to/source /path/to/target
+mediar link --tv-id tv_id --target /path/to/target /path/to/source
 ```
 
 #### Example
@@ -159,10 +159,10 @@ $ tree
 
 ```bash
 # Copy files (keeps originals)
-mediar copy --tv-id tv_id /path/to/source /path/to/target
+mediar copy --tv-id tv_id --target /path/to/target /path/to/source
 
 # Move files
-mediar move --movie-id movie_id /path/to/source /path/to/target
+mediar move --movie-id movie_id --target /path/to/target /path/to/source
 ```
 
 ## Supported File Formats

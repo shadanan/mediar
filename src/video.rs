@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
-use core::fmt;
 use regex::Regex;
-use std::{collections::HashSet, path::Path};
+use std::fmt;
+use std::path::Path;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ContentType {
@@ -28,17 +28,12 @@ pub fn episode_id(season: i32, episode: i32) -> String {
     format!("S{:02}E{:02}", season, episode)
 }
 
-/// Extract the title from a filename by removing metadata patterns
-/// Returns the cleaned title as a string
 pub fn parse_title(path: &Path) -> Option<String> {
     let file_name = path.file_stem().and_then(|name| name.to_str())?;
 
-    // Strip leading metadata tags
     let leading_group_re = Regex::new(r"^\[.*?\]\s*").ok()?;
-    let file_name = leading_group_re.replace(file_name, "");
-    let file_name = file_name.as_ref();
+    let file_name = &*leading_group_re.replace(file_name, "");
 
-    // Patterns that indicate the start of metadata (case insensitive)
     let metadata_patterns = [
         r"[Ss]\d+",
         r"[Ee]\d+",
@@ -54,26 +49,18 @@ pub fn parse_title(path: &Path) -> Option<String> {
     let combined_pattern = metadata_patterns.join("|");
     let re = Regex::new(&combined_pattern).ok()?;
 
-    // Find the first match of any metadata pattern
     let title_end = re
         .find(file_name)
         .map(|m| m.start())
         .unwrap_or(file_name.len());
 
-    // Extract the title portion
-    let title = &file_name[..title_end];
-
-    let cleaned = title
+    let cleaned = file_name[..title_end]
         .replace(['.', '_', '-'], " ")
         .split_whitespace()
         .collect::<Vec<_>>()
         .join(" ");
 
-    if cleaned.is_empty() {
-        None
-    } else {
-        Some(cleaned)
-    }
+    (!cleaned.is_empty()).then_some(cleaned)
 }
 
 pub fn parse_content_type(path: &Path) -> ContentType {
@@ -91,15 +78,8 @@ pub fn parse_extension(path: &Path) -> Option<String> {
 
     let ext = path.extension()?.to_str()?.to_lowercase();
 
-    let allowed_formats = ["mp4", "mkv", "avi", "mov", "flv", "wmv", "webm", "srt"]
-        .into_iter()
-        .map(|ext| ext.to_string())
-        .collect::<HashSet<_>>();
-    if !allowed_formats.contains(&ext) {
-        return None;
-    }
-
-    Some(ext)
+    const ALLOWED_EXTS: &[&str] = &["mp4", "mkv", "avi", "mov", "flv", "wmv", "webm", "srt"];
+    ALLOWED_EXTS.contains(&ext.as_str()).then_some(ext)
 }
 
 pub fn parse_episode_id(path: &Path) -> Result<String> {
@@ -107,7 +87,7 @@ pub fn parse_episode_id(path: &Path) -> Result<String> {
 
     let ova_regex = Regex::new(r"(?i)\bOVA[._\-\s]*(\d+)")?;
     if let Some(cap) = ova_regex.captures(&path_str) {
-        let episode_num: i32 = cap.get(1).unwrap().as_str().parse()?;
+        let episode_num: i32 = cap[1].parse()?;
         return Ok(format!("S00E{:02}", episode_num));
     }
 
