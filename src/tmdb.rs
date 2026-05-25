@@ -154,34 +154,44 @@ impl Show {
 }
 
 fn seasons_from_episode_group(detail: EpisodeGroupDetail) -> Vec<TvSeason> {
-    let mut groups: Vec<EpisodeGroupSeason> =
-        detail.groups.into_iter().filter(|g| g.order > 0).collect();
-    groups.sort_by_key(|g| g.order);
-    groups
-        .into_iter()
-        .enumerate()
-        .map(|(i, group)| {
-            let season_number = (i + 1) as i32;
-            let episodes = group
-                .episodes
-                .into_iter()
-                .map(|ep| TvSeasonEpisode {
-                    id: ep.id,
-                    season_number,
-                    episode_number: ep.order + 1,
-                    name: ep.name,
-                    overview: ep.overview,
-                })
-                .collect();
-            TvSeason {
-                id: season_number,
+    let (zero_groups, mut positive_groups): (Vec<_>, Vec<_>) =
+        detail.groups.into_iter().partition(|g| g.order == 0);
+    positive_groups.sort_by_key(|g| g.order);
+
+    let make_season = |season_number: i32, group: EpisodeGroupSeason| {
+        let episodes = group
+            .episodes
+            .into_iter()
+            .map(|ep| TvSeasonEpisode {
+                id: ep.id,
                 season_number,
-                name: group.name,
-                overview: String::new(),
-                episodes,
-            }
-        })
-        .collect()
+                episode_number: ep.order + 1,
+                name: ep.name,
+                overview: ep.overview,
+            })
+            .collect();
+        TvSeason {
+            id: season_number,
+            season_number,
+            name: group.name,
+            overview: String::new(),
+            episodes,
+        }
+    };
+
+    let mut seasons: Vec<TvSeason> = zero_groups
+        .into_iter()
+        .map(|group| make_season(0, group))
+        .collect();
+
+    seasons.extend(
+        positive_groups
+            .into_iter()
+            .enumerate()
+            .map(|(i, group)| make_season((i + 1) as i32, group)),
+    );
+
+    seasons
 }
 
 pub struct TmdbClient {
@@ -206,12 +216,18 @@ impl TmdbClient {
                 let detail = self.episode_group(&group.id).await?;
                 seasons_from_episode_group(detail)
             } else {
-                try_join_all(
+                let mut seasons = try_join_all(
                     (1..=series.number_of_seasons)
                         .map(|season_number| self.season(id, season_number))
                         .collect::<Vec<_>>(),
                 )
-                .await?
+                .await?;
+                if let Ok(season0) = self.season(id, 0).await
+                    && !season0.episodes.is_empty()
+                {
+                    seasons.insert(0, season0);
+                }
+                seasons
             };
 
         let number_of_seasons = seasons.len() as i32;

@@ -41,6 +41,7 @@ pub fn parse_title(path: &Path) -> Option<String> {
         r"\d{3,4}p",
         r"(?i)(bluray|brrip|webrip|web-dl|hdtv|dvdrip|xvid|x264|x265|h264|h265)",
         r"(?i)(proper|repack|internal|limited|unrated|extended|directors.cut)",
+        r"(?i)\bOVA\b",
         r"\[.*?\]",
         r"\(.*?\)",
     ];
@@ -98,6 +99,12 @@ pub fn parse_extension(path: &Path) -> Option<String> {
 
 pub fn parse_episode_id(path: &Path) -> Result<String> {
     let path_str = path.to_string_lossy();
+
+    let ova_regex = Regex::new(r"(?i)\bOVA[._\-\s]*(\d+)")?;
+    if let Some(cap) = ova_regex.captures(&path_str) {
+        let episode_num: i32 = cap.get(1).unwrap().as_str().parse()?;
+        return Ok(format!("S00E{:02}", episode_num));
+    }
 
     let season_regex = Regex::new(r"(?:^|[^[:alpha:]])[Ss](?:eason)?[._\-\s]*(\d+)")?;
     let season_match = season_regex
@@ -168,6 +175,14 @@ mod tests {
     fn test_parse_title_with_brackets() {
         assert_eq!(
             parse_title(Path::new("Show Name [1080p].mkv")),
+            Some("Show Name".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_title_with_ova() {
+        assert_eq!(
+            parse_title(Path::new("Show Name - OVA 1 [1080p].mkv")),
             Some("Show Name".to_string())
         );
     }
@@ -397,5 +412,35 @@ mod tests {
         // Should prefer S02E03 from filename over Season 01 from directory
         let result = parse_episode_id(Path::new("Season.01/Show.S02E03.mkv"));
         assert_eq!(result.unwrap(), "S02E03");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_with_dot() {
+        let result = parse_episode_id(Path::new("Show.OVA.1.mkv"));
+        assert_eq!(result.unwrap(), "S00E01");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_without_space() {
+        let result = parse_episode_id(Path::new("Show.OVA2.mkv"));
+        assert_eq!(result.unwrap(), "S00E02");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_with_space() {
+        let result = parse_episode_id(Path::new("Show - OVA 3.mkv"));
+        assert_eq!(result.unwrap(), "S00E03");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_lowercase() {
+        let result = parse_episode_id(Path::new("show - ova 5.mkv"));
+        assert_eq!(result.unwrap(), "S00E05");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_ignores_season() {
+        let result = parse_episode_id(Path::new("Season.01/Show.OVA.1.mkv"));
+        assert_eq!(result.unwrap(), "S00E01");
     }
 }
