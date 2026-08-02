@@ -5,7 +5,10 @@ mod video;
 use crate::{
     config::{load_config, resolve_target, save_config},
     tmdb::{Movie, MovieSearchResult, Show, TmdbClient, TvSearchResult},
-    video::{ContentType, parse_content_type, parse_episode_id, parse_extension, parse_title},
+    video::{
+        ContentType, parse_content_type, parse_episode_id, parse_extension, parse_subtitle_tag,
+        parse_title,
+    },
 };
 use anyhow::{Context, Result, anyhow};
 use clap::{Parser, Subcommand};
@@ -13,7 +16,7 @@ use colored::{ColoredString, Colorize};
 use inquire::{Confirm, Select};
 use sanitize_filename::sanitize;
 use std::{
-    collections::HashSet,
+    collections::{HashMap, HashSet},
     fs,
     path::{Path, PathBuf},
 };
@@ -192,12 +195,36 @@ fn confirm_operations(auto_confirm: bool) -> Result<bool> {
         .prompt()?)
 }
 
-fn collect_operations<F>(source: &Path, mut path_builder: F) -> Result<Vec<(PathBuf, PathBuf)>>
+enum PendingEntry {
+    Direct(PathBuf, PathBuf),
+    Subtitle {
+        old: PathBuf,
+        dir: PathBuf,
+        stem: String,
+        language: String,
+        variant: Option<String>,
+    },
+}
+
+fn subtitle_filename(
+    stem: &str,
+    language: &str,
+    variant: &Option<String>,
+    version: usize,
+) -> String {
+    match (variant, version) {
+        (Some(variant), 0) => format!("{stem}.{language}.{variant}.srt"),
+        (None, 0) => format!("{stem}.{language}.srt"),
+        (Some(variant), v) => format!("{stem}.{language}.{variant}.v{v}.srt"),
+        (None, v) => format!("{stem}.{language}.v{v}.srt"),
+    }
+}
+
+fn collect_operations<F>(source: &Path, mut base_builder: F) -> Result<Vec<(PathBuf, PathBuf)>>
 where
-    F: FnMut(&Path, &str) -> Result<Option<PathBuf>>,
+    F: FnMut(&Path) -> Result<Option<(PathBuf, String)>>,
 {
-    let mut operations: Vec<(PathBuf, PathBuf)> = Vec::new();
-    let mut seen_outputs: HashSet<PathBuf> = HashSet::new();
+    let mut pending: Vec<PendingEntry> = Vec::new();
 
     for entry in WalkDir::new(source).sort_by_file_name() {
         let entry = entry?;
@@ -207,8 +234,65 @@ where
             continue;
         };
 
-        let Some(new) = path_builder(&old, &ext)? else {
+        let Some((dir, stem)) = base_builder(&old)? else {
             continue;
+        };
+
+        if ext == "srt" {
+            let (language, variant) = parse_subtitle_tag(&old);
+            pending.push(PendingEntry::Subtitle {
+                old,
+                dir,
+                stem,
+                language,
+                variant,
+            });
+        } else {
+            let new = dir.join(format!("{stem}.{ext}"));
+            pending.push(PendingEntry::Direct(old, new));
+        }
+    }
+
+    let mut groups: HashMap<(PathBuf, String, String, Option<String>), Vec<usize>> = HashMap::new();
+    for (index, entry) in pending.iter().enumerate() {
+        if let PendingEntry::Subtitle {
+            dir,
+            stem,
+            language,
+            variant,
+            ..
+        } = entry
+        {
+            groups
+                .entry((dir.clone(), stem.clone(), language.clone(), variant.clone()))
+                .or_default()
+                .push(index);
+        }
+    }
+
+    let mut operations: Vec<(PathBuf, PathBuf)> = Vec::new();
+    let mut seen_outputs: HashSet<PathBuf> = HashSet::new();
+
+    for (index, entry) in pending.into_iter().enumerate() {
+        let (old, new) = match entry {
+            PendingEntry::Direct(old, new) => (old, new),
+            PendingEntry::Subtitle {
+                old,
+                dir,
+                stem,
+                language,
+                variant,
+            } => {
+                let key = (dir.clone(), stem.clone(), language.clone(), variant.clone());
+                let group = &groups[&key];
+                let version = if group.len() > 1 {
+                    group.iter().position(|&i| i == index).unwrap() + 1
+                } else {
+                    0
+                };
+                let new = dir.join(subtitle_filename(&stem, &language, &variant, version));
+                (old, new)
+            }
         };
 
         if old == new {
@@ -269,7 +353,7 @@ fn build_tv_operations(
     let episodes = show.episodes();
     let title = sanitize(format!("{} ({})", show.name, show.year));
 
-    collect_operations(source, |old, ext| {
+    collect_operations(source, |old| {
         let episode_id = match parse_episode_id(old) {
             Ok(episode_id) => episode_id,
             Err(err) => {
@@ -283,16 +367,13 @@ fn build_tv_operations(
             .get(&episode_id)
             .with_context(|| format!("Unable to get metadata for {episode_id:?}"))?;
 
-        let new = target
+        let dir = target
             .to_path_buf()
             .join(&title)
-            .join(format!("Season {:02}", episode.season_number))
-            .join(sanitize(format!(
-                "{} - {} - {}.{}",
-                show.name, episode_id, episode.name, ext
-            )));
+            .join(format!("Season {:02}", episode.season_number));
+        let stem = sanitize(format!("{} - {} - {}", show.name, episode_id, episode.name));
 
-        Ok(Some(new))
+        Ok(Some((dir, stem)))
     })
 }
 
@@ -310,13 +391,11 @@ fn build_movie_operations(
 
     let title = sanitize(format!("{} ({})", movie.title, year));
 
-    collect_operations(source, |_old, ext| {
-        let new = target
-            .to_path_buf()
-            .join(&title)
-            .join(sanitize(format!("{} ({}).{}", movie.title, year, ext)));
+    collect_operations(source, |_old| {
+        let dir = target.to_path_buf().join(&title);
+        let stem = sanitize(format!("{} ({})", movie.title, year));
 
-        Ok(Some(new))
+        Ok(Some((dir, stem)))
     })
 }
 
@@ -956,7 +1035,7 @@ mod tests {
 
         for expected_file in [
             season1_dir.join("Show Name - S01E01 - One.mkv"),
-            season1_dir.join("Show Name - S01E01 - One.srt"),
+            season1_dir.join("Show Name - S01E01 - One.en.srt"),
             season1_dir.join("Show Name - S01E02 - Two.mp4"),
             season2_dir.join("Show Name - S02E01 - Three.avi"),
         ] {
@@ -1015,13 +1094,50 @@ mod tests {
 
         for expected_file in [
             season1_dir.join("Show Name - S01E01 - One.mkv"),
-            season1_dir.join("Show Name - S01E01 - One.srt"),
+            season1_dir.join("Show Name - S01E01 - One.en.srt"),
             season1_dir.join("Show Name - S01E02 - Two.mp4"),
             season2_dir.join("Show Name - S02E01 - Three.avi"),
         ] {
             assert!(
                 expected_file.exists(),
                 "Renamed file should exist: {:?}",
+                expected_file
+            );
+        }
+    }
+
+    #[test]
+    fn test_organize_tv_numbered_subtitle_versions() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let episode_files = vec![
+            Path::new("Show.S01E01.1080p.BluRay.x265.mkv").to_path_buf(),
+            Path::new("Subs/Show.S01E01.1080p.BluRay.x265/3_English.srt").to_path_buf(),
+            Path::new("Subs/Show.S01E01.1080p.BluRay.x265/4_English.srt").to_path_buf(),
+        ];
+
+        create_test_files(&source, &episode_files);
+
+        let show = create_test_show();
+
+        let result = organize_tv(Mode::Copy, &source, &target, &show, true);
+        assert!(
+            result.is_ok(),
+            "organize should succeed: {:?}",
+            result.err()
+        );
+
+        let season1_dir = target.join("Show Name (2008)").join("Season 01");
+        for expected_file in [
+            season1_dir.join("Show Name - S01E01 - One.mkv"),
+            season1_dir.join("Show Name - S01E01 - One.en.v1.srt"),
+            season1_dir.join("Show Name - S01E01 - One.en.v2.srt"),
+        ] {
+            assert!(
+                expected_file.exists(),
+                "Expected file should exist: {:?}",
                 expected_file
             );
         }
@@ -1110,12 +1226,86 @@ mod tests {
             expected_mkv
         );
 
-        let expected_srt = movie_dir.join("Movie Name (1999).srt");
+        let expected_srt = movie_dir.join("Movie Name (1999).en.srt");
         assert!(
             expected_srt.exists(),
             "Movie srt file should exist in target: {:?}",
             expected_srt
         );
+    }
+
+    #[test]
+    fn test_organize_movie_multiple_subtitle_languages() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let movie_files = vec![
+            Path::new("Movie.Name.1999.mkv").to_path_buf(),
+            Path::new("Movie.Name.1999.en.srt").to_path_buf(),
+            Path::new("Movie.Name.1999.fr.srt").to_path_buf(),
+        ];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Copy, &source, &target, &movie, true);
+        assert!(
+            result.is_ok(),
+            "organize_movie should succeed: {:?}",
+            result.err()
+        );
+
+        let movie_dir = target.join("Movie Name (1999)");
+        for expected_file in [
+            movie_dir.join("Movie Name (1999).mkv"),
+            movie_dir.join("Movie Name (1999).en.srt"),
+            movie_dir.join("Movie Name (1999).fr.srt"),
+        ] {
+            assert!(
+                expected_file.exists(),
+                "Expected file should exist: {:?}",
+                expected_file
+            );
+        }
+    }
+
+    #[test]
+    fn test_organize_movie_multiple_english_subtitle_variants() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let movie_files = vec![
+            Path::new("Movie.Name.1999.mkv").to_path_buf(),
+            Path::new("Movie.Name.1999.en.srt").to_path_buf(),
+            Path::new("Movie.Name.1999.en.sdh.srt").to_path_buf(),
+        ];
+
+        create_test_files(&source, &movie_files);
+
+        let movie = create_test_movie();
+
+        let result = organize_movie(Mode::Copy, &source, &target, &movie, true);
+        assert!(
+            result.is_ok(),
+            "organize_movie should succeed: {:?}",
+            result.err()
+        );
+
+        let movie_dir = target.join("Movie Name (1999)");
+        for expected_file in [
+            movie_dir.join("Movie Name (1999).mkv"),
+            movie_dir.join("Movie Name (1999).en.srt"),
+            movie_dir.join("Movie Name (1999).en.sdh.srt"),
+        ] {
+            assert!(
+                expected_file.exists(),
+                "Expected file should exist: {:?}",
+                expected_file
+            );
+        }
     }
 
     #[test]

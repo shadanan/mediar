@@ -82,6 +82,106 @@ pub fn parse_extension(path: &Path) -> Option<String> {
     ALLOWED_EXTS.contains(&ext.as_str()).then_some(ext)
 }
 
+const LANGUAGE_ALIASES: &[(&str, &str)] = &[
+    ("en", "en"),
+    ("eng", "en"),
+    ("english", "en"),
+    ("es", "es"),
+    ("spa", "es"),
+    ("spanish", "es"),
+    ("fr", "fr"),
+    ("fre", "fr"),
+    ("fra", "fr"),
+    ("french", "fr"),
+    ("de", "de"),
+    ("ger", "de"),
+    ("deu", "de"),
+    ("german", "de"),
+    ("it", "it"),
+    ("ita", "it"),
+    ("italian", "it"),
+    ("pt", "pt"),
+    ("por", "pt"),
+    ("portuguese", "pt"),
+    ("ja", "ja"),
+    ("jpn", "ja"),
+    ("japanese", "ja"),
+    ("zh", "zh"),
+    ("chi", "zh"),
+    ("zho", "zh"),
+    ("chinese", "zh"),
+    ("ko", "ko"),
+    ("kor", "ko"),
+    ("korean", "ko"),
+    ("ru", "ru"),
+    ("rus", "ru"),
+    ("russian", "ru"),
+    ("nl", "nl"),
+    ("dut", "nl"),
+    ("nld", "nl"),
+    ("dutch", "nl"),
+    ("sv", "sv"),
+    ("swe", "sv"),
+    ("swedish", "sv"),
+    ("no", "no"),
+    ("nor", "no"),
+    ("norwegian", "no"),
+    ("da", "da"),
+    ("dan", "da"),
+    ("danish", "da"),
+    ("fi", "fi"),
+    ("fin", "fi"),
+    ("finnish", "fi"),
+    ("pl", "pl"),
+    ("pol", "pl"),
+    ("polish", "pl"),
+    ("tr", "tr"),
+    ("tur", "tr"),
+    ("turkish", "tr"),
+    ("ar", "ar"),
+    ("ara", "ar"),
+    ("arabic", "ar"),
+    ("hi", "hi"),
+    ("hin", "hi"),
+    ("hindi", "hi"),
+];
+
+const SUBTITLE_VARIANT_TAGS: &[&str] = &["sdh", "forced", "cc", "commentary"];
+const DEFAULT_SUBTITLE_LANGUAGE: &str = "en";
+
+pub fn parse_subtitle_tag(path: &Path) -> (String, Option<String>) {
+    let stem = path
+        .file_stem()
+        .and_then(|s| s.to_str())
+        .unwrap_or_default();
+
+    let tokens: Vec<String> = stem
+        .split(['.', '_', '-'])
+        .map(|t| t.to_lowercase())
+        .collect();
+
+    let variant = tokens
+        .last()
+        .filter(|t| SUBTITLE_VARIANT_TAGS.contains(&t.as_str()))
+        .cloned();
+
+    let lang_index = tokens
+        .len()
+        .saturating_sub(if variant.is_some() { 2 } else { 1 });
+    let lang_token = (lang_index < tokens.len()).then(|| &tokens[lang_index]);
+
+    let language = lang_token
+        .and_then(|t| {
+            LANGUAGE_ALIASES
+                .iter()
+                .find(|(alias, _)| *alias == t.as_str())
+                .map(|(_, code)| code.to_string())
+        })
+        .unwrap_or_else(|| DEFAULT_SUBTITLE_LANGUAGE.to_string());
+
+    (language, variant)
+}
+
 pub fn parse_episode_id(path: &Path) -> Result<String> {
     let path_str = path.to_string_lossy();
 
@@ -435,5 +535,69 @@ mod tests {
     fn test_parse_episode_id_ova_ignores_season() {
         let result = parse_episode_id(Path::new("Season.01/Show.OVA.1.mkv"));
         assert_eq!(result.unwrap(), "S00E01");
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_untagged_defaults_to_english() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.srt")),
+            ("en".to_string(), None)
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_language_code() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.fr.srt")),
+            ("fr".to_string(), None)
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_language_full_name() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.French.srt")),
+            ("fr".to_string(), None)
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_language_three_letter_code() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.eng.srt")),
+            ("en".to_string(), None)
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_with_sdh_variant() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.en.sdh.srt")),
+            ("en".to_string(), Some("sdh".to_string()))
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_with_forced_variant() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.fr.forced.srt")),
+            ("fr".to_string(), Some("forced".to_string()))
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_variant_without_language() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.sdh.srt")),
+            ("en".to_string(), Some("sdh".to_string()))
+        );
+    }
+
+    #[test]
+    fn test_parse_subtitle_tag_unrecognized_defaults_to_english() {
+        assert_eq!(
+            parse_subtitle_tag(Path::new("Movie.Name.1999.720p.srt")),
+            ("en".to_string(), None)
+        );
     }
 }
