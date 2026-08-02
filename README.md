@@ -165,6 +165,31 @@ mediar copy --tv-id tv_id --target /path/to/target /path/to/source
 mediar move --movie-id movie_id --target /path/to/target /path/to/source
 ```
 
+### Subtitle Handling
+
+Subtitles are tagged with their language code, parsed from the source file
+name (e.g. `.en`, `.fr`, `.english`, `.eng` all map to `en`). Untagged
+subtitles are assumed to be English. Variants like `.sdh` and `.forced` are
+preserved so multiple tracks in the same language don't collide:
+
+```
+Movie Name (1999).mkv
+Movie Name (1999).en.srt
+Movie Name (1999).en.sdh.srt
+Movie Name (1999).fr.srt
+```
+
+If multiple subtitle files resolve to the same language and variant (common
+with scene releases that dump numbered, unlabeled tracks like
+`3_English.srt`, `4_English.srt`), they can't be told apart, so they're
+numbered in the order they're found instead of colliding:
+
+```
+video.mp4
+video.en.v1.srt
+video.en.v2.srt
+```
+
 ## Supported File Formats
 
 - Video: `.mp4`, `.mkv`, `.avi`, `.mov`, `.flv`, `.wmv`, `.webm`
