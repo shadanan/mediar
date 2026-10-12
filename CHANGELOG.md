@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.6](https://github.com/shadanan/mediar/compare/v1.3.5...v1.3.6) - 2026-10-12
+
+### Other
+
+- *(deps)* update all dependencies ([#106](https://github.com/shadanan/mediar/pull/106))
+
 ## [1.3.5](https://github.com/shadanan/mediar/compare/v1.3.4...v1.3.5) - 2026-09-21
 
 ### Other
