@@ -299,13 +299,7 @@ where
             continue;
         }
         if new.exists() {
-            print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
-            print_wrapped(
-                "  ↪  ".bold(),
-                format!("{} already exists", new.to_string_lossy())
-                    .bold()
-                    .yellow(),
-            );
+            print_skip(&old, &format!("{} already exists", new.to_string_lossy()));
             continue;
         }
         if !seen_outputs.insert(new.clone()) {
@@ -345,6 +339,11 @@ fn execute_operations(
     Ok(())
 }
 
+fn print_skip(path: &Path, reason: &str) {
+    print_wrapped("Skip ".clear(), path.to_string_lossy().yellow());
+    print_wrapped("  ↪  ".bold(), reason.bold().yellow());
+}
+
 fn build_tv_operations(
     source: &Path,
     target: &Path,
@@ -357,15 +356,15 @@ fn build_tv_operations(
         let episode_id = match parse_episode_id(old) {
             Ok(episode_id) => episode_id,
             Err(err) => {
-                print_wrapped("Skip ".clear(), old.to_string_lossy().yellow());
-                print_wrapped("  ↪  ".bold(), err.to_string().bold().yellow());
+                print_skip(old, &err.to_string());
                 return Ok(None);
             }
         };
 
-        let episode = episodes
-            .get(&episode_id)
-            .with_context(|| format!("Unable to get metadata for {episode_id:?}"))?;
+        let Some(episode) = episodes.get(&episode_id) else {
+            print_skip(old, &format!("No metadata found for {episode_id}"));
+            return Ok(None);
+        };
 
         let dir = target
             .to_path_buf()
@@ -1141,6 +1140,33 @@ mod tests {
                 expected_file
             );
         }
+    }
+
+    #[test]
+    fn test_organize_tv_skips_episodes_missing_from_metadata() {
+        let temp_dir = TempDir::new().unwrap();
+        let source = temp_dir.path().join("source");
+        let target = temp_dir.path().join("target");
+
+        let episode_files = vec![
+            Path::new("Series/S01E01-Pilot.mkv").to_path_buf(),
+            Path::new("OVA/S01E14 [OVA]-Special.mkv").to_path_buf(),
+        ];
+
+        create_test_files(&source, &episode_files);
+
+        let show = create_test_show();
+
+        let result = organize_tv(Mode::Copy, &source, &target, &show, true);
+        assert!(
+            result.is_ok(),
+            "organize should succeed: {:?}",
+            result.err()
+        );
+
+        let season1_dir = target.join("Show Name (2008)").join("Season 01");
+        assert!(season1_dir.join("Show Name - S01E01 - One.mkv").exists());
+        assert_eq!(fs::read_dir(&season1_dir).unwrap().count(), 1);
     }
 
     fn create_test_movie() -> Movie {
