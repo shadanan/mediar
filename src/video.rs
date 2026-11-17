@@ -184,9 +184,13 @@ pub fn parse_subtitle_tag(path: &Path) -> (String, Option<String>) {
 
 pub fn parse_episode_id(path: &Path) -> Result<String> {
     let path_str = path.to_string_lossy();
+    let file_name = path
+        .file_name()
+        .map(|name| name.to_string_lossy())
+        .unwrap_or_default();
 
-    let ova_regex = Regex::new(r"(?i)\bOVA[._\-\s]*(\d+)")?;
-    if let Some(cap) = ova_regex.captures(&path_str) {
+    let ova_regex = Regex::new(r"(?i)\bOVA[._\-\s]*(\d+)(?:[^\dp]|$)")?;
+    if let Some(cap) = ova_regex.captures(&file_name) {
         let episode_num: i32 = cap[1].parse()?;
         return Ok(format!("S00E{:02}", episode_num));
     }
@@ -535,6 +539,12 @@ mod tests {
     fn test_parse_episode_id_ova_ignores_season() {
         let result = parse_episode_id(Path::new("Season.01/Show.OVA.1.mkv"));
         assert_eq!(result.unwrap(), "S00E01");
+    }
+
+    #[test]
+    fn test_parse_episode_id_ova_ignores_resolution() {
+        let result = parse_episode_id(Path::new("Show S01 OVA 1080p E05.mkv"));
+        assert_eq!(result.unwrap(), "S01E05");
     }
 
     #[test]
