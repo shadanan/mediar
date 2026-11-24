@@ -203,7 +203,7 @@ pub fn parse_episode_id(path: &Path) -> Result<String> {
         .get(1)
         .context("Failed to extract season number")?;
 
-    let episode_regex = Regex::new(r"(?:[Ee](?:pisode)?\s*|\b)(\d{1,2})(?:[._\-]|\b)")?;
+    let episode_regex = Regex::new(r"(?:[Ee](?:pisode)?\s*|\b)(\d{1,2})(?:[Vv]\d+)?(?:[._\-]|\b)")?;
     let episode_match = episode_regex
         .captures_at(&path_str, season_match.end())
         .context("Failed to extract episode number")?
@@ -509,6 +509,20 @@ mod tests {
         // Should prefer S02E03 from filename over Season 01 from directory
         let result = parse_episode_id(Path::new("Season.01/Show.S02E03.mkv"));
         assert_eq!(result.unwrap(), "S02E03");
+    }
+
+    #[test]
+    fn test_parse_episode_id_with_revision() {
+        let result = parse_episode_id(Path::new(
+            "[Group] Show Name (Alternate Name)v2/[Group] Show - S02E01v3.mkv",
+        ));
+        assert_eq!(result.unwrap(), "S02E01");
+    }
+
+    #[test]
+    fn test_parse_episode_id_standalone_episode_with_revision() {
+        let result = parse_episode_id(Path::new("Season 01/02v2 Episode Title.mkv"));
+        assert_eq!(result.unwrap(), "S01E02");
     }
 
     #[test]
