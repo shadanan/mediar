@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.8](https://github.com/shadanan/mediar/compare/v1.3.7...v1.3.8) - 2026-11-24
+
+### Fixed
+
+- episode revision suffix causing episode parse failure ([#115](https://github.com/shadanan/mediar/pull/115))
+
+### Other
+
+- *(deps)* update all dependencies ([#113](https://github.com/shadanan/mediar/pull/113))
+
 ## [1.3.7](https://github.com/shadanan/mediar/compare/v1.3.6...v1.3.7) - 2026-11-17
 
 ### Fixed
